@@ -1797,8 +1797,36 @@
     <script>
       // Initialize Stripe.js with your publishable key
       const stripe = Stripe(
-        'pk_test_51QyFMCPRAnMpnSvUKeD3nLuDji95DSDDRp5Zf2eS1MTkJSKNlcp9Ty40y55gWZWGuskp2tVLHH1cZRRt2nTpDNeD00SsFT0lTd'
+        'pk_live_51QyFM2A9aibyk7ocyoijP7A9gPKC0oDS0HlySiSEuCOaS4sndnS1HZn9fyKPkf48ERT7FPaoxOWwvesYKKSy7N5J003rxyTc2b'
       );
+
+      // Display a small indicator of the current mode
+      const stripeMode = document.createElement('div');
+      stripeMode.style.position = 'fixed';
+      stripeMode.style.bottom = '5px';
+      stripeMode.style.right = '5px';
+      stripeMode.style.padding = '3px 8px';
+      stripeMode.style.fontSize = '12px';
+      stripeMode.style.borderRadius = '3px';
+      stripeMode.style.zIndex = '9999';
+
+      // Determine if we're in live mode based on the API key
+      const isLiveMode = true; // We're now in live mode
+
+      if (isLiveMode) {
+        stripeMode.textContent = 'LIVE MODE';
+        stripeMode.style.backgroundColor = '#4CAF50';
+        stripeMode.style.color = 'white';
+      } else {
+        stripeMode.textContent = 'TEST MODE';
+        stripeMode.style.backgroundColor = '#FFC107';
+        stripeMode.style.color = 'black';
+      }
+
+      document.addEventListener('DOMContentLoaded', function () {
+        document.body.appendChild(stripeMode);
+        console.log('Stripe mode:', isLiveMode ? 'LIVE' : 'TEST');
+      });
 
       // Function to handle checkout process
       async function handleCheckout() {
@@ -1817,7 +1845,7 @@
               'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-              priceId: 'price_1QyFPTPRAnMpnSvUnZFOlJq2', // Using your provided price ID
+              priceId: 'price_1QyfHoA9aibyk7ocoy9gcOsX', // Using the live mode price ID
             }),
           });
 

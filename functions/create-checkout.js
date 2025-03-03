@@ -1,9 +1,9 @@
 const stripe = require('stripe')(
-  'sk_test_51QyFMCPRAnMpnSvU4iq7Iorwhbi84onYbrd7TxJlpkU8tTNVMb8fboIqPKHNioTINTvJYq1Hh3xxss2ezTIWikwG00XH7i0qyX',
+  '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',
   {
     apiVersion: '2023-08-16', // Specify the API version to allow zero-amount orders
   }
-); // Secret key
+); // Live key
 
 exports.handler = async function (event, context) {
   // Only allow POST requests
@@ -30,6 +30,11 @@ exports.handler = async function (event, context) {
       });
       priceId = price.id;
       console.log(`Created new price: ${priceId}`);
+    }
+
+    // If no price ID is provided, use the default product key from live mode
+    if (!priceId) {
+      priceId = 'price_1QyfHoA9aibyk7ocoy9gcOsX'; // Live mode product key
     }
 
     // Create a checkout session

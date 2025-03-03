@@ -1,7 +1,7 @@
 const express = require('express');
 const stripe = require('stripe')(
-  'sk_test_51QyFMCPRAnMpnSvU4iq7Iorwhbi84onYbrd7TxJlpkU8tTNVMb8fboIqPKHNioTINTvJYq1Hh3xxss2ezTIWikwG00XH7i0qyX'
-); // Secret key
+  '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'
+); // Live key
 const app = express();
 
 // Serve static files from the current directory
@@ -22,6 +22,11 @@ app.post('/create-checkout-session', async (req, res) => {
       });
       priceId = price.id;
       console.log(`Created new price: ${priceId}`);
+    }
+
+    // If no price ID is provided, use the default product key from live mode
+    if (!priceId) {
+      priceId = 'price_1QyfHoA9aibyk7ocoy9gcOsX'; // Live mode product key
     }
 
     // Create a checkout session with the price
