@@ -1803,8 +1803,15 @@
       // Function to handle checkout process
       async function handleCheckout() {
         try {
+          // Use Netlify function endpoint or fallback to local server
+          const endpointUrl =
+            window.location.hostname === 'localhost' ||
+            window.location.hostname === '127.0.0.1'
+              ? '/create-checkout-session'
+              : '/api/create-checkout';
+
           // Call your backend to create a Checkout Session
-          const response = await fetch('/create-checkout-session', {
+          const response = await fetch(endpointUrl, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -1816,18 +1823,28 @@
 
           const session = await response.json();
 
+          // Show error if there was a problem
+          if (session.error) {
+            console.error('Session error:', session.error);
+            alert(
+              'Es gab ein Problem mit dem Checkout. Bitte versuchen Sie es später noch einmal.'
+            );
+            return;
+          }
+
           // Redirect to Stripe Checkout
           const result = await stripe.redirectToCheckout({
             sessionId: session.id,
           });
 
           if (result.error) {
+            console.error('Redirect error:', result.error);
             alert(result.error.message);
           }
         } catch (error) {
           console.error('Error:', error);
           alert(
-            'There was an error redirecting to checkout. Please try again.'
+            'Es gab ein Problem mit der Weiterleitung zum Checkout. Bitte versuchen Sie es später noch einmal.'
           );
         }
       }
