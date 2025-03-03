@@ -1,5 +1,8 @@
 const stripe = require('stripe')(
-  'sk_test_51QyFMCPRAnMpnSvU4iq7Iorwhbi84onYbrd7TxJlpkU8tTNVMb8fboIqPKHNioTINTvJYq1Hh3xxss2ezTIWikwG00XH7i0qyX'
+  'sk_test_51QyFMCPRAnMpnSvU4iq7Iorwhbi84onYbrd7TxJlpkU8tTNVMb8fboIqPKHNioTINTvJYq1Hh3xxss2ezTIWikwG00XH7i0qyX',
+  {
+    apiVersion: '2023-08-16', // Specify the API version to allow zero-amount orders
+  }
 ); // Secret key
 
 exports.handler = async function (event, context) {
