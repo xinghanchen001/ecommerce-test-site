@@ -1793,6 +1793,41 @@
       <p>© 2023 Micro Giant - BPER System. Alle Rechte vorbehalten.</p>
     </footer>
 
+    <!-- Discount Code Modal -->
+    <div
+      id="discountModal"
+      class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black bg-opacity-50"
+    >
+      <div class="bg-white rounded-lg shadow-lg p-6 max-w-md w-full">
+        <h3 class="text-lg font-semibold mb-4">Enter Discount Code</h3>
+        <div class="mb-4">
+          <label for="discountCode" class="block text-sm font-medium mb-2"
+            >Discount Code</label
+          >
+          <input
+            type="text"
+            id="discountCode"
+            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder="Enter your code"
+          />
+        </div>
+        <div class="flex justify-end space-x-3">
+          <button
+            id="cancelDiscount"
+            class="px-4 py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300 transition-colors"
+          >
+            Cancel
+          </button>
+          <button
+            id="applyDiscount"
+            class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+          >
+            Apply & Checkout
+          </button>
+        </div>
+      </div>
+    </div>
+
     <!-- Stripe Integration Script -->
     <script>
       // Initialize Stripe.js with your publishable key
@@ -1801,7 +1836,7 @@
       );
 
       // Function to handle checkout process
-      async function handleCheckout() {
+      async function handleCheckout(discountCode = null) {
         try {
           // Use Netlify function endpoint or fallback to local server
           const endpointUrl =
@@ -1810,15 +1845,23 @@
               ? '/create-checkout-session'
               : '/api/create-checkout';
 
+          // Prepare checkout data
+          const checkoutData = {
+            priceId: 'price_1QyFPTPRAnMpnSvUnZFOlJq2', // Using your provided price ID
+          };
+
+          // Add discount code if provided
+          if (discountCode) {
+            checkoutData.discountCode = discountCode;
+          }
+
           // Call your backend to create a Checkout Session
           const response = await fetch(endpointUrl, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
             },
-            body: JSON.stringify({
-              priceId: 'price_1QyFPTPRAnMpnSvUnZFOlJq2', // Using your provided price ID
-            }),
+            body: JSON.stringify(checkoutData),
           });
 
           const session = await response.json();
@@ -1847,6 +1890,16 @@
             'Es gab ein Problem mit der Weiterleitung zum Checkout. Bitte versuchen Sie es später noch einmal.'
           );
         }
+      }
+
+      // Function to show discount modal
+      function showDiscountModal() {
+        document.getElementById('discountModal').classList.remove('hidden');
+      }
+
+      // Function to hide discount modal
+      function hideDiscountModal() {
+        document.getElementById('discountModal').classList.add('hidden');
       }
     </script>
 
@@ -1882,9 +1935,38 @@
         // Add checkout handler to all buy buttons
         buyButtons.forEach((button) => {
           if (button) {
-            button.addEventListener('click', handleCheckout);
+            button.addEventListener('click', function (e) {
+              e.preventDefault();
+              showDiscountModal(); // Show the discount modal instead of direct checkout
+            });
           }
         });
+
+        // Handle discount modal actions
+        document
+          .getElementById('cancelDiscount')
+          .addEventListener('click', function () {
+            hideDiscountModal();
+          });
+
+        document
+          .getElementById('applyDiscount')
+          .addEventListener('click', function () {
+            const discountCode = document
+              .getElementById('discountCode')
+              .value.trim();
+            hideDiscountModal();
+            handleCheckout(discountCode);
+          });
+
+        // Allow clicking outside modal to close
+        document
+          .getElementById('discountModal')
+          .addEventListener('click', function (e) {
+            if (e.target === this) {
+              hideDiscountModal();
+            }
+          });
 
         // Bento Grid interactions
         const bentoCards = document.querySelectorAll('.bento-card');

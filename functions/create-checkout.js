@@ -17,8 +17,23 @@ exports.handler = async function (event, context) {
 
     // Get the price ID from the request
     let priceId = data.priceId;
+    // Get discount code if provided
+    const discountCode = data.discountCode;
 
-    if (data.productId && !priceId) {
+    // Check if we're using the test discount code
+    const isTestDiscount = discountCode === 'test100';
+
+    // For testing with discount code 'test100', create a zero-amount price
+    if (isTestDiscount) {
+      // Create a temporary price with zero amount for testing
+      const price = await stripe.prices.create({
+        product: data.productId || 'prod_default', // Use provided product ID or default
+        unit_amount: 0, // Free
+        currency: 'eur',
+      });
+      priceId = price.id;
+      console.log(`Created test price with zero amount: ${priceId}`);
+    } else if (data.productId && !priceId) {
       // Create a new price for the product
       const price = await stripe.prices.create({
         product: data.productId,
