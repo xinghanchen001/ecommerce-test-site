@@ -17,23 +17,8 @@ exports.handler = async function (event, context) {
 
     // Get the price ID from the request
     let priceId = data.priceId;
-    // Get discount code if provided
-    const discountCode = data.discountCode;
 
-    // Check if we're using the test discount code
-    const isTestDiscount = discountCode === 'test100';
-
-    // For testing with discount code 'test100', create a zero-amount price
-    if (isTestDiscount) {
-      // Create a temporary price with zero amount for testing
-      const price = await stripe.prices.create({
-        product: data.productId || 'prod_default', // Use provided product ID or default
-        unit_amount: 0, // Free
-        currency: 'eur',
-      });
-      priceId = price.id;
-      console.log(`Created test price with zero amount: ${priceId}`);
-    } else if (data.productId && !priceId) {
+    if (data.productId && !priceId) {
       // Create a new price for the product
       const price = await stripe.prices.create({
         product: data.productId,
@@ -42,6 +27,27 @@ exports.handler = async function (event, context) {
       });
       priceId = price.id;
       console.log(`Created new price: ${priceId}`);
+    }
+
+    // Check if the test100 coupon exists, if not create it
+    let coupon;
+    try {
+      // Try to retrieve the coupon
+      coupon = await stripe.coupons.retrieve('test100');
+      console.log('Retrieved existing test100 coupon');
+    } catch (err) {
+      // If the coupon doesn't exist, create it
+      if (err.code === 'resource_missing') {
+        coupon = await stripe.coupons.create({
+          id: 'test100',
+          percent_off: 100, // 100% discount
+          duration: 'once',
+          name: 'Test Discount (100% off)',
+        });
+        console.log('Created new test100 coupon');
+      } else {
+        throw err; // Other errors should be thrown
+      }
     }
 
     // Create a checkout session
@@ -86,6 +92,8 @@ exports.handler = async function (event, context) {
           optional: true,
         },
       ],
+      // Enable discount codes
+      allow_promotion_codes: true,
     });
 
     // Return the session ID
