@@ -41,6 +41,36 @@ exports.handler = async function (event, context) {
       mode: 'payment',
       success_url: `${event.headers.origin}/success.html`,
       cancel_url: `${event.headers.origin}/cancel.html`,
+      // Add shipping address collection
+      shipping_address_collection: {
+        allowed_countries: [
+          'DE',
+          'AT',
+          'CH',
+          'FR',
+          'IT',
+          'BE',
+          'NL',
+          'LU',
+          'ES',
+          'US',
+          'GB',
+        ], // Add countries you want to support
+      },
+      // Collect billing address
+      billing_address_collection: 'required',
+      // Collect additional information
+      custom_fields: [
+        {
+          key: 'delivery_notes',
+          label: {
+            type: 'custom',
+            custom: 'Delivery Instructions (Optional)',
+          },
+          type: 'text',
+          optional: true,
+        },
+      ],
     });
 
     // Return the session ID
