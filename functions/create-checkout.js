@@ -29,27 +29,6 @@ exports.handler = async function (event, context) {
       console.log(`Created new price: ${priceId}`);
     }
 
-    // Check if the test100 coupon exists, if not create it
-    let coupon;
-    try {
-      // Try to retrieve the coupon
-      coupon = await stripe.coupons.retrieve('test100');
-      console.log('Retrieved existing test100 coupon');
-    } catch (err) {
-      // If the coupon doesn't exist, create it
-      if (err.code === 'resource_missing') {
-        coupon = await stripe.coupons.create({
-          id: 'test100',
-          percent_off: 100, // 100% discount
-          duration: 'once',
-          name: 'Test Discount (100% off)',
-        });
-        console.log('Created new test100 coupon');
-      } else {
-        throw err; // Other errors should be thrown
-      }
-    }
-
     // Create a checkout session
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
@@ -92,7 +71,7 @@ exports.handler = async function (event, context) {
           optional: true,
         },
       ],
-      // Enable discount codes
+      // Enable promotion/discount codes
       allow_promotion_codes: true,
     });
 
