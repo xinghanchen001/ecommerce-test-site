@@ -773,6 +773,101 @@
         height: auto;
         border-radius: 12px;
       }
+
+      /* Marquee Animation Styles */
+      @keyframes marquee {
+        0% {
+          transform: translateX(0);
+        }
+        100% {
+          transform: translateX(-100%);
+        }
+      }
+
+      @keyframes marquee2 {
+        0% {
+          transform: translateX(100%);
+        }
+        100% {
+          transform: translateX(0);
+        }
+      }
+
+      .animate-marquee {
+        animation: marquee 25s linear infinite;
+      }
+
+      .animate-marquee2 {
+        animation: marquee2 25s linear infinite;
+      }
+
+      /* Badge styles */
+      .badge {
+        display: inline-block;
+        border: 1px solid #1e5799;
+        color: #1e5799;
+        padding: 4px 12px;
+        border-radius: 16px;
+        font-size: 0.875rem;
+        margin-bottom: 16px;
+      }
+
+      .testimonial-badge {
+        display: inline-flex;
+        align-items: center;
+        border-radius: 9999px;
+        border: 1px solid #e2e8f0;
+        padding: 0.25rem 0.75rem;
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: #4a5568;
+        background-color: #f7fafc;
+        margin-bottom: 1rem;
+      }
+
+      /* Testimonial styles */
+      .testimonial-card p {
+        white-space: normal;
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+        hyphens: auto;
+        text-align: left;
+        line-height: 1.5;
+      }
+
+      /* Force line breaks in testimonials */
+      [class*='rounded-xl'] p.text-sm {
+        white-space: pre-line;
+      }
+
+      /* Testimonial styles */
+      .flex-col p.text-sm {
+        white-space: normal;
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+        hyphens: auto;
+        line-height: 1.5;
+        text-align: left;
+        display: block;
+      }
+
+      /* Force line breaks in testimonials */
+      [class*='rounded-xl'] p.text-sm {
+        white-space: pre-line;
+      }
+
+      /* Ensure equal height for all testimonial cards */
+      .testimonial-card {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+      }
+
+      /* Fix spacing between testimonial cards */
+      .animate-marquee > div,
+      .animate-marquee2 > div {
+        margin-right: 2rem;
+      }
     </style>
   </head>
   <body>
@@ -1091,6 +1186,356 @@
               <span class="bento-cta">Beispiel generieren →</span>
             </div>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials Section with Marquee -->
+    <section class="py-16 md:py-24 bg-white text-gray-900 overflow-hidden">
+      <div class="container mx-auto px-4 md:px-6">
+        <div class="flex flex-col items-center text-center mb-12 md:mb-16">
+          <div class="testimonial-badge">Kundenstimmen</div>
+          <h2 class="text-3xl md:text-4xl font-bold tracking-tight mb-4">
+            Was unsere Kunden über BPER sagen
+          </h2>
+          <p class="text-lg text-gray-600 max-w-2xl">
+            Erfahren Sie, wie das BPER System das Leben unserer Kunden verändert
+            hat und ihnen hilft, ihre Gesundheit besser zu verstehen
+          </p>
+        </div>
+
+        <div class="relative w-full overflow-hidden">
+          <div class="flex overflow-hidden">
+            <div
+              class="animate-marquee whitespace-nowrap flex items-center gap-8 py-4"
+            >
+              <!-- Testimonial 1 -->
+              <div
+                class="testimonial-card flex flex-col rounded-xl border border-gray-200 bg-gradient-to-b from-gray-50/50 to-gray-50/10 p-6 text-start hover:from-gray-50/60 hover:to-gray-50/20 w-[340px] shadow-sm hover:shadow transition-all duration-300"
+              >
+                <div class="flex-1">
+                  <p class="text-sm text-gray-600 mb-4">
+                    "Das BPER Blutdruckmessgerät hat mein Leben verändert. Die
+                    Echtzeit-Überwachung gibt mir endlich die Sicherheit, die
+                    ich gesucht habe. Besonders gut gefällt mir die
+                    App-Integration."
+                  </p>
+                </div>
+                <div class="flex items-center gap-3 mt-2">
+                  <div
+                    class="relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full border border-gray-200 shadow-xs"
+                  >
+                    <img
+                      class="aspect-square h-full w-full"
+                      src="https://i.pravatar.cc/150?img=1"
+                      alt="Thomas Müller"
+                    />
+                  </div>
+                  <div class="flex flex-col">
+                    <h3 class="text-sm font-medium leading-none">
+                      Thomas Müller
+                    </h3>
+                    <p class="text-xs text-gray-500 mt-1">
+                      Herzpatient seit 5 Jahren
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Testimonial 2 -->
+              <div
+                class="testimonial-card flex flex-col rounded-xl border border-gray-200 bg-gradient-to-b from-gray-50/50 to-gray-50/10 p-6 text-start hover:from-gray-50/60 hover:to-gray-50/20 w-[340px] shadow-sm hover:shadow transition-all duration-300"
+              >
+                <div class="flex-1">
+                  <p class="text-sm text-gray-600 mb-4">
+                    "Als Ärztin empfehle ich meinen Patienten das BPER System.
+                    Die Daten sind präzise und die kontinuierliche Überwachung
+                    liefert wertvolle Einblicke für eine bessere Behandlung."
+                  </p>
+                </div>
+                <div class="flex items-center gap-3 mt-2">
+                  <div
+                    class="relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full border border-gray-200 shadow-xs"
+                  >
+                    <img
+                      class="aspect-square h-full w-full"
+                      src="https://i.pravatar.cc/150?img=5"
+                      alt="Dr. Sabine Weber"
+                    />
+                  </div>
+                  <div class="flex flex-col">
+                    <h3 class="text-sm font-medium leading-none">
+                      Dr. Sabine Weber
+                    </h3>
+                    <p class="text-xs text-gray-500 mt-1">Kardiologin</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Testimonial 3 -->
+              <div
+                class="testimonial-card flex flex-col rounded-xl border border-gray-200 bg-gradient-to-b from-gray-50/50 to-gray-50/10 p-6 text-start hover:from-gray-50/60 hover:to-gray-50/20 w-[340px] shadow-sm hover:shadow transition-all duration-300"
+              >
+                <div class="flex-1">
+                  <p class="text-sm text-gray-600 mb-4">
+                    "Endlich muss ich nicht mehr mehrmals täglich manuell meinen
+                    Blutdruck messen. Die automatischen Warnungen haben mir
+                    schon zweimal in kritischen Situationen geholfen!"
+                  </p>
+                </div>
+                <div class="flex items-center gap-3 mt-2">
+                  <div
+                    class="relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full border border-gray-200 shadow-xs"
+                  >
+                    <img
+                      class="aspect-square h-full w-full"
+                      src="https://i.pravatar.cc/150?img=3"
+                      alt="Klaus Becker"
+                    />
+                  </div>
+                  <div class="flex flex-col">
+                    <h3 class="text-sm font-medium leading-none">
+                      Klaus Becker
+                    </h3>
+                    <p class="text-xs text-gray-500 mt-1">
+                      Bluthochdruckpatient
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Testimonial 4 -->
+              <div
+                class="testimonial-card flex flex-col rounded-xl border border-gray-200 bg-gradient-to-b from-gray-50/50 to-gray-50/10 p-6 text-start hover:from-gray-50/60 hover:to-gray-50/20 w-[340px] shadow-sm hover:shadow transition-all duration-300"
+              >
+                <div class="flex-1">
+                  <p class="text-sm text-gray-600 mb-4">
+                    "Die Berichte, die ich meinem Arzt zeigen kann, sind
+                    umfassend und leicht verständlich. Ein großer Fortschritt
+                    gegenüber den sporadischen Messungen in der Praxis."
+                  </p>
+                </div>
+                <div class="flex items-center gap-3 mt-2">
+                  <div
+                    class="relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full border border-gray-200 shadow-xs"
+                  >
+                    <img
+                      class="aspect-square h-full w-full"
+                      src="https://i.pravatar.cc/150?img=8"
+                      alt="Martina Schmidt"
+                    />
+                  </div>
+                  <div class="flex flex-col">
+                    <h3 class="text-sm font-medium leading-none">
+                      Martina Schmidt
+                    </h3>
+                    <p class="text-xs text-gray-500 mt-1">
+                      Nutzerin seit 6 Monaten
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Testimonial 5 -->
+              <div
+                class="testimonial-card flex flex-col rounded-xl border border-gray-200 bg-gradient-to-b from-gray-50/50 to-gray-50/10 p-6 text-start hover:from-gray-50/60 hover:to-gray-50/20 w-[340px] shadow-sm hover:shadow transition-all duration-300"
+              >
+                <div class="flex-1">
+                  <p class="text-sm text-gray-600 mb-4">
+                    "Als Sportler nutze ich BPER, um meine kardiovaskuläre
+                    Gesundheit zu überwachen. Die Trends über die Zeit sind
+                    besonders nützlich für mein Training."
+                  </p>
+                </div>
+                <div class="flex items-center gap-3 mt-2">
+                  <div
+                    class="relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full border border-gray-200 shadow-xs"
+                  >
+                    <img
+                      class="aspect-square h-full w-full"
+                      src="https://i.pravatar.cc/150?img=4"
+                      alt="Jan Hoffmann"
+                    />
+                  </div>
+                  <div class="flex flex-col">
+                    <h3 class="text-sm font-medium leading-none">
+                      Jan Hoffmann
+                    </h3>
+                    <p class="text-xs text-gray-500 mt-1">Marathonläufer</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="absolute top-0 animate-marquee2 whitespace-nowrap flex items-center gap-8 py-4"
+            >
+              <!-- Duplicate testimonials for continuous scrolling effect -->
+              <!-- Testimonial 1 - Duplicate -->
+              <div
+                class="testimonial-card flex flex-col rounded-xl border border-gray-200 bg-gradient-to-b from-gray-50/50 to-gray-50/10 p-6 text-start hover:from-gray-50/60 hover:to-gray-50/20 w-[340px] shadow-sm hover:shadow transition-all duration-300"
+              >
+                <div class="flex-1">
+                  <p class="text-sm text-gray-600 mb-4">
+                    "Das BPER Blutdruckmessgerät hat mein Leben verändert. Die
+                    Echtzeit-Überwachung gibt mir endlich die Sicherheit, die
+                    ich gesucht habe. Besonders gut gefällt mir die
+                    App-Integration."
+                  </p>
+                </div>
+                <div class="flex items-center gap-3 mt-2">
+                  <div
+                    class="relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full border border-gray-200 shadow-xs"
+                  >
+                    <img
+                      class="aspect-square h-full w-full"
+                      src="https://i.pravatar.cc/150?img=1"
+                      alt="Thomas Müller"
+                    />
+                  </div>
+                  <div class="flex flex-col">
+                    <h3 class="text-sm font-medium leading-none">
+                      Thomas Müller
+                    </h3>
+                    <p class="text-xs text-gray-500 mt-1">
+                      Herzpatient seit 5 Jahren
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Testimonial 2 - Duplicate -->
+              <div
+                class="testimonial-card flex flex-col rounded-xl border border-gray-200 bg-gradient-to-b from-gray-50/50 to-gray-50/10 p-6 text-start hover:from-gray-50/60 hover:to-gray-50/20 w-[340px] shadow-sm hover:shadow transition-all duration-300"
+              >
+                <div class="flex-1">
+                  <p class="text-sm text-gray-600 mb-4">
+                    "Als Ärztin empfehle ich meinen Patienten das BPER System.
+                    Die Daten sind präzise und die kontinuierliche Überwachung
+                    liefert wertvolle Einblicke für eine bessere Behandlung."
+                  </p>
+                </div>
+                <div class="flex items-center gap-3 mt-2">
+                  <div
+                    class="relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full border border-gray-200 shadow-xs"
+                  >
+                    <img
+                      class="aspect-square h-full w-full"
+                      src="https://i.pravatar.cc/150?img=5"
+                      alt="Dr. Sabine Weber"
+                    />
+                  </div>
+                  <div class="flex flex-col">
+                    <h3 class="text-sm font-medium leading-none">
+                      Dr. Sabine Weber
+                    </h3>
+                    <p class="text-xs text-gray-500 mt-1">Kardiologin</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Testimonial 3 - Duplicate -->
+              <div
+                class="testimonial-card flex flex-col rounded-xl border border-gray-200 bg-gradient-to-b from-gray-50/50 to-gray-50/10 p-6 text-start hover:from-gray-50/60 hover:to-gray-50/20 w-[340px] shadow-sm hover:shadow transition-all duration-300"
+              >
+                <div class="flex-1">
+                  <p class="text-sm text-gray-600 mb-4">
+                    "Endlich muss ich nicht mehr mehrmals täglich manuell meinen
+                    Blutdruck messen. Die automatischen Warnungen haben mir
+                    schon zweimal in kritischen Situationen geholfen!"
+                  </p>
+                </div>
+                <div class="flex items-center gap-3 mt-2">
+                  <div
+                    class="relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full border border-gray-200 shadow-xs"
+                  >
+                    <img
+                      class="aspect-square h-full w-full"
+                      src="https://i.pravatar.cc/150?img=3"
+                      alt="Klaus Becker"
+                    />
+                  </div>
+                  <div class="flex flex-col">
+                    <h3 class="text-sm font-medium leading-none">
+                      Klaus Becker
+                    </h3>
+                    <p class="text-xs text-gray-500 mt-1">
+                      Bluthochdruckpatient
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Testimonial 4 - Duplicate -->
+              <div
+                class="testimonial-card flex flex-col rounded-xl border border-gray-200 bg-gradient-to-b from-gray-50/50 to-gray-50/10 p-6 text-start hover:from-gray-50/60 hover:to-gray-50/20 w-[340px] shadow-sm hover:shadow transition-all duration-300"
+              >
+                <div class="flex-1">
+                  <p class="text-sm text-gray-600 mb-4">
+                    "Die Berichte, die ich meinem Arzt zeigen kann, sind
+                    umfassend und leicht verständlich. Ein großer Fortschritt
+                    gegenüber den sporadischen Messungen in der Praxis."
+                  </p>
+                </div>
+                <div class="flex items-center gap-3 mt-2">
+                  <div
+                    class="relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full border border-gray-200 shadow-xs"
+                  >
+                    <img
+                      class="aspect-square h-full w-full"
+                      src="https://i.pravatar.cc/150?img=8"
+                      alt="Martina Schmidt"
+                    />
+                  </div>
+                  <div class="flex flex-col">
+                    <h3 class="text-sm font-medium leading-none">
+                      Martina Schmidt
+                    </h3>
+                    <p class="text-xs text-gray-500 mt-1">
+                      Nutzerin seit 6 Monaten
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Testimonial 5 - Duplicate -->
+              <div
+                class="testimonial-card flex flex-col rounded-xl border border-gray-200 bg-gradient-to-b from-gray-50/50 to-gray-50/10 p-6 text-start hover:from-gray-50/60 hover:to-gray-50/20 w-[340px] shadow-sm hover:shadow transition-all duration-300"
+              >
+                <div class="flex-1">
+                  <p class="text-sm text-gray-600 mb-4">
+                    "Als Sportler nutze ich BPER, um meine kardiovaskuläre
+                    Gesundheit zu überwachen. Die Trends über die Zeit sind
+                    besonders nützlich für mein Training."
+                  </p>
+                </div>
+                <div class="flex items-center gap-3 mt-2">
+                  <div
+                    class="relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full border border-gray-200 shadow-xs"
+                  >
+                    <img
+                      class="aspect-square h-full w-full"
+                      src="https://i.pravatar.cc/150?img=4"
+                      alt="Jan Hoffmann"
+                    />
+                  </div>
+                  <div class="flex flex-col">
+                    <h3 class="text-sm font-medium leading-none">
+                      Jan Hoffmann
+                    </h3>
+                    <p class="text-xs text-gray-500 mt-1">Marathonläufer</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="pointer-events-none absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-white to-transparent"
+          ></div>
+          <div
+            class="pointer-events-none absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-white to-transparent"
+          ></div>
         </div>
       </div>
     </section>
@@ -1627,7 +2072,7 @@
                   >
                     <path
                       fill-rule="evenodd"
-                      d="M7 2a2 2 0 00-2 2v12a2 2 0 002 2h6a2 2 0 002-2V4a2 2 0 00-2-2H7zm3 14a1 1 0 100-2 1 1 0 000 2z"
+                      d="M7 2a2 2 0 00-2 2v12a2 2 0 002 2h6.586l-1.293 1.293a1 1 0 101.414 1.414L15 15.414l2.293 2.293a1 1 0 001.414-1.414L16.414 15H18a2 2 0 002-2V4a2 2 0 00-2-2H7zm3 14a1 1 0 100-2 1 1 0 000 2z"
                       clip-rule="evenodd"
                     ></path>
                   </svg>
