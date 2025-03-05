@@ -1540,6 +1540,410 @@
       </div>
     </section>
 
+    <!-- Pricing Section -->
+    <section class="w-full py-16 md:py-24 bg-gray-50">
+      <div class="container mx-auto px-4">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl md:text-4xl font-bold mb-4">Preisoptionen</h2>
+          <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+            Wählen Sie den Plan, der am besten zu Ihren Anforderungen passt
+          </p>
+
+          <div class="flex items-center justify-center mt-8">
+            <div class="bg-gray-100 p-1 rounded-full inline-flex">
+              <button
+                id="monthly-btn"
+                class="bg-white shadow-sm px-4 py-2 rounded-full text-sm font-medium transition-all duration-200"
+              >
+                Monatlich
+              </button>
+              <button
+                id="yearly-btn"
+                class="bg-transparent px-4 py-2 rounded-full text-sm font-medium transition-all duration-200"
+              >
+                Jährlich <span class="text-green-500 text-xs">-20%</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <!-- Basic Plan -->
+          <div
+            class="relative h-full rounded-xl border border-gray-200 bg-white shadow-xs hover:shadow-md transition-all duration-300"
+          >
+            <div class="p-6 h-full flex flex-col">
+              <div class="mb-6">
+                <h3 class="text-xl font-bold">Basis</h3>
+                <p class="text-gray-500 mt-2">
+                  Ideal für Einzelpersonen, die ihren Blutdruck überwachen
+                  möchten.
+                </p>
+              </div>
+
+              <div class="mb-6">
+                <div class="flex items-baseline">
+                  <span class="text-4xl font-bold price-monthly">€29</span>
+                  <span class="text-4xl font-bold price-yearly hidden"
+                    >€23</span
+                  >
+                  <span class="text-gray-500 ml-2 cycle-text">/Monat</span>
+                </div>
+                <div class="text-sm text-gray-500 mt-1 yearly-discount hidden">
+                  <span class="line-through">€29</span>
+                  <span class="text-green-500">20% Rabatt</span>
+                </div>
+              </div>
+
+              <div class="space-y-4 mb-8 flex-grow">
+                <h4 class="font-medium">Features:</h4>
+                <ul class="space-y-3">
+                  <li class="flex items-start">
+                    <svg
+                      class="h-5 w-5 text-green-500 mr-2 flex-shrink-0 mt-0.5"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                    <span>Echtzeit-Blutdrucküberwachung</span>
+                  </li>
+                  <li class="flex items-start">
+                    <svg
+                      class="h-5 w-5 text-green-500 mr-2 flex-shrink-0 mt-0.5"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                    <span>Grundlegende App-Funktionen</span>
+                  </li>
+                  <li class="flex items-start">
+                    <svg
+                      class="h-5 w-5 text-green-500 mr-2 flex-shrink-0 mt-0.5"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                    <span>Daten-Export als PDF</span>
+                  </li>
+                  <li class="flex items-start">
+                    <svg
+                      class="h-5 w-5 text-green-500 mr-2 flex-shrink-0 mt-0.5"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                    <span>Email-Support</span>
+                  </li>
+                </ul>
+              </div>
+
+              <button
+                class="w-full h-9 px-4 py-2 rounded-md font-medium transition-all duration-200 focus:outline-none bg-gray-100 hover:bg-gray-200"
+              >
+                Jetzt starten
+              </button>
+            </div>
+          </div>
+
+          <!-- Premium Plan -->
+          <div
+            class="relative h-full rounded-xl border border-gray-200 bg-white shadow-xs hover:shadow-md transition-all duration-300 md:scale-105 z-10"
+          >
+            <div
+              class="absolute top-0 right-0 bg-green-500 text-white text-xs font-bold px-3 py-1 rounded-bl-lg rounded-tr-lg"
+            >
+              Beliebt
+            </div>
+            <div class="p-6 h-full flex flex-col">
+              <div class="mb-6">
+                <h3 class="text-xl font-bold">Premium</h3>
+                <p class="text-gray-500 mt-2">
+                  Perfekt für Patienten mit speziellen Überwachungsbedürfnissen.
+                </p>
+              </div>
+
+              <div class="mb-6">
+                <div class="flex items-baseline">
+                  <span class="text-4xl font-bold price-monthly">€49</span>
+                  <span class="text-4xl font-bold price-yearly hidden"
+                    >€39</span
+                  >
+                  <span class="text-gray-500 ml-2 cycle-text">/Monat</span>
+                </div>
+                <div class="text-sm text-gray-500 mt-1 yearly-discount hidden">
+                  <span class="line-through">€49</span>
+                  <span class="text-green-500">20% Rabatt</span>
+                </div>
+              </div>
+
+              <div class="space-y-4 mb-8 flex-grow">
+                <h4 class="font-medium">Features:</h4>
+                <ul class="space-y-3">
+                  <li class="flex items-start">
+                    <svg
+                      class="h-5 w-5 text-green-500 mr-2 flex-shrink-0 mt-0.5"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                    <span>Alles im Basis-Plan enthalten</span>
+                  </li>
+                  <li class="flex items-start">
+                    <svg
+                      class="h-5 w-5 text-green-500 mr-2 flex-shrink-0 mt-0.5"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                    <span>Erweiterte Datenanalyse</span>
+                  </li>
+                  <li class="flex items-start">
+                    <svg
+                      class="h-5 w-5 text-green-500 mr-2 flex-shrink-0 mt-0.5"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                    <span>Arzt-Teilen-Funktion</span>
+                  </li>
+                  <li class="flex items-start">
+                    <svg
+                      class="h-5 w-5 text-green-500 mr-2 flex-shrink-0 mt-0.5"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                    <span>Prioritäts-Support</span>
+                  </li>
+                  <li class="flex items-start">
+                    <svg
+                      class="h-5 w-5 text-green-500 mr-2 flex-shrink-0 mt-0.5"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                    <span>Unbegrenzte Datenaufzeichnung</span>
+                  </li>
+                </ul>
+              </div>
+
+              <button
+                class="w-full h-9 px-4 py-2 rounded-md font-medium transition-all duration-200 focus:outline-none bg-blue-600 hover:bg-blue-700 text-white"
+              >
+                Jetzt starten
+              </button>
+            </div>
+          </div>
+
+          <!-- Professional Plan -->
+          <div
+            class="relative h-full rounded-xl border border-gray-200 bg-white shadow-xs hover:shadow-md transition-all duration-300"
+          >
+            <div class="p-6 h-full flex flex-col">
+              <div class="mb-6">
+                <h3 class="text-xl font-bold">Professional</h3>
+                <p class="text-gray-500 mt-2">
+                  Für medizinische Einrichtungen und Praxen mit mehreren
+                  Patienten.
+                </p>
+              </div>
+
+              <div class="mb-6">
+                <div class="flex items-baseline">
+                  <span class="text-4xl font-bold price-monthly">€99</span>
+                  <span class="text-4xl font-bold price-yearly hidden"
+                    >€79</span
+                  >
+                  <span class="text-gray-500 ml-2 cycle-text">/Monat</span>
+                </div>
+                <div class="text-sm text-gray-500 mt-1 yearly-discount hidden">
+                  <span class="line-through">€99</span>
+                  <span class="text-green-500">20% Rabatt</span>
+                </div>
+              </div>
+
+              <div class="space-y-4 mb-8 flex-grow">
+                <h4 class="font-medium">Features:</h4>
+                <ul class="space-y-3">
+                  <li class="flex items-start">
+                    <svg
+                      class="h-5 w-5 text-green-500 mr-2 flex-shrink-0 mt-0.5"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                    <span>Alles im Premium-Plan enthalten</span>
+                  </li>
+                  <li class="flex items-start">
+                    <svg
+                      class="h-5 w-5 text-green-500 mr-2 flex-shrink-0 mt-0.5"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                    <span>Patientenverwaltungssystem</span>
+                  </li>
+                  <li class="flex items-start">
+                    <svg
+                      class="h-5 w-5 text-green-500 mr-2 flex-shrink-0 mt-0.5"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                    <span>API-Integration</span>
+                  </li>
+                  <li class="flex items-start">
+                    <svg
+                      class="h-5 w-5 text-green-500 mr-2 flex-shrink-0 mt-0.5"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                    <span>Dedizierter Account Manager</span>
+                  </li>
+                  <li class="flex items-start">
+                    <svg
+                      class="h-5 w-5 text-green-500 mr-2 flex-shrink-0 mt-0.5"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                    <span>Anpassbare Berichterstellung</span>
+                  </li>
+                </ul>
+              </div>
+
+              <button
+                class="w-full h-9 px-4 py-2 rounded-md font-medium transition-all duration-200 focus:outline-none bg-gray-100 hover:bg-gray-200"
+              >
+                Jetzt starten
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pricing toggle script -->
+      <script>
+        document.addEventListener('DOMContentLoaded', function () {
+          const monthlyBtn = document.getElementById('monthly-btn');
+          const yearlyBtn = document.getElementById('yearly-btn');
+          const monthlyPrices = document.querySelectorAll('.price-monthly');
+          const yearlyPrices = document.querySelectorAll('.price-yearly');
+          const cycleTexts = document.querySelectorAll('.cycle-text');
+          const yearlyDiscounts = document.querySelectorAll('.yearly-discount');
+
+          monthlyBtn.addEventListener('click', function () {
+            monthlyBtn.classList.add('bg-white', 'shadow-sm');
+            monthlyBtn.classList.remove('bg-transparent');
+            yearlyBtn.classList.remove('bg-white', 'shadow-sm');
+            yearlyBtn.classList.add('bg-transparent');
+
+            monthlyPrices.forEach((el) => el.classList.remove('hidden'));
+            yearlyPrices.forEach((el) => el.classList.add('hidden'));
+            yearlyDiscounts.forEach((el) => el.classList.add('hidden'));
+            cycleTexts.forEach((el) => (el.textContent = '/Monat'));
+          });
+
+          yearlyBtn.addEventListener('click', function () {
+            yearlyBtn.classList.add('bg-white', 'shadow-sm');
+            yearlyBtn.classList.remove('bg-transparent');
+            monthlyBtn.classList.remove('bg-white', 'shadow-sm');
+            monthlyBtn.classList.add('bg-transparent');
+
+            monthlyPrices.forEach((el) => el.classList.add('hidden'));
+            yearlyPrices.forEach((el) => el.classList.remove('hidden'));
+            yearlyDiscounts.forEach((el) => el.classList.remove('hidden'));
+            cycleTexts.forEach((el) => (el.textContent = '/Jahr'));
+          });
+        });
+      </script>
+    </section>
+
     <!-- FAQ Section -->
     <section class="w-full py-20 lg:py-40">
       <div class="container mx-auto">
