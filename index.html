@@ -236,6 +236,10 @@
       .icon {
         width: 1rem;
         height: 1rem;
+        display: inline-flex;
+        align-items: center;
+        line-height: 1;
+        vertical-align: middle;
       }
       .story-section {
         display: flex;
@@ -774,7 +778,7 @@
         }
       }
       .hero-image-container {
-        margin-top: 2rem;
+        margin-top: 0.5rem;
         max-width: 100%;
         display: flex;
         justify-content: center;
@@ -958,11 +962,12 @@
       }
 
       .lamp-inner {
-        position: relative;
+        position: absolute;
+        inset: 0;
         display: flex;
         width: 100%;
-        flex: 1;
-        transform: scaleY(1.25);
+        height: 100%;
+        transform: scaleY(1);
         align-items: center;
         justify-content: center;
         isolation: isolate;
@@ -1112,7 +1117,7 @@
         position: relative;
         z-index: 50;
         display: flex;
-        transform: translateY(-20rem);
+        transform: translateY(7rem);
         flex-direction: column;
         align-items: center;
         padding: 0 1.25rem;
@@ -1179,6 +1184,25 @@
           transform: translateY(0);
         }
       }
+
+      /* Custom colors for animated words */
+      #word-1 {
+        color: #14ed2d; /* Blue color for "kontinuierlicher" */
+      }
+      #word-2 {
+        color: #3b82f6; /* Blue color for "kontinuierlicher" */
+      }
+
+      #word-3 {
+        color: #8b5cf6; /* Purple color for "intelligenter" */
+      }
+
+      #word-4 {
+        color: #ec4899; /* Pink color for "fortschrittlicher" */
+      }
+      #word-5 {
+        color: #0800ff; /* Pink color for "fortschrittlicher" */
+      }
     </style>
   </head>
   <body>
@@ -1192,38 +1216,42 @@
             <h1 class="hero-title">
               <span class="hero-title-highlight">BPER System</span> ist ein
               <div class="animated-word-container">
-                <span class="animated-word" data-word="präziser">präziser</span>
-                <span class="animated-word" data-word="kontinuierlicher"
+                <span id="word-1" class="animated-word" data-word="präziser"
+                  >präziser</span
+                >
+                <span
+                  id="word-2"
+                  class="animated-word"
+                  data-word="kontinuierlicher"
                   >kontinuierlicher</span
                 >
-                <span class="animated-word" data-word="intelligenter"
+                <span
+                  id="word-3"
+                  class="animated-word"
+                  data-word="intelligenter"
                   >intelligenter</span
                 >
-                <span class="animated-word" data-word="fortschrittlicher"
+                <span
+                  id="word-4"
+                  class="animated-word"
+                  data-word="fortschrittlicher"
                   >fortschrittlicher</span
                 >
-                <span class="animated-word" data-word="zuverlässiger"
+                <span
+                  id="word-5"
+                  class="animated-word"
+                  data-word="zuverlässiger"
                   >zuverlässiger</span
                 >
               </div>
               Blutdruckmonitor
             </h1>
-            <p class="hero-description">
-              Das BPER System bietet kontinuierliche Blutdrucküberwachung mit
-              klinischer Präzision, damit Sie Ihre Herzgesundheit einfach im
-              Auge behalten können, ohne Kompromisse bei der Genauigkeit
-              einzugehen.
-            </p>
           </div>
           <div class="hero-buttons">
             <button class="btn btn-primary checkout-button">
               Jetzt bestellen
               <span class="icon">→</span>
             </button>
-            <a href="#details" class="btn btn-secondary learn-more-btn">
-              Mehr erfahren
-              <span class="icon">↓</span>
-            </a>
           </div>
 
           <div class="hero-image-container">
