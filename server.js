@@ -8,6 +8,16 @@ const app = express();
 app.use(express.static('.'));
 app.use(express.json());
 
+// Route for the sparkles example
+app.get('/sparkles', (req, res) => {
+  res.sendFile(__dirname + '/sparkles-example.html');
+});
+
+// Route for the lamp example
+app.get('/lamp', (req, res) => {
+  res.sendFile(__dirname + '/lamp-demo.html');
+});
+
 app.post('/create-checkout-session', async (req, res) => {
   try {
     // Option 1: If you have a productId but no priceId, create a price on the fly
@@ -50,7 +60,7 @@ app.post('/create-checkout-session', async (req, res) => {
   }
 });
 
-const port = 3000;
+const port = 3002; // Changed from 3001 to 3002
 app.listen(port, () =>
   console.log(`Server running at http://localhost:${port}`)
 );
