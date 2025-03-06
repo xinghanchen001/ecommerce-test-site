@@ -74,8 +74,8 @@
             100deg,
             rgba(255, 255, 255, 0.8) 0%,
             rgba(255, 255, 255, 0.8) 7%,
-            transparent 20%,
-            transparent 32%,
+            transparent 12%,
+            transparent 6%,
             rgba(255, 255, 255, 0.8) 16%
           ),
           repeating-linear-gradient(
@@ -533,7 +533,7 @@
       }
       .bento-section {
         width: 100%;
-        padding: 60px 0;
+        padding: 60px 0 150px 0;
         background-color: #fff;
       }
       .bento-header {
@@ -562,6 +562,8 @@
         display: grid;
         grid-template-columns: repeat(1, 1fr);
         gap: 24px;
+        grid-auto-rows: minmax(280px, auto);
+        position: relative;
       }
       @media (min-width: 768px) {
         .bento-grid {
@@ -587,19 +589,110 @@
         transition: all 0.3s ease;
         height: 100%;
         position: relative;
+        display: flex;
+        flex-direction: column;
       }
       .bento-card:hover {
         transform: translateY(-5px);
         box-shadow: 0 12px 20px rgba(0, 0, 0, 0.1);
       }
       .bento-card-inner {
-        padding: 24px;
+        padding: 0.5rem;
         height: 100%;
         display: flex;
         flex-direction: column;
         position: relative;
         z-index: 1;
+        justify-content: space-between;
       }
+
+      /* Neues Layout für bento-span-2 Karten mit Bild */
+      .bento-span-2 .bento-card-inner {
+        flex-direction: row;
+        align-items: center;
+        gap: 30px;
+      }
+
+      .bento-content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+      }
+
+      /* Content anpassen für Karten mit vertikalem Layout und Bild */
+      .bento-card-inner.with-image .bento-content {
+        flex: 0 1 auto;
+        max-height: 65%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+      }
+
+      .bento-image {
+        flex: 1;
+        max-width: 50%;
+        border-radius: 8px;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .bento-image img,
+      .bento-image video {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        object-fit: contain;
+        display: block;
+      }
+
+      /* Video container styling */
+      .video-container {
+        width: 100%;
+        height: 100%;
+        border-radius: 8px;
+        overflow: hidden;
+        position: relative;
+      }
+
+      /* Hero video styling */
+      .hero-video-container {
+        width: 100%;
+        max-width: 500px;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+      }
+
+      .hero-video-container video {
+        width: 100%;
+        height: auto;
+        display: block;
+        object-fit: contain;
+      }
+
+      @media (max-width: 768px) {
+        .bento-span-2 .bento-card-inner {
+          flex-direction: column;
+        }
+
+        .bento-image {
+          max-width: 100%;
+          margin-top: 15px;
+        }
+
+        /* Verbesserte Darstellung für mobile Ansicht */
+        .bento-card-inner {
+          padding: 16px;
+        }
+
+        .bento-card .bento-card-inner.with-image .bento-image {
+          min-height: 100px;
+          max-height: 150px;
+        }
+      }
+
       .bento-card::after {
         content: '';
         position: absolute;
@@ -651,12 +744,13 @@
         margin-top: 16px;
       }
       .bento-tag {
-        background-color: #f0f4f8;
+        background-color: #eef1f8;
         padding: 4px 10px;
         border-radius: 16px;
-        font-size: 0.75rem;
+        font-size: 0.875rem;
         color: #1e5799;
         transition: all 0.3s ease;
+        font-weight: 500;
       }
       .bento-card:hover .bento-tag {
         background-color: rgba(30, 87, 153, 0.1);
@@ -1216,6 +1310,113 @@
       #word-3 {
         color: #8b5cf6; /* Purple color for "intelligenter" */
       }
+
+      /* Anpassung für normale Karten mit Bild */
+      .bento-card .bento-card-inner.with-image .bento-image {
+        max-width: 100%;
+        margin-top: 15px;
+        min-height: 120px;
+        overflow: hidden;
+        flex: 1;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      /* Neue Klasse für horizontales Layout (links Text, rechts Bild) */
+      .bento-card.horizontal .bento-card-inner {
+        flex-direction: row;
+        align-items: center;
+        gap: 20px;
+        height: 100%;
+      }
+
+      .bento-card.horizontal .bento-content {
+        flex: 1;
+      }
+
+      .bento-card.horizontal .bento-image {
+        max-width: 45%;
+        height: auto;
+        min-height: 160px;
+        margin-top: 0;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      @media (max-width: 768px) {
+        .bento-card.horizontal .bento-card-inner {
+          flex-direction: column;
+        }
+
+        .bento-card.horizontal .bento-image {
+          max-width: 100%;
+          margin-top: 20px;
+          min-height: 120px;
+          height: auto;
+        }
+      }
+
+      .bento-image img {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        object-fit: contain;
+        display: block;
+      }
+
+      /* Fix für einheitliche Kartenhöhen */
+      @media (min-width: 1024px) {
+        .bento-card:not(.bento-span-2) {
+          height: 280px;
+        }
+      }
+
+      /* Feinabstimmung für die Inhalte */
+      .bento-item-description {
+        font-size: 0.95rem;
+        line-height: 1.5;
+      }
+
+      /* Dafür sorgen, dass die Beschreibung nicht zu viel Raum einnimmt */
+      .bento-card-inner.with-image .bento-item-description {
+        margin-bottom: 10px;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+      }
+
+      /* Verbesserte Textbegrenzung für mobile Ansicht */
+      @media (max-width: 768px) {
+        .bento-item-description {
+          font-size: 0.9rem;
+          line-height: 1.4;
+          overflow: hidden;
+          display: -webkit-box;
+          -webkit-line-clamp: 3;
+          -webkit-box-orient: vertical;
+          max-height: 3.8em;
+        }
+
+        .bento-span-2 .bento-item-description {
+          -webkit-line-clamp: 2;
+          max-height: 2.8em;
+        }
+
+        /* Optimierte Höhe für span-2 Karten in mobiler Ansicht */
+        .bento-span-2 {
+          height: auto;
+          max-height: none;
+        }
+
+        .bento-span-2 .bento-content {
+          flex: 0 1 auto;
+        }
+      }
     </style>
   </head>
   <body>
@@ -1266,107 +1467,47 @@
       </div>
     </div>
 
-    <!-- Lamp Component (Pure HTML/CSS version) -->
-    <div class="lamp-container">
-      <div class="lamp-inner">
-        <div class="lamp-glow-right">
-          <div class="lamp-mask-bottom"></div>
-          <div class="lamp-mask-left"></div>
-        </div>
-        <div class="lamp-glow-left">
-          <div class="lamp-mask-right"></div>
-          <div class="lamp-mask-bottom"></div>
-        </div>
-        <div class="lamp-blur"></div>
-        <div class="lamp-backdrop"></div>
-        <div class="lamp-glow-center"></div>
-        <div class="lamp-glow-orb"></div>
-        <div class="lamp-line"></div>
-        <div class="lamp-shade-top"></div>
-      </div>
-      <div class="lamp-content">
-        <h1 class="lamp-heading">
-          Präzise Blutdruckmessung <br />
-          für Ihre Gesundheit
-        </h1>
-      </div>
-    </div>
-
     <!-- Bento Grid Section -->
-    <section class="bento-section bg-blue-50">
+    <section class="bento-section bg-gray-100">
       <div class="container">
         <div class="bento-header">
-          <div class="badge">Funktionsübersicht</div>
           <h2 class="bento-title">
             MicroGiant™ - Das weltweit erste Echtzeit Blutdruckmessgerät für
             Zuhause
           </h2>
-          <p class="bento-description">
-            Entdecken Sie die innovativen Funktionen, die das BPER System zu
-            einer revolutionären Lösung für die Blutdrucküberwachung machen
-          </p>
         </div>
 
         <div class="bento-grid">
+          <!-- Große Karte mit span-2 und Bild rechts -->
           <div class="bento-card bento-span-2">
             <div class="bento-card-inner">
-              <div class="bento-icon">
-                <svg
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M12 4.75V6.25"
-                    stroke="#1e5799"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                  />
-                  <path
-                    d="M19.25 12H17.75"
-                    stroke="#1e5799"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                  />
-                  <path
-                    d="M6.25 12H4.75"
-                    stroke="#1e5799"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                  />
-                  <path
-                    d="M12 17.75V19.25"
-                    stroke="#1e5799"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                  />
-                  <path
-                    d="M12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15Z"
-                    stroke="#1e5799"
-                    stroke-width="1.5"
-                  />
-                  <path
-                    d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
-                    stroke="#1e5799"
-                    stroke-width="1.5"
-                  />
-                </svg>
+              <div class="bento-content">
+                <h3 class="bento-item-title">Ereigniserkennung</h3>
+                <p class="bento-item-description">
+                  Automatische Erkennung kritischer Ereignisse mit sofortigen
+                  Benachrichtigungen an Sie und Ihre Gesundheitsdienstleister.
+                </p>
+                <div class="bento-tags">
+                  <span class="bento-tag">#überwachung</span>
+                  <span class="bento-tag">#echtzeit</span>
+                </div>
               </div>
-              <h3 class="bento-item-title">Kontinuierliche Überwachung</h3>
-              <p class="bento-item-description">
-                24/7 Blutdrucküberwachung für ein vollständiges Bild Ihrer
-                Herz-Kreislauf-Gesundheit mit detaillierter Trendanalyse.
-              </p>
-              <div class="bento-tags">
-                <span class="bento-tag">#überwachung</span>
-                <span class="bento-tag">#echtzeit</span>
+              <div class="bento-image">
+                <div class="video-container">
+                  <video
+                    src="images/672f761185cedb86cfdcf42a_674642f269b4561790865f79_video2-transcode.mp4"
+                    alt="BPER System mit Blutdruckmessung"
+                    autoplay
+                    loop
+                    muted
+                    playsinline
+                  ></video>
+                </div>
               </div>
-              <span class="bento-cta">Mehr erfahren →</span>
             </div>
           </div>
 
+          <!-- Einfache Karte ohne Bild -->
           <div class="bento-card">
             <div class="bento-card-inner">
               <div class="bento-icon">
@@ -1414,42 +1555,68 @@
                 <span class="bento-tag">#mobil</span>
                 <span class="bento-tag">#app</span>
               </div>
-              <span class="bento-cta">Erkunden →</span>
             </div>
           </div>
 
+          <!-- Vertikale Karte mit Bild unten (vorher horizontal) -->
           <div class="bento-card">
+            <div class="bento-card-inner with-image">
+              <div class="bento-content">
+                <h3 class="bento-item-title">Warnungen</h3>
+              </div>
+              <div class="bento-image">
+                <img
+                  src="images/Bildschirmfoto 2025-03-06 um 23.49.48.png"
+                  alt="Warnungen des BPER Systems"
+                />
+              </div>
+            </div>
+          </div>
+
+          <!-- Karte mit vertikalem Layout und Bild unten -->
+          <div class="bento-card">
+            <div class="bento-card-inner with-image">
+              <div class="bento-content">
+                <h3 class="bento-item-title">KI-Analyse</h3>
+              </div>
+              <div class="bento-image">
+                <img
+                  src="images/Bildschirmfoto 2025-03-06 um 23.50.12.png"
+                  alt="KI-Analyse des BPER Systems"
+                />
+              </div>
+            </div>
+          </div>
+
+          <!-- Große Karte mit span-2 und Bild rechts -->
+          <div class="bento-card bento-span-2">
             <div class="bento-card-inner">
-              <div class="bento-icon">
-                <svg
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12Z"
-                    stroke="#1e5799"
-                    stroke-width="1.5"
-                  />
-                  <path
-                    d="M8 11.7324C8 11.3866 8.14819 11.0623 8.4 10.8295L11.4 8.3295C11.7556 8.03242 12.2444 8.03242 12.6 8.3295L15.6 10.8295C15.8518 11.0623 16 11.3866 16 11.7324V16C16 16.5523 15.5523 17 15 17H9C8.44772 17 8 16.5523 8 16V11.7324Z"
-                    stroke="#1e5799"
-                    stroke-width="1.5"
-                  />
-                </svg>
+              <div class="bento-content">
+                <h3 class="bento-item-title">Medizinische Berichte</h3>
+                <p class="bento-item-description">
+                  Erstellen Sie umfassende Berichte für medizinisches
+                  Fachpersonal mit detaillierten Blutdruckprotokollen, Trends
+                  und Ereignisverläufen zur Verbesserung von Diagnose und
+                  Behandlung.
+                </p>
+                <div class="bento-tags">
+                  <span class="bento-tag">#berichte</span>
+                  <span class="bento-tag">#gesundheit</span>
+                  <span class="bento-tag">#analyse</span>
+                </div>
               </div>
-              <h3 class="bento-item-title">KI-Analyse</h3>
-              <p class="bento-item-description">
-                Fortschrittliche Machine-Learning-Algorithmen erkennen Muster
-                und liefern personalisierte Gesundheitseinblicke.
-              </p>
-              <div class="bento-tags">
-                <span class="bento-tag">#KI</span>
-                <span class="bento-tag">#einblicke</span>
+              <div class="bento-image">
+                <div class="video-container">
+                  <video
+                    src="images/672f761185cedb86cfdcf42a_6746424c6316898233481faa_video3_1-transcode.mp4"
+                    alt="BPER System mit medizinischen Berichten"
+                    autoplay
+                    loop
+                    muted
+                    playsinline
+                  ></video>
+                </div>
               </div>
-              <span class="bento-cta">Entdecken →</span>
             </div>
           </div>
 
@@ -1490,75 +1657,37 @@
                 <span class="bento-tag">#warnungen</span>
                 <span class="bento-tag">#sicherheit</span>
               </div>
-              <span class="bento-cta">Details anzeigen →</span>
-            </div>
-          </div>
-
-          <div class="bento-card bento-span-2">
-            <div class="bento-card-inner">
-              <div class="bento-icon">
-                <svg
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M3.33782 7C4.68988 4.61949 7.16497 3 10 3H14C16.8350 3 19.3101 4.61949 20.6622 7"
-                    stroke="#1e5799"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                  />
-                  <path
-                    d="M20.6622 17C19.3101 19.3805 16.8350 21 14 21H10C7.16497 21 4.68988 19.3805 3.33782 17"
-                    stroke="#1e5799"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                  />
-                  <path
-                    d="M8.75 10.75H15.25"
-                    stroke="#1e5799"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                  />
-                  <path
-                    d="M8.75 13.25H15.25"
-                    stroke="#1e5799"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                  />
-                  <path
-                    d="M8.75 15.75H12"
-                    stroke="#1e5799"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                  />
-                  <path
-                    d="M7 3.33782C8.47087 2.48697 10.1786 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 10.1786 2.48697 8.47087 3.33782 7"
-                    stroke="#1e5799"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                  />
-                </svg>
-              </div>
-              <h3 class="bento-item-title">Medizinische Berichte</h3>
-              <p class="bento-item-description">
-                Erstellen Sie umfassende Berichte für medizinisches Fachpersonal
-                mit detaillierten Blutdruckprotokollen, Trends und
-                Ereignisverläufen zur Verbesserung von Diagnose und Behandlung.
-              </p>
-              <div class="bento-tags">
-                <span class="bento-tag">#berichte</span>
-                <span class="bento-tag">#gesundheit</span>
-                <span class="bento-tag">#analyse</span>
-              </div>
-              <span class="bento-cta">Beispiel generieren →</span>
             </div>
           </div>
         </div>
       </div>
     </section>
+
+    <!-- Lamp Component (Pure HTML/CSS version) -->
+    <div class="lamp-container">
+      <div class="lamp-inner">
+        <div class="lamp-glow-right">
+          <div class="lamp-mask-bottom"></div>
+          <div class="lamp-mask-left"></div>
+        </div>
+        <div class="lamp-glow-left">
+          <div class="lamp-mask-right"></div>
+          <div class="lamp-mask-bottom"></div>
+        </div>
+        <div class="lamp-blur"></div>
+        <div class="lamp-backdrop"></div>
+        <div class="lamp-glow-center"></div>
+        <div class="lamp-glow-orb"></div>
+        <div class="lamp-line"></div>
+        <div class="lamp-shade-top"></div>
+      </div>
+      <div class="lamp-content">
+        <h1 class="lamp-heading">
+          Präzise Blutdruckmessung <br />
+          für Ihre Gesundheit
+        </h1>
+      </div>
+    </div>
 
     <!-- Testimonials Section with Marquee -->
     <section class="py-16 md:py-24 bg-white text-gray-900 overflow-hidden">
