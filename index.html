@@ -1216,13 +1216,6 @@
       #word-3 {
         color: #8b5cf6; /* Purple color for "intelligenter" */
       }
-
-      #word-4 {
-        color: #ec4899; /* Pink color for "fortschrittlicher" */
-      }
-      #word-5 {
-        color: #0800ff; /* Pink color for "fortschrittlicher" */
-      }
     </style>
   </head>
   <body>
@@ -1250,18 +1243,6 @@
                   class="animated-word"
                   data-word="intelligenter"
                   >intelligenter</span
-                >
-                <span
-                  id="word-4"
-                  class="animated-word"
-                  data-word="fortschrittlicher"
-                  >fortschrittlicher</span
-                >
-                <span
-                  id="word-5"
-                  class="animated-word"
-                  data-word="zuverlässiger"
-                  >zuverlässiger</span
                 >
               </div>
               Blutdruckmonitor
@@ -3347,6 +3328,9 @@
     </footer>
 
     <script>
+      // Globale Variable, um den Timer zu speichern
+      let wordAnimationInterval = null;
+
       // Intersection Observer für die Lampenkomponente
       document.addEventListener('DOMContentLoaded', function () {
         const lampInner = document.querySelector('.lamp-inner');
@@ -3393,25 +3377,54 @@
           observer.observe(lampInner);
         }
 
-        // Word-Animation starten
-        startWordAnimation();
+        // Word-Animation starten, aber nur falls sie noch nicht läuft
+        initWordAnimation();
       });
 
-      // Bestehender Code für die Wortanimation
-      function startWordAnimation() {
-        const words = document.querySelectorAll('.animated-word');
-        let activeIndex = 0;
-
-        // Erste Wortanimation starten
-        if (words.length > 0) {
-          words[0].classList.add('active');
+      // Initialisiert die Wortanimation, falls sie noch nicht läuft
+      function initWordAnimation() {
+        // Stoppe vorhandene Animation, falls sie bereits läuft
+        if (wordAnimationInterval) {
+          clearInterval(wordAnimationInterval);
+          wordAnimationInterval = null;
         }
 
-        // Wörter rotieren
-        setInterval(() => {
+        // Starte die neue Animation
+        startWordAnimation();
+      }
+
+      // Verbesserte Animation für die Wörter
+      function startWordAnimation() {
+        const words = document.querySelectorAll('.animated-word');
+        if (words.length === 0) return; // Falls keine Wörter gefunden wurden
+
+        let activeIndex = 0;
+
+        // Zuerst alle active-Klassen entfernen
+        words.forEach((word) => {
+          word.classList.remove('active');
+        });
+
+        // Dann nur das erste Wort aktivieren
+        words[0].classList.add('active');
+
+        // Timer für die Rotation der Wörter
+        wordAnimationInterval = setInterval(() => {
+          // Aktuelles Wort deaktivieren
           words[activeIndex].classList.remove('active');
+
+          // Zum nächsten Wort wechseln
           activeIndex = (activeIndex + 1) % words.length;
+
+          // Neues Wort aktivieren
           words[activeIndex].classList.add('active');
+
+          // Sicherheitsprüfung: Stelle sicher, dass es keine anderen aktiven Wörter gibt
+          for (let i = 0; i < words.length; i++) {
+            if (i !== activeIndex && words[i].classList.contains('active')) {
+              words[i].classList.remove('active');
+            }
+          }
         }, 3000);
       }
     </script>
