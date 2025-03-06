@@ -74,8 +74,8 @@
             100deg,
             rgba(255, 255, 255, 0.8) 0%,
             rgba(255, 255, 255, 0.8) 7%,
-            transparent 10%,
-            transparent 12%,
+            transparent 20%,
+            transparent 32%,
             rgba(255, 255, 255, 0.8) 16%
           ),
           repeating-linear-gradient(
@@ -89,7 +89,7 @@
         background-size: 300%, 200%;
         background-position: 50% 50%, 50% 50%;
         filter: blur(10px);
-        opacity: 0.15;
+        opacity: 0.2;
         pointer-events: none;
         will-change: transform;
         transition-opacity: 300ms ease-in-out;
@@ -110,10 +110,10 @@
         background-image: repeating-linear-gradient(
             100deg,
             rgba(255, 255, 255, 0.8) 0%,
-            rgba(255, 255, 255, 0.8) 7%,
-            transparent 10%,
-            transparent 12%,
-            rgba(255, 255, 255, 0.8) 16%
+            rgba(255, 255, 255, 0.8) 0%,
+            transparent 0%,
+            transparent 2%,
+            rgba(255, 255, 255, 0.8) 0%
           ),
           repeating-linear-gradient(
             100deg,
@@ -155,7 +155,7 @@
         flex-direction: column;
       }
       .hero-title {
-        font-size: 3.5rem;
+        font-size: 3.8rem;
         max-width: 40rem;
         letter-spacing: -0.05em;
         text-align: center;
@@ -213,7 +213,7 @@
         font-weight: 500;
       }
       .btn-primary {
-        background: #ffffff00;
+        background: #ffffff49;
         color: #004691;
         border: 1px solid #004691;
         box-shadow: 0 6px 15px rgba(43, 108, 176, 0.3);
@@ -988,8 +988,12 @@
           transparent
         );
         color: white;
-        animation: expandWidth 2s ease-in-out forwards;
+        animation: none; /* Animation wird per JavaScript gestartet */
         opacity: 0.5;
+      }
+
+      .lamp-glow-right.animate {
+        animation: expandWidth 1s ease-in-out forwards;
       }
 
       .lamp-glow-left {
@@ -1005,8 +1009,12 @@
           #06b6d4
         );
         color: white;
-        animation: expandWidth 2s ease-in-out forwards;
+        animation: none; /* Animation wird per JavaScript gestartet */
         opacity: 0.5;
+      }
+
+      .lamp-glow-left.animate {
+        animation: expandWidth 1s ease-in-out 0s forwards;
       }
 
       .lamp-mask-bottom {
@@ -1089,7 +1097,11 @@
         border-radius: 9999px;
         background-color: #22d3ee;
         filter: blur(1rem);
-        animation: expandOrbWidth 2s ease-in-out forwards;
+        animation: none; /* Animation wird per JavaScript gestartet */
+      }
+
+      .lamp-glow-orb.animate {
+        animation: expandOrbWidth 1s ease-in-out 0.2s forwards;
       }
 
       .lamp-line {
@@ -1100,7 +1112,11 @@
         width: 30rem;
         transform: translateY(-7rem);
         background-color: #22d3ee;
-        animation: expandLineWidth 2s ease-in-out forwards;
+        animation: none; /* Animation wird per JavaScript gestartet */
+      }
+
+      .lamp-line.animate {
+        animation: expandLineWidth 2s ease-in-out 0.5s forwards;
       }
 
       .lamp-shade-top {
@@ -1136,6 +1152,10 @@
         color: transparent;
         opacity: 0;
         transform: translateY(6.25rem);
+        animation: none; /* Animation wird per JavaScript gestartet */
+      }
+
+      .lamp-heading.animate {
         animation: fadeInUp 2s ease-in-out 0.3s forwards;
       }
 
@@ -3325,5 +3345,75 @@
         </div>
       </div>
     </footer>
+
+    <script>
+      // Intersection Observer für die Lampenkomponente
+      document.addEventListener('DOMContentLoaded', function () {
+        const lampInner = document.querySelector('.lamp-inner');
+        const lampGlowOrb = document.querySelector('.lamp-glow-orb');
+        const lampLine = document.querySelector('.lamp-line');
+        const lampHeading = document.querySelector('.lamp-heading');
+        const lampGlowRight = document.querySelector('.lamp-glow-right');
+        const lampGlowLeft = document.querySelector('.lamp-glow-left');
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                // Starte die Animationen in einer bestimmten Reihenfolge
+                if (lampGlowRight) lampGlowRight.classList.add('animate');
+                if (lampGlowLeft) lampGlowLeft.classList.add('animate');
+
+                // Verzögere die anderen Animationen
+                setTimeout(() => {
+                  if (lampGlowOrb) lampGlowOrb.classList.add('animate');
+                }, 100);
+
+                setTimeout(() => {
+                  if (lampLine) lampLine.classList.add('animate');
+                }, 300);
+
+                setTimeout(() => {
+                  if (lampHeading) lampHeading.classList.add('animate');
+                }, 600);
+
+                // Beobachtung beenden, nachdem die Animationen gestartet wurden
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          {
+            root: null, // Viewport als Referenz
+            threshold: 0.25, // Animation startet, wenn 25% des Elements sichtbar sind
+          }
+        );
+
+        // Starte die Beobachtung
+        if (lampInner) {
+          observer.observe(lampInner);
+        }
+
+        // Word-Animation starten
+        startWordAnimation();
+      });
+
+      // Bestehender Code für die Wortanimation
+      function startWordAnimation() {
+        const words = document.querySelectorAll('.animated-word');
+        let activeIndex = 0;
+
+        // Erste Wortanimation starten
+        if (words.length > 0) {
+          words[0].classList.add('active');
+        }
+
+        // Wörter rotieren
+        setInterval(() => {
+          words[activeIndex].classList.remove('active');
+          activeIndex = (activeIndex + 1) % words.length;
+          words[activeIndex].classList.add('active');
+        }, 3000);
+      }
+    </script>
   </body>
 </html>
