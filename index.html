@@ -1417,6 +1417,22 @@
           flex: 0 1 auto;
         }
       }
+
+      .lamp-heading.animate {
+        animation: fadeInUp 2s ease-in-out 0.3s forwards;
+      }
+
+      /* Button sichtbar machen */
+      .btn.btn-primary.checkout-button {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      @media (min-width: 768px) {
+        .lamp-heading {
+          font-size: 4.5rem;
+        }
+      }
     </style>
   </head>
   <body>
@@ -1701,6 +1717,12 @@
             Erfahren Sie, wie das BPER System das Leben unserer Kunden verändert
             hat und ihnen hilft, ihre Gesundheit besser zu verstehen
           </p>
+          <div class="hero-buttons">
+            <button class="btn btn-primary checkout-button">
+              Jetzt bestellen
+              <span class="icon">→</span>
+            </button>
+          </div>
         </div>
 
         <div class="relative w-full overflow-hidden">
@@ -2056,7 +2078,7 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
           <!-- Angebot 1 -->
           <div
-            class="bg-gray-50 rounded-xl p-6 border border-gray-200 flex flex-col h-full relative overflow-hidden"
+            class="opacity-60 bg-gray-50 rounded-xl p-6 border border-gray-200 flex flex-col h-full relative overflow-hidden"
           >
             <div
               class="absolute top-0 right-0 bg-red-500 text-white py-1 px-4 rounded-bl-lg text-sm font-medium"
@@ -2126,8 +2148,8 @@
               Bedürfnisse zu erfüllen.
             </p>
             <button
-              disabled
-              class="mt-auto w-full py-2 bg-gray-300 text-gray-600 rounded-md cursor-not-allowed"
+              disabled=""
+              class="mt-auto w-full py-2 bg-gray-100 text-gray-300 rounded-md cursor-not-allowed"
             >
               Ausverkauft
             </button>
@@ -2135,18 +2157,14 @@
 
           <!-- Angebot 2 -->
           <div
-            class="bg-white rounded-xl p-6 border-2 border-blue-500 flex flex-col h-full relative overflow-hidden shadow-lg"
+            class="bg-white rounded-xl p-6 border-4 border-green-500 flex flex-col h-full relative overflow-hidden shadow-lg"
           >
             <div
-              class="absolute top-0 right-0 bg-blue-500 text-white py-1 px-4 rounded-bl-lg text-sm font-medium"
+              class="absolute top-0 right-0 bg-green-500 text-white py-1 px-4 rounded-bl-lg text-sm font-medium"
             >
               Aktuell
             </div>
-            <div
-              class="py-2 px-4 bg-blue-100 text-blue-800 rounded-lg text-sm inline-block mb-3"
-            >
-              Beliebteste Wahl
-            </div>
+
             <h3 class="text-xl font-bold mb-2">Spezialangebot</h3>
             <div class="text-3xl font-bold mb-4">259 €</div>
             <div class="mb-4 text-sm text-gray-500">
@@ -3020,16 +3038,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
           <!-- Brand Section -->
           <div class="lg:col-span-2">
-            <div class="flex items-center gap-3 mb-4">
-              <img
-                src="/BPER-logo.svg"
-                alt="BPER Blutdruckmessgerät"
-                onerror="this.src='https://placehold.co/200x60?text=BPER';this.onerror='';"
-                class="h-10 w-auto transition-transform hover:scale-105 focus:scale-105"
-              />
-              <span class="text-xl font-semibold text-blue-700">BPER</span>
-            </div>
-            <p class="text-gray-600 mb-6 max-w-md">
+            <p class="text-gray-600 mb-6 max-w-md text-left">
               Präzise Blutdruckmessung für Ihr Wohlbefinden
             </p>
 
