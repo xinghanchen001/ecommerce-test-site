@@ -171,10 +171,10 @@
         display: flex;
         width: 100%;
         justify-content: center;
-        overflow: hidden;
+        overflow: visible; /* Änderung von hidden zu visible */
         text-align: center;
         padding: 0.25rem 0 1rem 0;
-        min-height: 5rem;
+        min-height: 6rem; /* Erhöhung von 5rem auf 6rem */
       }
       .animated-word {
         position: absolute;
@@ -1462,6 +1462,16 @@
       @media (min-width: 768px) {
         .lamp-heading {
           font-size: 4.5rem;
+        }
+      }
+
+      /* Mobile styles für animierte Wörter */
+      @media (max-width: 768px) {
+        .animated-word-container {
+          min-height: 4rem;
+        }
+        .animated-word {
+          font-size: 0.9em;
         }
       }
     </style>
