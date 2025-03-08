@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BPER System - Blutdruck-Diagnose</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: '#1e5799',
+              ring: '#1e5799',
+              input: '#e2e8f0',
+              background: '#ffffff',
+              foreground: '#0f172a',
+              'muted-foreground': '#64748b',
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+          Helvetica, Arial, sans-serif;
+      }
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 0.375rem;
+        font-size: 0.875rem;
+        font-weight: 500;
+        height: 2.5rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        background-color: #1e5799;
+        color: white;
+        transition: background-color 0.2s ease-in-out;
+      }
+      .button:hover {
+        background-color: #154a8c;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-50">
+    <header class="bg-white shadow-sm py-4">
+      <div class="container mx-auto px-4">
+        <div class="flex items-center justify-between">
+          <a href="index.html" class="text-xl font-semibold text-primary"
+            >BPER System</a
+          >
+          <a href="index.html" class="button flex items-center">
+            <svg
+              class="w-4 h-4 mr-2"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M10 19l-7-7m0 0l7-7m-7 7h18"
+              ></path>
+            </svg>
+            Zurück zur Startseite
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <main class="container mx-auto py-8 px-4">
+      <div class="max-w-3xl mx-auto">
+        <h1 class="text-3xl font-bold text-center mb-8">
+          Ihre Blutdruck-Diagnose
+        </h1>
+
+        <div class="bg-white rounded-lg shadow-md p-6 md:p-8">
+          <div id="loading" class="text-center py-12">
+            <div
+              class="inline-block animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"
+            ></div>
+            <p class="mt-4 text-lg text-gray-700">
+              Ihre Daten werden analysiert...
+            </p>
+          </div>
+
+          <div id="result" class="hidden">
+            <div class="mb-8">
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <p class="text-sm text-gray-500">Alter</p>
+                  <p id="age-value" class="text-2xl font-medium">-</p>
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <p class="text-sm text-gray-500">Systolischer Wert</p>
+                  <p id="systolic-value" class="text-2xl font-medium">-</p>
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <p class="text-sm text-gray-500">Diastolischer Wert</p>
+                  <p id="diastolic-value" class="text-2xl font-medium">-</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="border-t border-gray-200 pt-6">
+              <h2 class="text-xl font-semibold mb-4">Diagnose:</h2>
+              <div id="diagnosis-message" class="p-4 rounded-lg mb-6">
+                <!-- Diagnose-Nachricht wird hier eingefügt -->
+              </div>
+
+              <!-- Kommentarbereich und Bestellbereich wurden entfernt -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <section class="py-16 md:py-24 bg-white">
+      <div class="container mx-auto px-4 md:px-6">
+        <div class="flex flex-col items-center text-center mb-12">
+          <div class="badge mb-2">Limitiertes Angebot</div>
+          <h2 class="text-3xl md:text-4xl font-bold tracking-tight mb-4">
+            Unsere exklusive Vorabvermarktung – nur für die Schnellsten!
+          </h2>
+          <p class="text-lg text-gray-600 max-w-2xl mb-8">
+            Sichern Sie sich jetzt Ihr BPER System zu einem der begrenzt
+            verfügbaren Sonderangebote.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <!-- Angebot 1 -->
+          <div
+            class="opacity-60 bg-gray-50 rounded-xl p-6 border border-gray-200 flex flex-col h-full relative overflow-hidden"
+          >
+            <div
+              class="absolute top-0 right-0 bg-red-500 text-white py-1 px-4 rounded-bl-lg text-sm font-medium"
+            >
+              Ausverkauft
+            </div>
+            <h3 class="text-xl font-bold mb-2">Frühvogel-Angebot</h3>
+            <div class="text-3xl font-bold mb-4">199 €</div>
+            <div class="mb-4 text-sm text-gray-500">Nur 200 Geräte</div>
+            <ul class="mb-6 flex-1 space-y-2 text-sm">
+              <li class="flex items-start">
+                <svg
+                  class="w-5 h-5 text-green-500 mr-2 flex-shrink-0"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  ></path>
+                </svg>
+                <span>Veröffentlicht am 10. März 2025</span>
+              </li>
+              <li class="flex items-start">
+                <svg
+                  class="w-5 h-5 text-green-500 mr-2 flex-shrink-0"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  ></path>
+                </svg>
+                <span>Ausverkauft am 11. März 2025</span>
+              </li>
+              <li class="flex items-start">
+                <svg
+                  class="w-5 h-5 text-red-500 mr-2 flex-shrink-0"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M6 18L18 6M6 6l12 12"
+                  ></path>
+                </svg>
+                <span>Nicht mehr verfügbar</span>
+              </li>
+            </ul>
+            <p class="text-sm text-gray-600 mb-4">
+              Dieses Angebot war unser Startschuss für die BPER-Revolution,
+              exklusiv für die ersten 200 Reservierungen. Die Nachfrage war
+              überwältigend, und wir haben uns entschieden, nur die dringendsten
+              Bedürfnisse zu erfüllen.
+            </p>
+            <button
+              disabled=""
+              class="mt-auto w-full py-2 bg-gray-100 text-gray-300 rounded-md cursor-not-allowed"
+            >
+              Ausverkauft
+            </button>
+          </div>
+
+          <!-- Angebot 2 -->
+          <div
+            class="bg-white rounded-xl p-6 border-4 border-green-500 flex flex-col h-full relative overflow-hidden shadow-lg"
+          >
+            <div
+              class="absolute top-0 right-0 bg-green-500 text-white py-1 px-4 rounded-bl-lg text-sm font-medium"
+            >
+              Aktuell
+            </div>
+
+            <h3 class="text-xl font-bold mb-2">Spezialangebot</h3>
+            <div class="text-3xl font-bold mb-4">259 €</div>
+            <div class="mb-4 text-sm text-gray-500">
+              Nur 500 Geräte, pro Person ausschließlich!
+            </div>
+            <ul class="mb-6 flex-1 space-y-2 text-sm">
+              <li class="flex items-start">
+                <svg
+                  class="w-5 h-5 text-green-500 mr-2 flex-shrink-0"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  ></path>
+                </svg>
+                <span
+                  >1 Jahr kostenlose Online-Datenspeicherung (Wert: 59 €)</span
+                >
+              </li>
+              <li class="flex items-start">
+                <svg
+                  class="w-5 h-5 text-green-500 mr-2 flex-shrink-0"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  ></path>
+                </svg>
+                <span
+                  >1 Jahr kostenlose manuelle Risikowarnungen (Wert: 199
+                  €)</span
+                >
+              </li>
+              <li class="flex items-start">
+                <svg
+                  class="w-5 h-5 text-green-500 mr-2 flex-shrink-0"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  ></path>
+                </svg>
+                <span>KI-priorisierte Lieferung nach individuellem Bedarf</span>
+              </li>
+            </ul>
+            <p class="text-sm text-gray-600 mb-4">
+              Dieses Angebot ist einzigartig und begrenzt – perfekt für den, der
+              sofort handelt und die maximale Unterstützung sucht. Nur eine
+              Reservierung pro Person, um Exklusivität und Fairness zu
+              gewährleisten.
+            </p>
+            <button
+              class="mt-auto w-full py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md transition duration-300 checkout-button"
+            >
+              Jetzt reservieren
+            </button>
+          </div>
+
+          <!-- Angebot 3 -->
+          <div
+            class="bg-gray-50 rounded-xl p-6 border border-gray-200 flex flex-col h-full"
+          >
+            <h3 class="text-xl font-bold mb-2">Einführungspreis</h3>
+            <div class="text-3xl font-bold mb-4">299 €</div>
+            <div class="mb-4 text-sm text-gray-500">Regulärer UVP-Preis</div>
+            <ul class="mb-6 flex-1 space-y-2 text-sm">
+              <li class="flex items-start">
+                <svg
+                  class="w-5 h-5 text-green-500 mr-2 flex-shrink-0"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  ></path>
+                </svg>
+                <span>Lieferstart planmäßig Mitte Juli 2025</span>
+              </li>
+              <li class="flex items-start">
+                <svg
+                  class="w-5 h-5 text-green-500 mr-2 flex-shrink-0"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  ></path>
+                </svg>
+                <span>Begrenzte Verfügbarkeit nach dem Spezialangebot</span>
+              </li>
+              <li class="flex items-start">
+                <svg
+                  class="w-5 h-5 text-green-500 mr-2 flex-shrink-0"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  ></path>
+                </svg>
+                <span>Deutsche Qualitätstechnologie</span>
+              </li>
+            </ul>
+            <p class="text-sm text-gray-600 mb-4">
+              Der UVP-Preis von 299 € ist unser Standardeinführungspreis für die
+              Vorabvermarktung. Er spiegelt den echten Wert dieser
+              revolutionären Technologie wider – eine Investition in Ihre
+              Gesundheit, die sich lohnt.
+            </p>
+            <button
+              class="mt-auto w-full py-2 bg-gray-600 hover:bg-gray-700 text-white rounded-md transition duration-300 checkout-button"
+            >
+              Jetzt vorbestellen
+            </button>
+          </div>
+        </div>
+
+        <!-- Hinweisblock mit voller Breite -->
+        <div
+          class="mt-10 p-5 bg-yellow-50 border border-yellow-200 rounded-lg w-full"
+        >
+          <p
+            class="text-sm md:text-base font-medium text-yellow-800 text-center"
+          >
+            <span class="font-bold">Achtung:</span> Handeln Sie schnell! Unsere
+            Produktion ist noch im Aufbau, und die ersten 500 Geräte sind
+            begrenzt. Wenn Ihr Blutdruck noch nicht täglich überwacht werden
+            muss, empfehlen wir Ihnen, vorerst zu warten – wir wollen die
+            Ressourcen für die dringendsten Fälle nutzen.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        // Daten aus localStorage abrufen
+        const bloodPressureDataString =
+          localStorage.getItem('bloodPressureData');
+
+        if (!bloodPressureDataString) {
+          // Wenn keine Daten vorhanden sind, zurück zur Eingabeseite
+          window.location.href = 'blutdruck-test.html';
+          return;
+        }
+
+        const bloodPressureData = JSON.parse(bloodPressureDataString);
+        const { age, systolic, diastolic, email } = bloodPressureData;
+
+        // Character-Limit-Input Funktionalität
+        const commentInput = document.getElementById('comment-input');
+        const charactersLeft = document.getElementById('characters-left');
+        const maxLength = 200;
+
+        // Diese Funktionalität wird nicht mehr benötigt, da der Kommentarbereich entfernt wurde
+        // Aber wir lassen den Code hier, um keine Fehler zu verursachen
+        if (commentInput && charactersLeft) {
+          commentInput.addEventListener('input', function () {
+            const currentLength = this.value.length;
+            const remaining = maxLength - currentLength;
+            charactersLeft.textContent = remaining;
+          });
+        }
+
+        // Simuliere Ladezeit für die Analyse
+        setTimeout(function () {
+          // Verstecke Ladeanimation und zeige Ergebnis
+          document.getElementById('loading').classList.add('hidden');
+          document.getElementById('result').classList.remove('hidden');
+
+          // Zeige die eingegebenen Werte an
+          document.getElementById('age-value').textContent = age;
+          document.getElementById('systolic-value').textContent = systolic;
+          document.getElementById('diastolic-value').textContent = diastolic;
+
+          // Diagnose basierend auf den Werten
+          const diagnosisElement = document.getElementById('diagnosis-message');
+
+          // Bewerte den Blutdruck
+          let diagnosisText = '';
+          let diagnosisClass = '';
+          let isDangerous = false;
+
+          // Einfache Bewertung basierend auf diastolischem Wert und Alter
+          if (diastolic < 60) {
+            diagnosisText =
+              'Ihr diastolischer Blutdruck ist niedrig. Dies kann in manchen Fällen normal sein, sollte aber überwacht werden.';
+            diagnosisClass = 'bg-blue-50 text-blue-800';
+          } else if (diastolic <= 80) {
+            diagnosisText =
+              'Ihr diastolischer Blutdruck liegt im optimalen Bereich. Regelmäßige Überwachung ist dennoch wichtig. Das BPER System kann Ihnen helfen, Ihre Gesundheit besser im Blick zu behalten.';
+            diagnosisClass = 'bg-orange-50 text-orange-800';
+          } else if (diastolic <= 90) {
+            diagnosisText =
+              'Ihr diastolischer Blutdruck ist leicht erhöht. Eine regelmäßige Überwachung wird empfohlen.';
+            diagnosisClass = 'bg-yellow-50 text-yellow-800';
+          } else {
+            diagnosisText =
+              'Ihre Blutdruckwerte liegen in einem Bereich, der ein erhöhtes Gesundheitsrisiko darstellt. Ein Blutdruckmessgerät ist für Sie besonders wichtig, um Ihre Werte regelmäßig zu überwachen. Das BPER System kann Ihnen helfen, Ihre Gesundheit besser im Blick zu behalten.';
+            diagnosisClass = 'bg-red-50 text-red-800';
+            isDangerous = false;
+          }
+
+          // Füge Altershinweis hinzu
+          if (age > 65) {
+            if (diastolic <= 90) {
+              diagnosisText +=
+                ' In Ihrem Alter ist eine regelmäßige Blutdruckkontrolle besonders wichtig.';
+            }
+            if (diastolic > 85) {
+              isDangerous = false;
+            }
+          }
+
+          // Setze Diagnose-Text und Klasse
+          diagnosisElement.textContent = diagnosisText;
+          diagnosisElement.className = `p-4 rounded-lg mb-6 ${diagnosisClass}`;
+
+          // Speichere die E-Mail-Adresse für spätere Kommunikation
+          // In einer echten Anwendung würde dies an einen Server gesendet werden
+          console.log('E-Mail für Nachverfolgung:', email);
+        }, 2000); // 2 Sekunden Ladezeit simulieren
+      });
+    </script>
+  </body>
+</html>
