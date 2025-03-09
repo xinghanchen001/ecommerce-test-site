@@ -2874,7 +2874,7 @@
           const endpointUrl =
             window.location.hostname === 'localhost' ||
             window.location.hostname === '127.0.0.1'
-              ? '/create-checkout-session'
+              ? 'http://localhost:3002/create-checkout-session'
               : '/api/create-checkout';
 
           // Call your backend to create a Checkout Session
