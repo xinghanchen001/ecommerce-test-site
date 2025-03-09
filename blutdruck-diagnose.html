@@ -480,5 +480,76 @@
         }, 2000); // 2 Sekunden Ladezeit simulieren
       });
     </script>
+
+    <!-- Stripe Integration -->
+    <script src="https://js.stripe.com/v3/"></script>
+    <script>
+      // Initialize Stripe.js with your publishable key
+      const stripe = Stripe(
+        'pk_live_51QyFM2A9aibyk7ocyoijP7A9gPKC0oDS0HlySiSEuCOaS4sndnS1HZn9fyKPkf48ERT7FPaoxOWwvesYKKSy7N5J003rxyTc2b'
+      );
+
+      // Function to handle checkout process
+      async function handleCheckout() {
+        try {
+          // Use Netlify function endpoint or fallback to local server
+          const endpointUrl =
+            window.location.hostname === 'localhost' ||
+            window.location.hostname === '127.0.0.1'
+              ? 'http://localhost:3002/create-checkout-session'
+              : '/api/create-checkout';
+
+          // Call your backend to create a Checkout Session
+          const response = await fetch(endpointUrl, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              priceId: 'price_1QyfHoA9aibyk7ocoy9gcOsX', // Using the live mode price ID
+            }),
+          });
+
+          const session = await response.json();
+
+          // Show error if there was a problem
+          if (session.error) {
+            console.error('Session error:', session.error);
+            alert(
+              'Es gab ein Problem mit dem Checkout. Bitte versuchen Sie es später noch einmal.'
+            );
+            return;
+          }
+
+          // Redirect to Stripe Checkout
+          const result = await stripe.redirectToCheckout({
+            sessionId: session.id,
+          });
+
+          if (result.error) {
+            console.error('Redirect error:', result.error);
+            alert(result.error.message);
+          }
+        } catch (error) {
+          console.error('Checkout error:', error);
+          alert(
+            'Es gab ein Problem mit dem Checkout. Bitte versuchen Sie es später noch einmal.'
+          );
+        }
+      }
+
+      // Add event listeners for Stripe checkout buttons
+      document.addEventListener('DOMContentLoaded', function () {
+        // Get all buy buttons
+        const buyButtons = document.querySelectorAll('.checkout-button');
+
+        // Add checkout handler to all buy buttons
+        buyButtons.forEach((button) => {
+          if (button) {
+            button.addEventListener('click', handleCheckout);
+          }
+        });
+      });
+    </script>
   </body>
 </html>
