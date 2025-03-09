@@ -6,3 +6,14 @@
   from = "/api/*"
   to = "/.netlify/functions/:splat"
   status = 200 
+
+# Füge eine neue Umleitung für blutdruck-test.html hinzu
+[[redirects]]
+  from = "/blutdruck-test"
+  to = "/blutdruck-test.html"
+  status = 200
+
+[[redirects]]
+  from = "/blutdruck-test/"
+  to = "/blutdruck-test.html"
+  status = 200 
