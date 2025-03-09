@@ -201,7 +201,13 @@
         <div
           class="bg-white bg-opacity-95 rounded-lg shadow-lg p-6 md:p-10 border border-gray-100 form-card"
         >
-          <form id="bloodPressureForm" class="space-y-8">
+          <form
+            id="bloodPressureForm"
+            class="space-y-8"
+            action="https://formspree.io/f/xbjnkwgp"
+            method="POST"
+          >
+            <input type="hidden" name="_to" value="drcomoi708@gmail.com" />
             <div class="input-group input-focus-ring">
               <label for="age" class="shadcn-label">Alter</label>
               <input
@@ -442,8 +448,31 @@
               })
             );
 
-            // Weiterleitung zur Diagnoseseite
-            window.location.href = 'blutdruck-diagnose.html';
+            // Senden der Daten per E-Mail
+            const formData = new FormData();
+            formData.append('Alter', age);
+            formData.append('Systolischer Wert', systolic);
+            formData.append('Diastolischer Wert', diastolic);
+            formData.append('E-Mail', email);
+            formData.append('_replyto', email);
+
+            fetch('https://formspree.io/f/xbjnkwgp', {
+              method: 'POST',
+              body: formData,
+              headers: {
+                Accept: 'application/json',
+              },
+            })
+              .then((response) => {
+                console.log('Form submitted successfully');
+                // Weiterleitung zur Diagnoseseite
+                window.location.href = 'blutdruck-diagnose.html';
+              })
+              .catch((error) => {
+                console.error('Error submitting form:', error);
+                // Trotz Fehler zur Diagnoseseite weiterleiten
+                window.location.href = 'blutdruck-diagnose.html';
+              });
           }
         });
 
