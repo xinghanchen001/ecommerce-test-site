@@ -211,6 +211,7 @@
             <input type="text" name="age" />
             <input type="text" name="systolic" />
             <input type="text" name="diastolic" />
+            <input type="text" name="concern" />
             <input type="email" name="email" />
             <input type="text" name="subject" />
           </form>
@@ -307,6 +308,77 @@
                     >0</span
                   >
                   / 3 Zeichen
+                </div>
+              </div>
+            </div>
+
+            <div class="input-group input-focus-ring">
+              <label class="shadcn-label"
+                >Welche Hauptbedenken haben Sie bezüglich der Messergebnisse
+                Ihres aktuellen Hausgeräts?</label
+              >
+              <div class="space-y-3 mt-2">
+                <div class="flex items-start">
+                  <input
+                    type="radio"
+                    id="concern-none"
+                    name="concern"
+                    value="Keine Bedenken, sehr zufrieden."
+                    class="mt-1 h-4 w-4 text-primary border-gray-300 focus:ring-primary"
+                    required
+                  />
+                  <label
+                    for="concern-none"
+                    class="ml-3 text-sm font-medium text-gray-700"
+                  >
+                    Keine Bedenken, sehr zufrieden.
+                  </label>
+                </div>
+
+                <div class="flex items-start">
+                  <input
+                    type="radio"
+                    id="concern-inconsistent"
+                    name="concern"
+                    value="Mehrmals zur gleichen Zeit gemessen, die Ergebnisse sind unterschiedlich."
+                    class="mt-1 h-4 w-4 text-primary border-gray-300 focus:ring-primary"
+                  />
+                  <label
+                    for="concern-inconsistent"
+                    class="ml-3 text-sm font-medium text-gray-700"
+                  >
+                    Mehrmals zur gleichen Zeit gemessen, die Ergebnisse sind
+                    unterschiedlich.
+                  </label>
+                </div>
+
+                <div class="flex items-start">
+                  <input
+                    type="radio"
+                    id="concern-feeling"
+                    name="concern"
+                    value="Die Messergebnisse stimmen nicht mit meinem Körpergefühl überein."
+                    class="mt-1 h-4 w-4 text-primary border-gray-300 focus:ring-primary"
+                  />
+                  <label
+                    for="concern-feeling"
+                    class="ml-3 text-sm font-medium text-gray-700"
+                  >
+                    Die Messergebnisse stimmen nicht mit meinem Körpergefühl
+                    überein.
+                  </label>
+                </div>
+
+                <div class="flex items-start">
+                  <input type="radio" id="concern-error" name="concern"
+                  value="Häufige Fehlermeldungen (z.B. "ERROR")." class="mt-1
+                  h-4 w-4 text-primary border-gray-300 focus:ring-primary" />
+                  <label
+                    for="concern-error"
+                    class="ml-3 text-sm font-medium text-gray-700"
+                  >
+                    Häufige Fehlermeldungen (z.B. "ERROR").
+                  </label>
                 </div>
               </div>
             </div>
@@ -469,11 +541,22 @@
           const diastolic = parseInt(diastolicInput.value);
           const email = emailInput.value;
 
+          // Get selected concern
+          const concernRadios = document.getElementsByName('concern');
+          let selectedConcern = '';
+          for (const radio of concernRadios) {
+            if (radio.checked) {
+              selectedConcern = radio.value;
+              break;
+            }
+          }
+
           // Alle Felder validieren
           const isAgeValid = validateAge(age);
           const isSystolicValid = validateSystolic(systolic);
           const isDiastolicValid = validateDiastolic(diastolic);
           const isEmailValid = validateEmail(email);
+          const isConcernValid = selectedConcern !== '';
 
           // Fehlermeldungen anzeigen
           showError('age', !isAgeValid);
@@ -486,7 +569,8 @@
             isAgeValid &&
             isSystolicValid &&
             isDiastolicValid &&
-            isEmailValid
+            isEmailValid &&
+            isConcernValid
           ) {
             // Zeige Ladeanimation
             buttonText.textContent = 'Wird gesendet...';
@@ -501,6 +585,7 @@
                 age,
                 systolic,
                 diastolic,
+                concern: selectedConcern,
                 email,
               })
             );
@@ -517,13 +602,14 @@
                 age,
                 systolic,
                 diastolic,
+                concern: selectedConcern,
                 email,
                 subject: 'Neue Blutdruck-Test Einreichung',
               });
 
               // Simuliere eine kurze Verzögerung für bessere UX
               setTimeout(() => {
-                window.location.href = 'blutdruck-diagnose.html';
+                window.location.href = 'blutdruck-analyse.html';
               }, 1500);
 
               // Zusätzlich: Daten an den lokalen Server senden, falls dieser sie verarbeiten kann
@@ -537,6 +623,7 @@
                     age,
                     systolic,
                     diastolic,
+                    concern: selectedConcern,
                     email,
                     subject: 'Neue Blutdruck-Test Einreichung',
                   }),
@@ -568,12 +655,12 @@
               })
                 .then(() => {
                   console.log('Form successfully submitted to Netlify');
-                  window.location.href = 'blutdruck-diagnose.html';
+                  window.location.href = 'blutdruck-analyse.html';
                 })
                 .catch((error) => {
                   console.error('Netlify form submission error:', error);
                   // Bei Fehler trotzdem zur Diagnoseseite weiterleiten
-                  window.location.href = 'blutdruck-diagnose.html';
+                  window.location.href = 'blutdruck-analyse.html';
                 });
             }
 

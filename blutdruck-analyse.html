@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>BPER System - Blutdruck-Diagnose</title>
+    <title>BPER System - Blutdruck-Analyse</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
@@ -76,7 +76,7 @@
     <main class="container mx-auto py-8 px-4">
       <div class="max-w-3xl mx-auto">
         <h1 class="text-3xl font-bold text-center mb-8">
-          Ihre Blutdruck-Diagnose
+          Ihre Blutdruck-Analyse
         </h1>
 
         <div class="bg-white rounded-lg shadow-md p-6 md:p-8">
@@ -108,9 +108,9 @@
             </div>
 
             <div class="border-t border-gray-200 pt-6">
-              <h2 class="text-xl font-semibold mb-4">Diagnose:</h2>
-              <div id="diagnosis-message" class="p-4 rounded-lg mb-6">
-                <!-- Diagnose-Nachricht wird hier eingefügt -->
+              <h2 class="text-xl font-semibold mb-4">Analyse:</h2>
+              <div id="analysis-message" class="p-4 rounded-lg mb-6">
+                <!-- Analyse-Nachricht wird hier eingefügt -->
               </div>
 
               <!-- Kommentarbereich und Bestellbereich wurden entfernt -->
@@ -431,38 +431,38 @@
           document.getElementById('systolic-value').textContent = systolic;
           document.getElementById('diastolic-value').textContent = diastolic;
 
-          // Diagnose basierend auf den Werten
-          const diagnosisElement = document.getElementById('diagnosis-message');
+          // Analyse basierend auf den Werten
+          const analysisElement = document.getElementById('analysis-message');
 
           // Bewerte den Blutdruck
-          let diagnosisText = '';
-          let diagnosisClass = '';
+          let analysisText = '';
+          let analysisClass = '';
           let isDangerous = false;
 
           // Einfache Bewertung basierend auf diastolischem Wert und Alter
           if (diastolic < 60) {
-            diagnosisText =
+            analysisText =
               'Ihr diastolischer Blutdruck ist niedrig. Dies kann in manchen Fällen normal sein, sollte aber überwacht werden.';
-            diagnosisClass = 'bg-blue-50 text-blue-800';
+            analysisClass = 'bg-blue-50 text-blue-800';
           } else if (diastolic <= 80) {
-            diagnosisText =
+            analysisText =
               'Ihr diastolischer Blutdruck liegt im optimalen Bereich. Regelmäßige Überwachung ist dennoch wichtig. Das BPER System kann Ihnen helfen, Ihre Gesundheit besser im Blick zu behalten.';
-            diagnosisClass = 'bg-orange-50 text-orange-800';
+            analysisClass = 'bg-orange-50 text-orange-800';
           } else if (diastolic <= 90) {
-            diagnosisText =
+            analysisText =
               'Ihr diastolischer Blutdruck ist leicht erhöht. Eine regelmäßige Überwachung wird empfohlen.';
-            diagnosisClass = 'bg-yellow-50 text-yellow-800';
+            analysisClass = 'bg-yellow-50 text-yellow-800';
           } else {
-            diagnosisText =
+            analysisText =
               'Ihre Blutdruckwerte liegen in einem Bereich, der ein erhöhtes Gesundheitsrisiko darstellt. Ein Blutdruckmessgerät ist für Sie besonders wichtig, um Ihre Werte regelmäßig zu überwachen. Das BPER System kann Ihnen helfen, Ihre Gesundheit besser im Blick zu behalten.';
-            diagnosisClass = 'bg-red-50 text-red-800';
+            analysisClass = 'bg-red-50 text-red-800';
             isDangerous = false;
           }
 
           // Füge Altershinweis hinzu
           if (age > 65) {
             if (diastolic <= 90) {
-              diagnosisText +=
+              analysisText +=
                 ' In Ihrem Alter ist eine regelmäßige Blutdruckkontrolle besonders wichtig.';
             }
             if (diastolic > 85) {
@@ -470,9 +470,9 @@
             }
           }
 
-          // Setze Diagnose-Text und Klasse
-          diagnosisElement.textContent = diagnosisText;
-          diagnosisElement.className = `p-4 rounded-lg mb-6 ${diagnosisClass}`;
+          // Setze Analyse-Text und Klasse
+          analysisElement.textContent = analysisText;
+          analysisElement.className = `p-4 rounded-lg mb-6 ${analysisClass}`;
 
           // Speichere die E-Mail-Adresse für spätere Kommunikation
           // In einer echten Anwendung würde dies an einen Server gesendet werden
