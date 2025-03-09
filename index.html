@@ -1511,12 +1511,6 @@
               Jetzt bestellen
               <span class="icon">→</span>
             </button>
-            <a
-              href="./blutdruck-test.html"
-              class="btn ml-4 border border-primary text-primary hover:bg-primary hover:text-white transition-colors duration-300 px-4 py-2 rounded-xl"
-            >
-              Blutdruck testen
-            </a>
           </div>
 
           <div class="hero-image-container">
@@ -2867,6 +2861,15 @@
       // Function to handle checkout process
       async function handleCheckout() {
         try {
+          // Prüfen, ob wir auf Netlify sind und ob die Stripe-Integration aktiv ist
+          if (window.location.hostname.includes('netlify.app')) {
+            // Auf Netlify, aber Stripe ist noch nicht konfiguriert
+            alert(
+              'Das Bestellsystem ist noch nicht vollständig eingerichtet. Bitte versuchen Sie es später noch einmal oder kontaktieren Sie uns direkt.'
+            );
+            return;
+          }
+
           // Use Netlify function endpoint or fallback to local server
           const endpointUrl =
             window.location.hostname === 'localhost' ||
