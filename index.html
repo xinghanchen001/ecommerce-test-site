@@ -2863,12 +2863,22 @@
       // Function to handle checkout process
       async function handleCheckout() {
         try {
-          // Use Netlify function endpoint or fallback to local server
-          const endpointUrl =
+          // For local testing
+          if (
             window.location.hostname === 'localhost' ||
-            window.location.hostname === '127.0.0.1'
-              ? 'http://localhost:3002/create-checkout-session'
-              : '/api/create-checkout';
+            window.location.hostname === '127.0.0.1' ||
+            window.location.hostname.includes('192.168')
+          ) {
+            console.log('Local development environment detected');
+            alert(
+              'In der lokalen Entwicklungsumgebung ist die Checkout-Funktion nicht vollständig verfügbar. Bei Bereitstellung auf Netlify wird diese Funktion aktiviert.'
+            );
+            return;
+          }
+
+          // On production, use relative URL to avoid certificate issues
+          const endpointUrl = '/api/create-checkout';
+          console.log('Using endpoint:', endpointUrl);
 
           // Call your backend to create a Checkout Session
           const response = await fetch(endpointUrl, {
