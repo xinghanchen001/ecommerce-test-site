@@ -7,13 +7,24 @@
   to = "/.netlify/functions/:splat"
   status = 200 
 
-# Füge eine neue Umleitung für blutdruck-test.html hinzu
+# Umleitungen für blutdruck-test.html
 [[redirects]]
   from = "/blutdruck-test"
-  to = "/blutdruck-test.html"
+  to = "/blutdruck-test-merged.html"
   status = 200
 
 [[redirects]]
   from = "/blutdruck-test/"
-  to = "/blutdruck-test.html"
+  to = "/blutdruck-test-merged.html"
+  status = 200 
+
+# Alte Blutdruck-Analyse-Seite umleiten
+[[redirects]]
+  from = "/blutdruck-analyse"
+  to = "/blutdruck-test-merged.html"
+  status = 200
+
+[[redirects]]
+  from = "/blutdruck-analyse/"
+  to = "/blutdruck-test-merged.html"
   status = 200 
