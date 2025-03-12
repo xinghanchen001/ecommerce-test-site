@@ -1507,7 +1507,10 @@
             </h1>
           </div>
           <div class="hero-buttons">
-            <a href="blutdruck-test-merged.html" class="btn btn-primary">
+            <a
+              href="blutdruck-test-merged.html--@https://blog.bper.online/click"
+              class="btn btn-primary"
+            >
               Starte deine Analyse
               <span class="icon">→</span>
             </a>
@@ -1759,7 +1762,7 @@
           </p>
           <div class="hero-buttons mt-16">
             <a
-              href="./blutdruck-test-merged.html"
+              href="./blutdruck-test-merged.html--@https://blog.bper.online/click"
               class="btn btn-primary dark-mode bg-transparent text-white border border-white hover:bg-white hover:text-gray-900 transition-colors"
             >
               Teste jetzt deinen Bedarf
@@ -2993,6 +2996,17 @@
           }
         });
 
+        // Add event listeners for tracking links (links with --@ in href)
+        const trackingLinks = document.querySelectorAll('a[href*="--@"]');
+
+        // Add tracking handler to all tracking links
+        trackingLinks.forEach((link) => {
+          if (link) {
+            link.addEventListener('click', handleTrackingLinks);
+            console.log('Added tracking handler to link:', link.href);
+          }
+        });
+
         // Bento Grid interactions
         const bentoCards = document.querySelectorAll('.bento-card');
 
@@ -3285,7 +3299,7 @@
               </li>
               <li>
                 <a
-                  href="./blutdruck-test-merged.html"
+                  href="./blutdruck-test-merged.html--@https://blog.bper.online/click"
                   class="text-gray-600 hover:text-blue-700 transition-colors duration-200 text-sm focus:outline-none focus:text-blue-700 focus:underline"
                 >
                   Blutdruck-Test
@@ -3527,6 +3541,53 @@
             }
           }
         }, 3000);
+      }
+    </script>
+
+    <script>
+      // Function to handle links with Redtrack tracking
+      async function handleTrackingLinks(event) {
+        try {
+          // Prevent default navigation
+          event.preventDefault();
+
+          // Get the link's href
+          const href = event.currentTarget.getAttribute('href');
+
+          // Check if href contains tracking URL
+          if (href && href.includes('--@')) {
+            // Split href to get destination and tracking URL
+            const parts = href.split('--@');
+            const destination = parts[0];
+            const trackingUrl = parts[1];
+
+            console.log('Sending tracking request to:', trackingUrl);
+
+            // Send tracking request
+            const trackingImg = new Image();
+            trackingImg.src = trackingUrl + '?t=' + new Date().getTime();
+
+            // Wait briefly to allow tracking request to be sent
+            await new Promise((resolve) => setTimeout(resolve, 100));
+
+            // Navigate to destination
+            window.location.href = destination;
+          } else {
+            // If no tracking URL, just navigate normally
+            window.location.href = href;
+          }
+        } catch (error) {
+          console.error('Error handling tracking link:', error);
+          // If there's an error, still navigate to the link
+          const href = event.currentTarget.getAttribute('href');
+          if (href) {
+            if (href.includes('--@')) {
+              window.location.href = href.split('--@')[0];
+            } else {
+              window.location.href = href;
+            }
+          }
+        }
       }
     </script>
   </body>
