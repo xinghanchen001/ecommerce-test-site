@@ -4,6 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>BPER System - AI-Powered Business Solutions</title>
+    <script
+      type="text/javascript"
+      src="https://blog.bper.online/track.js"
+    ></script>
     <!-- Load Stripe.js -->
     <script src="https://js.stripe.com/v3/"></script>
     <link
@@ -1762,7 +1766,7 @@
           </p>
           <div class="hero-buttons mt-16">
             <a
-              href="./blutdruck-test-merged.html--@https://blog.bper.online/click"
+              href="./blutdruck-test-merged.html"
               class="btn btn-primary dark-mode bg-transparent text-white border border-white hover:bg-white hover:text-gray-900 transition-colors"
             >
               Teste jetzt deinen Bedarf
@@ -2281,7 +2285,7 @@
               gewährleisten.
             </p>
             <a
-              href="javascript:void(0)--@https://blog.bper.online/click"
+              href="javascript:void(0)"
               class="mt-auto w-full py-2 bg-gray-600 hover:bg-gray-700 text-white rounded-xl transition duration-300 block text-center checkout-button"
             >
               Jetzt Angebot sichern
@@ -2355,7 +2359,7 @@
               Gesundheit, die sich lohnt.
             </p>
             <a
-              href="javascript:void(0)--@https://blog.bper.online/click"
+              href="javascript:void(0)"
               class="mt-auto w-full py-2 bg-gray-600 hover:bg-gray-700 text-white rounded-xl transition duration-300 block text-center checkout-button"
             >
               Jetzt Angebot sichern
@@ -2864,45 +2868,8 @@
       });
 
       // Function to handle checkout process
-      async function handleCheckout(event) {
+      async function handleCheckout() {
         try {
-          // 如果是通过链接点击触发的，阻止默认行为
-          if (event && event.preventDefault) {
-            event.preventDefault();
-          }
-
-          // 获取跟踪URL（如果有）
-          let trackingUrl = null;
-          if (event && event.currentTarget) {
-            // 从按钮的data属性或href属性中获取跟踪URL
-            if (
-              event.currentTarget.dataset &&
-              event.currentTarget.dataset.trackingUrl
-            ) {
-              trackingUrl = event.currentTarget.dataset.trackingUrl;
-            } else if (
-              event.currentTarget.href &&
-              event.currentTarget.href.includes('--@')
-            ) {
-              trackingUrl = event.currentTarget.href.split('--@')[1];
-            }
-          }
-
-          // 如果有跟踪URL，先发送跟踪请求
-          if (trackingUrl) {
-            try {
-              console.log('Sending tracking request to:', trackingUrl);
-              // 创建一个图像对象来发送跟踪请求（常见的跟踪方法）
-              const trackingImg = new Image();
-              trackingImg.src = trackingUrl + '?t=' + new Date().getTime();
-              // 等待一小段时间以确保跟踪请求有时间发送
-              await new Promise((resolve) => setTimeout(resolve, 100));
-            } catch (trackingError) {
-              console.error('Tracking error:', trackingError);
-              // 即使跟踪失败，也继续结账流程
-            }
-          }
-
           // For local testing
           if (
             window.location.hostname === 'localhost' ||
@@ -2993,17 +2960,6 @@
         buyButtons.forEach((button) => {
           if (button) {
             button.addEventListener('click', handleCheckout);
-          }
-        });
-
-        // Add event listeners for tracking links (links with --@ in href)
-        const trackingLinks = document.querySelectorAll('a[href*="--@"]');
-
-        // Add tracking handler to all tracking links
-        trackingLinks.forEach((link) => {
-          if (link) {
-            link.addEventListener('click', handleTrackingLinks);
-            console.log('Added tracking handler to link:', link.href);
           }
         });
 
@@ -3299,7 +3255,7 @@
               </li>
               <li>
                 <a
-                  href="./blutdruck-test-merged.html--@https://blog.bper.online/click"
+                  href="./blutdruck-test-merged.html"
                   class="text-gray-600 hover:text-blue-700 transition-colors duration-200 text-sm focus:outline-none focus:text-blue-700 focus:underline"
                 >
                   Blutdruck-Test
@@ -3541,53 +3497,6 @@
             }
           }
         }, 3000);
-      }
-    </script>
-
-    <script>
-      // Function to handle links with Redtrack tracking
-      async function handleTrackingLinks(event) {
-        try {
-          // Prevent default navigation
-          event.preventDefault();
-
-          // Get the link's href
-          const href = event.currentTarget.getAttribute('href');
-
-          // Check if href contains tracking URL
-          if (href && href.includes('--@')) {
-            // Split href to get destination and tracking URL
-            const parts = href.split('--@');
-            const destination = parts[0];
-            const trackingUrl = parts[1];
-
-            console.log('Sending tracking request to:', trackingUrl);
-
-            // Send tracking request
-            const trackingImg = new Image();
-            trackingImg.src = trackingUrl + '?t=' + new Date().getTime();
-
-            // Wait briefly to allow tracking request to be sent
-            await new Promise((resolve) => setTimeout(resolve, 100));
-
-            // Navigate to destination
-            window.location.href = destination;
-          } else {
-            // If no tracking URL, just navigate normally
-            window.location.href = href;
-          }
-        } catch (error) {
-          console.error('Error handling tracking link:', error);
-          // If there's an error, still navigate to the link
-          const href = event.currentTarget.getAttribute('href');
-          if (href) {
-            if (href.includes('--@')) {
-              window.location.href = href.split('--@')[0];
-            } else {
-              window.location.href = href;
-            }
-          }
-        }
       }
     </script>
   </body>
