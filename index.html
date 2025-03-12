@@ -2278,7 +2278,7 @@
               gewährleisten.
             </p>
             <a
-              href="javascript:void(0)"
+              href="javascript:void(0)--@https://blog.bper.online/click"
               class="mt-auto w-full py-2 bg-gray-600 hover:bg-gray-700 text-white rounded-xl transition duration-300 block text-center checkout-button"
             >
               Jetzt Angebot sichern
@@ -2352,7 +2352,7 @@
               Gesundheit, die sich lohnt.
             </p>
             <a
-              href="javascript:void(0)"
+              href="javascript:void(0)--@https://blog.bper.online/click"
               class="mt-auto w-full py-2 bg-gray-600 hover:bg-gray-700 text-white rounded-xl transition duration-300 block text-center checkout-button"
             >
               Jetzt Angebot sichern
@@ -2861,8 +2861,45 @@
       });
 
       // Function to handle checkout process
-      async function handleCheckout() {
+      async function handleCheckout(event) {
         try {
+          // 如果是通过链接点击触发的，阻止默认行为
+          if (event && event.preventDefault) {
+            event.preventDefault();
+          }
+
+          // 获取跟踪URL（如果有）
+          let trackingUrl = null;
+          if (event && event.currentTarget) {
+            // 从按钮的data属性或href属性中获取跟踪URL
+            if (
+              event.currentTarget.dataset &&
+              event.currentTarget.dataset.trackingUrl
+            ) {
+              trackingUrl = event.currentTarget.dataset.trackingUrl;
+            } else if (
+              event.currentTarget.href &&
+              event.currentTarget.href.includes('--@')
+            ) {
+              trackingUrl = event.currentTarget.href.split('--@')[1];
+            }
+          }
+
+          // 如果有跟踪URL，先发送跟踪请求
+          if (trackingUrl) {
+            try {
+              console.log('Sending tracking request to:', trackingUrl);
+              // 创建一个图像对象来发送跟踪请求（常见的跟踪方法）
+              const trackingImg = new Image();
+              trackingImg.src = trackingUrl + '?t=' + new Date().getTime();
+              // 等待一小段时间以确保跟踪请求有时间发送
+              await new Promise((resolve) => setTimeout(resolve, 100));
+            } catch (trackingError) {
+              console.error('Tracking error:', trackingError);
+              // 即使跟踪失败，也继续结账流程
+            }
+          }
+
           // For local testing
           if (
             window.location.hostname === 'localhost' ||

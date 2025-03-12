@@ -4,9 +4,43 @@ const stripe = require('stripe')(
 ); // Live key
 const app = express();
 
+// Add CORS middleware
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept'
+  );
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  if (req.method === 'OPTIONS') {
+    return res.sendStatus(200);
+  }
+  next();
+});
+
 // Serve static files from the current directory
 app.use(express.static('.'));
 app.use(express.json());
+
+// Endpoint to handle form data from the blood pressure test
+app.post('/save-form-data', (req, res) => {
+  const formData = req.body;
+  console.log('Received form data:', formData);
+
+  // Here you would typically send an email with this data
+  // For local testing, we'll just log it to the console
+  console.log('-------------------------------------');
+  console.log('BLOOD PRESSURE TEST SUBMISSION');
+  console.log('-------------------------------------');
+  console.log('Age:', formData.age);
+  console.log('Systolic:', formData.systolic);
+  console.log('Diastolic:', formData.diastolic);
+  console.log('Email:', formData.email);
+  console.log('-------------------------------------');
+
+  // Send a success response
+  res.json({ success: true, message: 'Form data received successfully' });
+});
 
 // Route for the sparkles example
 app.get('/sparkles', (req, res) => {

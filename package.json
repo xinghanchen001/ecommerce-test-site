@@ -7,7 +7,11 @@
     "start": "node server.js"
   },
   "dependencies": {
+    "@tsparticles/react": "^3.0.0",
+    "@tsparticles/slim": "^3.8.1",
+    "clsx": "^2.1.1",
     "express": "^4.21.2",
-    "stripe": "^12.18.0"
+    "stripe": "^12.18.0",
+    "tailwind-merge": "^3.0.2"
   }
 }
