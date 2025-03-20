@@ -85,6 +85,7 @@ app.post('/create-checkout-session', async (req, res) => {
       mode: 'payment',
       success_url: `${req.headers.origin}/success.html`,
       cancel_url: `${req.headers.origin}/cancel.html`,
+      locale: 'de', // Set language to German
     });
 
     res.json({ id: session.id });

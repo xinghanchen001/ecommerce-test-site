@@ -49,6 +49,7 @@ exports.handler = async function (event, context) {
       mode: 'payment',
       success_url: `${event.headers.origin}/success.html`,
       cancel_url: `${event.headers.origin}/cancel.html`,
+      locale: 'de', // Set language to German
       // Add shipping address collection
       shipping_address_collection: {
         allowed_countries: [
