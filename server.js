@@ -52,6 +52,15 @@ app.get('/lamp', (req, res) => {
   res.sendFile(__dirname + '/lamp-demo.html');
 });
 
+// Routes for impressum and datenschutz pages
+app.get('/impressum', (req, res) => {
+  res.sendFile(__dirname + '/impressum.html');
+});
+
+app.get('/datenschutz', (req, res) => {
+  res.sendFile(__dirname + '/datenschutz.html');
+});
+
 app.post('/create-checkout-session', async (req, res) => {
   try {
     // Option 1: If you have a productId but no priceId, create a price on the fly
