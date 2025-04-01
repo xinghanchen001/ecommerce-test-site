@@ -61,6 +61,23 @@ app.get('/datenschutz', (req, res) => {
   res.sendFile(__dirname + '/datenschutz.html');
 });
 
+// Routes for wissen pages
+app.get('/wissen/blutdruck', (req, res) => {
+  res.sendFile(__dirname + '/wissen/blutdruck.html');
+});
+
+app.get('/wissen/messmethoden', (req, res) => {
+  res.sendFile(__dirname + '/wissen/messmethoden.html');
+});
+
+app.get('/wissen/gesundheitstipps', (req, res) => {
+  res.sendFile(__dirname + '/wissen/gesundheitstipps.html');
+});
+
+app.get('/wissen/studien', (req, res) => {
+  res.sendFile(__dirname + '/wissen/studien.html');
+});
+
 app.post('/create-checkout-session', async (req, res) => {
   try {
     // Option 1: If you have a productId but no priceId, create a price on the fly
