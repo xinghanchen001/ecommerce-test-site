@@ -82,6 +82,7 @@ exports.handler = async function (event, context) {
       ],
       // Enable promotion/discount codes
       allow_promotion_codes: true,
+      automatic_tax: { enabled: true }, // Enable automatic tax calculation
     });
 
     // Return the session ID
