@@ -112,6 +112,7 @@ app.post('/create-checkout-session', async (req, res) => {
       success_url: `${req.headers.origin}/success.html`,
       cancel_url: `${req.headers.origin}/cancel.html`,
       locale: 'de', // Set language to German
+      automatic_tax: { enabled: true }, // Enable automatic tax calculation
     });
 
     res.json({ id: session.id });
