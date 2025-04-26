@@ -584,7 +584,7 @@
       </div>
     </main>
 
-    <!-- Products section - visible only in step 3 -->
+    <!-- Products section - replaced content -->
     <section id="products-section" class="py-16 md:py-24 bg-white hidden">
       <div class="container mx-auto px-4 md:px-6">
         <div class="flex flex-col items-center text-center mb-12">
@@ -601,12 +601,12 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
           <!-- Angebot 1 -->
           <div
-            class="opacity-60 bg-gray-50 rounded-xl p-6 border border-gray-200 flex flex-col h-full relative overflow-hidden offer-card disabled"
+            class="opacity-100 bg-white rounded-xl p-6 border-4 border-green-500 flex flex-col h-full relative overflow-hidden shadow-lg"
           >
             <div
-              class="absolute top-0 right-0 bg-red-500 text-white py-1 px-4 rounded-bl-lg text-sm font-medium"
+              class="absolute top-0 right-0 bg-green-500 text-white py-1 px-4 rounded-bl-lg text-sm font-medium"
             >
-              Ausverkauft
+              Aktuell
             </div>
             <h3 class="text-xl font-bold mb-2">
               Earlybird Preis für die ersten 200 Stk.
@@ -678,22 +678,21 @@
               gewährleisten.
             </p>
             <a
-              href="klarna-payment-info.html"
               class="text-blue-600 hover:underline text-sm block mb-4"
+              href="/klarna-payment-info"
             >
               Mehr zu Klarna Zahlungsoptionen →
             </a>
             <button
-              disabled=""
-              class="mt-auto w-full py-2 bg-gray-100 text-gray-300 rounded-xl cursor-not-allowed"
+              class="mt-auto w-full py-2 bg-green-500 hover:bg-green-600 text-white rounded-xl transition duration-300"
             >
-              Ausverkauft
+              Jetzt Angebot sichern
             </button>
           </div>
 
           <!-- Angebot 2 -->
           <div
-            class="bg-white rounded-xl p-6 border-4 border-green-500 flex flex-col h-full relative overflow-hidden shadow-lg offer-card"
+            class="opacity-60 bg-white rounded-xl p-6 flex flex-col h-full relative overflow-hidden shadow-lg"
           >
             <h3 class="text-xl font-bold mb-2">Einführungs-Angebot</h3>
             <div class="text-3xl font-bold mb-4">259 €</div>
@@ -714,7 +713,7 @@
                   ></path>
                 </svg>
                 <span
-                  >1 Jahr Subsription fuer Leistungsfaehigkeit Bewertung durch
+                  >1 Jahr Subskription fuer Leistungsfaehigkeit Bewertung durch
                   APP</span
                 >
               </li>
@@ -761,22 +760,22 @@
               haben oder sich nicht qualifiziert haben.
             </p>
             <a
-              href="klarna-payment-info.html"
               class="text-blue-600 hover:underline text-sm block mb-4"
+              href="/klarna-payment-info"
             >
               Mehr zu Klarna Zahlungsoptionen →
             </a>
-            <button
-              class="mt-auto w-full py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl transition duration-300 checkout-button"
-              data-tracking-url="https://blog.bper.online/click"
+            <a
+              href="javascript:void(0)"
+              class="mt-auto w-full py-2 bg-gray-600 hover:bg-gray-700 text-white rounded-xl transition duration-300 block text-center checkout-button"
             >
               Jetzt reservieren
-            </button>
+            </a>
           </div>
 
           <!-- Angebot 3 -->
           <div
-            class="bg-gray-50 rounded-xl p-6 border border-gray-200 flex flex-col h-full offer-card"
+            class="bg-gray-50 rounded-xl p-6 border border-gray-200 flex flex-col h-full opacity-60"
           >
             <h3 class="text-xl font-bold mb-2">Offizieller Preis</h3>
             <div class="text-3xl font-bold mb-4">359 €</div>
@@ -797,7 +796,7 @@
                   ></path>
                 </svg>
                 <span
-                  >1 Jahr Subsription fuer Leistungsfaehigkeit Bewertung durch
+                  >1 Jahr Subskription fuer Leistungsfaehigkeit Bewertung durch
                   APP</span
                 >
               </li>
@@ -842,18 +841,19 @@
             <p class="text-sm text-gray-600 mb-4">
               Der offizielle Preis bei Serienproduktion.
             </p>
+
             <a
-              href="klarna-payment-info.html"
               class="text-blue-600 hover:underline text-sm block mb-4"
+              href="/klarna-payment-info"
             >
               Mehr zu Klarna Zahlungsoptionen →
             </a>
-            <button
-              class="mt-auto w-full py-2 bg-gray-600 hover:bg-gray-700 text-white rounded-xl transition duration-300 checkout-button"
-              data-tracking-url="https://blog.bper.online/click"
+            <a
+              href="javascript:void(0)"
+              class="mt-auto w-full py-2 bg-gray-600 hover:bg-gray-700 text-white rounded-xl transition duration-300 block text-center checkout-button"
             >
               Jetzt vorbestellen
-            </button>
+            </a>
           </div>
         </div>
 
