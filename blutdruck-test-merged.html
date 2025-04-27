@@ -1137,40 +1137,76 @@
         // Funktion zur Analyse der Blutdruckwerte
         function analyzeBloodPressure(age, systolic, diastolic) {
           const analysisElement = document.getElementById('analysis-message');
-
-          // Bewerte den Blutdruck
           let analysisText = '';
-          let analysisClass = '';
+          let category = '';
+          let analysisClass = ''; // CSS class for styling the result box
 
-          // Einfache Bewertung basierend auf diastolischem Wert und Alter
-          if (diastolic < 60) {
+          // Check for Hypotension first
+          if (systolic < 90 || diastolic < 70) {
+            category = 'Niedriger Blutdruck (Hypotonie)';
             analysisText =
-              'Ihr diastolischer Blutdruck ist niedrig. Dies kann in manchen Fällen normal sein, sollte aber überwacht werden.';
-            analysisClass = 'bg-blue-50 text-blue-800';
-          } else if (diastolic <= 80) {
+              'Ihr Blutdruck ist niedrig. Wenn Sie Symptome wie Schwindel oder Müdigkeit verspüren, sollten Sie ärztlichen Rat suchen.';
+            analysisClass = 'bg-cyan-50 text-cyan-800'; // Hypotension = Cyan/Light Blue
+          }
+          // Standard Blood Pressure Categories (based on ESC/ESH guidelines)
+          else if (systolic < 120 && diastolic < 80) {
+            category = 'Optimal';
             analysisText =
-              'Ihr diastolischer Blutdruck liegt im optimalen Bereich. Regelmäßige Überwachung ist dennoch wichtig. Das BPER System kann Ihnen helfen, Ihre Gesundheit besser im Blick zu behalten.';
-            analysisClass = 'bg-orange-50 text-orange-800';
-          } else if (diastolic <= 90) {
+              'Ihr Blutdruck ist optimal. Pflegen Sie weiterhin einen gesunden Lebensstil.';
+            analysisClass = 'bg-green-50 text-green-800'; // Optimal = Green
+          } else if (systolic <= 129 && diastolic <= 84) {
+            category = 'Normal';
             analysisText =
-              'Ihr diastolischer Blutdruck ist leicht erhöht. Eine regelmäßige Überwachung wird empfohlen.';
-            analysisClass = 'bg-yellow-50 text-yellow-800';
+              'Ihr Blutdruck ist normal. Regelmäßige Kontrollen sind dennoch empfehlenswert.';
+            analysisClass = 'bg-blue-50 text-blue-800'; // Normal = Blue
+          } else if (systolic <= 139 || diastolic <= 89) {
+            category = 'Hochnormal';
+            analysisText =
+              'Ihr Blutdruck ist hochnormal. Achten Sie auf Ihren Lebensstil und kontrollieren Sie Ihren Blutdruck regelmäßig. Das BPER System kann Sie dabei unterstützen.';
+            analysisClass = 'bg-yellow-50 text-yellow-800'; // High-Normal = Yellow
+          } else if (systolic <= 159 || diastolic <= 99) {
+            category = 'Hypertonie Grad 1';
+            analysisText =
+              'Ihr Blutdruck entspricht einer Hypertonie Grad 1 (leichte Hypertonie). Lebensstiländerungen werden empfohlen, ärztliche Beratung kann sinnvoll sein. Eine genaue Überwachung mit dem BPER System ist ratsam.';
+            analysisClass = 'bg-orange-50 text-orange-800'; // Grade 1 = Orange
+          } else if (systolic <= 179 || diastolic <= 109) {
+            category = 'Hypertonie Grad 2';
+            analysisText =
+              'Ihr Blutdruck entspricht einer Hypertonie Grad 2 (mittelschwere Hypertonie). Ärztliche Beratung ist dringend empfohlen. Das BPER System hilft, den Verlauf genau zu dokumentieren.';
+            analysisClass = 'bg-red-50 text-red-800'; // Grade 2 = Red
+          } else if (systolic >= 180 || diastolic >= 110) {
+            category = 'Hypertonie Grad 3';
+            analysisText =
+              'Ihr Blutdruck entspricht einer Hypertonie Grad 3 (schwere Hypertonie). Suchen Sie umgehend ärztliche Hilfe auf! Dies kann ein medizinischer Notfall sein.';
+            analysisClass = 'bg-red-700 text-white font-bold'; // Grade 3 = Dark Red, White text
+          } else if (systolic >= 140 && diastolic < 90) {
+            // Specific case: Isolated Systolic Hypertension
+            category = 'Isolierte Systolische Hypertonie';
+            analysisText =
+              'Sie haben eine isolierte systolische Hypertonie (nur der obere Wert ist erhöht). Ärztliche Beratung wird empfohlen. Das BPER System kann helfen, Muster zu erkennen.';
+            analysisClass = 'bg-orange-50 text-orange-800'; // Treat similar to Grade 1 for styling
           } else {
+            // Fallback for unexpected values, though validation should prevent this
+            category = 'Nicht klassifizierbar';
             analysisText =
-              'Ihre Blutdruckwerte liegen in einem Bereich, der ein erhöhtes Gesundheitsrisiko darstellt. Blutdruck ist ein kontinuierlich dynamischer Gesundheitsparameter, und statische Werte können Ihre Situation nicht vollständig widerspiegeln, was auch Ihrem Hausarzt die Diagnose erschweren kann. Das BPER System unterstützt Sie dabei, Ihren Blutdruckzustand detailliert und umfassend zu erfassen und aufzuzeichnen – für mehr Klarheit und Sicherheit in Ihrem Alltag.';
-            analysisClass = 'bg-red-50 text-red-800';
+              'Ihre Werte konnten nicht eindeutig klassifiziert werden. Bitte überprüfen Sie die Eingabe oder konsultieren Sie einen Arzt.';
+            analysisClass = 'bg-gray-100 text-gray-800';
           }
 
-          // Füge Altershinweis hinzu
-          if (age > 65) {
-            if (diastolic <= 90) {
-              analysisText +=
-                ' In Ihrem Alter ist eine regelmäßige Blutdruckkontrolle besonders wichtig.';
-            }
+          // Add age-specific advice (optional, can be refined)
+          if (age > 65 && category !== 'Optimal' && category !== 'Normal') {
+            analysisText +=
+              ' In Ihrem Alter ist eine konsequente Blutdruckkontrolle besonders wichtig.';
           }
 
-          // Setze Analyse-Text und Klasse
-          analysisElement.textContent = analysisText;
+          // Add general advice about dynamic nature of blood pressure
+          if (category.includes('Hypertonie') || category === 'Hochnormal') {
+            analysisText +=
+              ' Bedenken Sie: Blutdruck ist dynamisch. Einzelmessungen geben nur einen Schnappschuss. Das BPER System ermöglicht eine umfassendere Betrachtung Ihres Blutdruckverlaufs.';
+          }
+
+          // Set Analysis Text and Class
+          analysisElement.innerHTML = `<p class="font-semibold mb-2">Kategorie: ${category}</p><p>${analysisText}</p>`; // Added category display
           analysisElement.className = `p-4 rounded-lg mb-6 ${analysisClass}`;
         }
 
