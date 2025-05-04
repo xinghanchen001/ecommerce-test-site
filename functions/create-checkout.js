@@ -17,6 +17,7 @@ exports.handler = async function (event, context) {
   try {
     // Parse the request body
     const data = JSON.parse(event.body);
+    const orderId = data.orderId; // Get orderId from the request body
 
     // Get the price ID from the request
     let priceId = data.priceId;
@@ -83,6 +84,8 @@ exports.handler = async function (event, context) {
       // Enable promotion/discount codes
       allow_promotion_codes: true,
       automatic_tax: { enabled: true }, // Enable automatic tax calculation
+      // Add metadata ONLY if orderId is provided in the request body
+      ...(orderId && { metadata: { order_id: orderId } }),
     });
 
     // Return the session ID
