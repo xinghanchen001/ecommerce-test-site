@@ -17,7 +17,21 @@ exports.handler = async function (event, context) {
   try {
     // Parse the request body
     const data = JSON.parse(event.body);
-    const orderId = data.orderId; // Get orderId from the request body
+    // We no longer expect orderId from the client
+    // const orderId = data.orderId;
+
+    // --- Generate Order ID Server-Side ---
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = (now.getMonth() + 1).toString().padStart(2, '0'); // Months are 0-indexed
+    const day = now.getDate().toString().padStart(2, '0');
+    const hours = now.getHours().toString().padStart(2, '0');
+    const minutes = now.getMinutes().toString().padStart(2, '0');
+    const seconds = now.getSeconds().toString().padStart(2, '0');
+    const milliseconds = now.getMilliseconds().toString().padStart(3, '0');
+
+    const generatedOrderId = `LPBP${year}${month}${day}${hours}${minutes}${seconds}${milliseconds}`;
+    // --- End Order ID Generation ---
 
     // Get the price ID from the request
     let priceId = data.priceId;
@@ -84,8 +98,10 @@ exports.handler = async function (event, context) {
       // Enable promotion/discount codes
       allow_promotion_codes: true,
       automatic_tax: { enabled: true }, // Enable automatic tax calculation
-      // Add metadata ONLY if orderId is provided in the request body
-      ...(orderId && { metadata: { order_id: orderId } }),
+      // Add generated order ID to metadata
+      metadata: {
+        order_id: generatedOrderId,
+      },
     });
 
     // Return the session ID

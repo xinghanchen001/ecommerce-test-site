@@ -1312,10 +1312,6 @@
           const endpointUrl = '/api/create-checkout';
           console.log('Using endpoint:', endpointUrl);
 
-          // Generate a unique Order ID
-          const uniqueOrderId = crypto.randomUUID();
-          console.log('Generated Order ID:', uniqueOrderId);
-
           // Call your backend to create a Checkout Session
           const response = await fetch(endpointUrl, {
             method: 'POST',
@@ -1324,7 +1320,6 @@
             },
             body: JSON.stringify({
               priceId: 'price_1RI4RCA9aibyk7oc22okGK2W', // Updated Price ID
-              orderId: uniqueOrderId, // Add the unique order ID here
             }),
           });
 
