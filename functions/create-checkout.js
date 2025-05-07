@@ -1,9 +1,7 @@
-const stripe = require('stripe')(
-  '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',
-  {
-    apiVersion: '2023-08-16', // Specify the API version to allow zero-amount orders
-  }
-); // Live key
+require('dotenv').config();
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY, {
+  apiVersion: '2023-08-16', // Specify the API version to allow zero-amount orders
+}); // Live key
 
 exports.handler = async function (event, context) {
   // Only allow POST requests

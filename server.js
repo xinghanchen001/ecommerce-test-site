@@ -1,7 +1,6 @@
+require('dotenv').config();
 const express = require('express');
-const stripe = require('stripe')(
-  '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'
-); // Live key
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY); // Live key
 const app = express();
 
 // Add CORS middleware
