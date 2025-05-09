@@ -79,6 +79,38 @@ app.get('/wissen/studien', (req, res) => {
 
 app.post('/create-checkout-session', async (req, res) => {
   try {
+    // --- Generate Order ID Server-Side (Berlin Time) ---
+    const now = new Date();
+    const options = {
+      timeZone: 'Europe/Berlin',
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: false, // Use 24-hour format
+    };
+
+    // Format the date and time parts according to Berlin time
+    const formatter = new Intl.DateTimeFormat('en-CA', options); // en-CA gives YYYY-MM-DD format
+    const parts = formatter.formatToParts(now);
+    const dateParts = {};
+    parts.forEach(({ type, value }) => {
+      dateParts[type] = value;
+    });
+
+    const year = dateParts.year;
+    const month = dateParts.month;
+    const day = dateParts.day;
+    const hours = dateParts.hour;
+    const minutes = dateParts.minute;
+    const seconds = dateParts.second;
+
+    // Construct the ID: LPBPYYYYMMDDHHMMSS
+    const generatedOrderId = `LPBP${year}${month}${day}${hours}${minutes}${seconds}`;
+    // --- End Order ID Generation ---
+
     // Option 1: If you have a productId but no priceId, create a price on the fly
     let priceId = req.body.priceId;
 
@@ -112,6 +144,10 @@ app.post('/create-checkout-session', async (req, res) => {
       cancel_url: `${req.headers.origin}/cancel.html`,
       locale: 'de', // Set language to German
       automatic_tax: { enabled: true }, // Enable automatic tax calculation
+      metadata: {
+        // Add generated order ID to metadata
+        order_id: generatedOrderId,
+      },
     });
 
     res.json({ id: session.id });
