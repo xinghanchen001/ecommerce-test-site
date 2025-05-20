@@ -18,22 +18,46 @@
       window.onload = function () {
         // Get click ID from URL
         var clickId = getUrlParameter('cid');
+        console.log('Found click ID:', clickId);
 
-        // If click ID exists, update the tracking pixel
+        // Only load the pixel if we have a click ID
         if (clickId) {
-          var trackingPixel = document.getElementById('conversionPixel');
-          var pixelUrl = trackingPixel.src;
-          pixelUrl = pixelUrl.replace('{clickid}', clickId);
-          trackingPixel.src = pixelUrl;
+          console.log('Loading conversion pixel with click ID:', clickId);
+
+          // Create the pixel dynamically instead of replacing src
+          var pixelContainer = document.getElementById('pixelContainer');
+
+          // Remove any existing pixels to avoid duplicates
+          while (pixelContainer.firstChild) {
+            pixelContainer.removeChild(pixelContainer.firstChild);
+          }
+
+          // Create new pixel with correct click ID
+          var trackingPixel = document.createElement('img');
+          trackingPixel.width = 1;
+          trackingPixel.height = 1;
+          trackingPixel.src =
+            'https://blog.heavyrun.de/conversion.gif?cid=' +
+            clickId +
+            '&payout=OPTIONAL&txid=OPTIONAL';
+
+          // Add pixel to container
+          pixelContainer.appendChild(trackingPixel);
+
+          // Store in localStorage for reference
+          localStorage.setItem('bper_click_id', clickId);
+          console.log('Conversion pixel loaded with URL:', trackingPixel.src);
+        } else {
+          console.log('No click ID found, conversion pixel not loaded');
         }
       };
     </script>
-    <img
-      id="conversionPixel"
-      src="https://blog.heavyrun.de/conversion.gif?cid={clickid}&payout=OPTIONAL&txid=OPTIONAL"
-      width="1"
-      height="1"
-    />
+    <!-- Pixel container instead of direct img tag -->
+    <div
+      id="pixelContainer"
+      style="position: absolute; width: 1px; height: 1px; overflow: hidden"
+    ></div>
+
     <title>Payment Successful</title>
     <style>
       body {
