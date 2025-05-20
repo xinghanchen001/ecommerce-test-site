@@ -168,6 +168,13 @@ app.post('/create-checkout-session', async (req, res) => {
         order_id: generatedOrderId,
         click_id: clickId,
       },
+      // Pass metadata to the payment intent
+      payment_intent_data: {
+        metadata: {
+          order_id: generatedOrderId,
+          click_id: clickId,
+        },
+      },
     });
 
     res.json({ id: session.id });
