@@ -2880,6 +2880,20 @@
       // Function to handle checkout process
       async function handleCheckout() {
         try {
+          // Extract click ID from URL if present
+          function getUrlParameter(name) {
+            name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+            var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+            var results = regex.exec(location.search);
+            return results === null
+              ? ''
+              : decodeURIComponent(results[1].replace(/\+/g, ' '));
+          }
+
+          // Get click ID from URL
+          const clickId = getUrlParameter('cid');
+          console.log('Click ID from URL:', clickId);
+
           // For local testing
           if (
             window.location.hostname === 'localhost' ||
@@ -2897,10 +2911,6 @@
           const endpointUrl = '/api/create-checkout';
           console.log('Using endpoint:', endpointUrl);
 
-          // Generate a unique Order ID - REMOVED
-          // const uniqueOrderId = crypto.randomUUID();
-          // console.log('Generated Order ID:', uniqueOrderId);
-
           // Call your backend to create a Checkout Session
           const response = await fetch(endpointUrl, {
             method: 'POST',
@@ -2909,7 +2919,7 @@
             },
             body: JSON.stringify({
               priceId: 'price_1RI4RCA9aibyk7oc22okGK2W', // Updated Price ID
-              // orderId: uniqueOrderId // REMOVED - Server generates ID now
+              clickId: clickId, // Pass the click ID to the checkout endpoint
             }),
           });
 

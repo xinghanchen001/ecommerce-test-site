@@ -79,6 +79,9 @@ app.get('/wissen/studien', (req, res) => {
 
 app.post('/create-checkout-session', async (req, res) => {
   try {
+    // Extract click ID if present
+    const clickId = req.body.clickId || '';
+
     // --- Generate Order ID Server-Side (Berlin Time) ---
     const now = new Date();
     const options = {
@@ -130,6 +133,11 @@ app.post('/create-checkout-session', async (req, res) => {
       priceId = 'price_1QyfHoA9aibyk7ocoy9gcOsX'; // Live mode product key
     }
 
+    // Construct success URL with clickId if it exists
+    const successUrl = clickId
+      ? `${req.headers.origin}/success.html?cid=${clickId}`
+      : `${req.headers.origin}/success.html`;
+
     // Create a checkout session with the price
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card', 'klarna'],
@@ -140,13 +148,14 @@ app.post('/create-checkout-session', async (req, res) => {
         },
       ],
       mode: 'payment',
-      success_url: `${req.headers.origin}/success.html`,
+      success_url: successUrl,
       cancel_url: `${req.headers.origin}/cancel.html`,
       locale: 'de', // Set language to German
       automatic_tax: { enabled: true }, // Enable automatic tax calculation
       metadata: {
-        // Add generated order ID to metadata
+        // Add generated order ID and click ID to metadata
         order_id: generatedOrderId,
+        click_id: clickId,
       },
     });
 

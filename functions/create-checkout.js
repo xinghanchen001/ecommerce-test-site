@@ -15,8 +15,8 @@ exports.handler = async function (event, context) {
   try {
     // Parse the request body
     const data = JSON.parse(event.body);
-    // We no longer expect orderId from the client
-    // const orderId = data.orderId;
+    // Extract click ID if present
+    const clickId = data.clickId || '';
 
     // --- Generate Order ID Server-Side (Berlin Time) ---
     const now = new Date();
@@ -69,6 +69,11 @@ exports.handler = async function (event, context) {
       priceId = 'price_1QyfHoA9aibyk7ocoy9gcOsX'; // Live mode product key
     }
 
+    // Construct success URL with clickId if it exists
+    const successUrl = clickId
+      ? `${event.headers.origin}/success.html?cid=${clickId}`
+      : `${event.headers.origin}/success.html`;
+
     // Create a checkout session
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card', 'klarna', 'paypal'],
@@ -79,7 +84,7 @@ exports.handler = async function (event, context) {
         },
       ],
       mode: 'payment',
-      success_url: `${event.headers.origin}/success.html`,
+      success_url: successUrl,
       cancel_url: `${event.headers.origin}/cancel.html`,
       locale: 'de', // Set language to German
       // Add shipping address collection
@@ -115,9 +120,10 @@ exports.handler = async function (event, context) {
       // Enable promotion/discount codes
       allow_promotion_codes: true,
       automatic_tax: { enabled: true }, // Enable automatic tax calculation
-      // Add generated order ID to metadata
+      // Add generated order ID and click ID to metadata
       metadata: {
         order_id: generatedOrderId,
+        click_id: clickId,
       },
     });
 

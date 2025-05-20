@@ -3,11 +3,33 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      // Extract URL parameters
+      function getUrlParameter(name) {
+        name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+        var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+        var results = regex.exec(location.search);
+        return results === null
+          ? ''
+          : decodeURIComponent(results[1].replace(/\+/g, ' '));
+      }
+
+      // Function to run when page loads
+      window.onload = function () {
+        // Get click ID from URL
+        var clickId = getUrlParameter('cid');
+
+        // If click ID exists, update the tracking pixel
+        if (clickId) {
+          var trackingPixel = document.getElementById('conversionPixel');
+          var pixelUrl = trackingPixel.src;
+          pixelUrl = pixelUrl.replace('{clickid}', clickId);
+          trackingPixel.src = pixelUrl;
+        }
+      };
+    </script>
     <img
-      src="//blog.bper.online/postback?format=img&sum=259"
-      width="1"
-      height="1"
-      <img
+      id="conversionPixel"
       src="https://blog.heavyrun.de/conversion.gif?cid={clickid}&payout=OPTIONAL&txid=OPTIONAL"
       width="1"
       height="1"

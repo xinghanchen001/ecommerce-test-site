@@ -1268,6 +1268,20 @@
             event.preventDefault();
           }
 
+          // Extract click ID from URL if present
+          function getUrlParameter(name) {
+            name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+            var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+            var results = regex.exec(location.search);
+            return results === null
+              ? ''
+              : decodeURIComponent(results[1].replace(/\+/g, ' '));
+          }
+
+          // Get click ID from URL
+          const clickId = getUrlParameter('cid');
+          console.log('Click ID from URL:', clickId);
+
           // 获取跟踪URL（如果有）
           let trackingUrl = null;
           if (event && event.currentTarget) {
@@ -1320,6 +1334,7 @@
             },
             body: JSON.stringify({
               priceId: 'price_1RI4RCA9aibyk7oc22okGK2W', // Updated Price ID
+              clickId: clickId, // Pass the click ID to the checkout endpoint
             }),
           });
 
