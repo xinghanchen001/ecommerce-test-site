@@ -598,97 +598,92 @@
           </p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <!-- Angebot 1 -->
+        <div class="offer-cards grid md:grid-cols-3 gap-6 mb-8">
+          <!-- Earlybird Offer -->
           <div
-            class="opacity-100 bg-white rounded-xl p-6 border-4 border-green-500 flex flex-col h-full relative overflow-hidden shadow-lg"
+            class="offer-card border rounded-lg shadow-lg overflow-hidden relative"
           >
-            <div
-              class="absolute top-0 right-0 bg-green-500 text-white py-1 px-4 rounded-bl-lg text-sm font-medium"
-            >
-              Aktuell
+            <div class="bg-blue-500 text-white py-3 px-4 text-center">
+              <span class="text-sm font-bold">Aktuell</span>
             </div>
-            <h3 class="text-xl font-bold mb-2">
-              Earlybird Preis für die ersten 200 Stk.
-            </h3>
-            <div class="text-3xl font-bold mb-4">199 €</div>
-            <ul class="mb-6 flex-1 space-y-2 text-sm">
-              <li class="flex items-start">
-                <svg
-                  class="w-5 h-5 text-green-500 mr-2 flex-shrink-0"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
+            <div class="p-6 bg-white">
+              <h3 class="text-xl font-bold mb-4">
+                Earlybird Preis für die ersten 200 Stk.
+              </h3>
+              <div class="mb-6 text-center">
+                <span class="text-4xl font-bold text-blue-600">199 €</span>
+              </div>
+              <ul class="mb-6 space-y-2 text-gray-700">
+                <li class="flex items-start">
+                  <svg
+                    class="h-5 w-5 text-blue-500 mr-2 mt-0.5"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                  <span
+                    >1 Jahr Subsription fuer Leistungsfaehigkeit Bewertung durch
+                    APP</span
+                  >
+                </li>
+                <li class="flex items-start">
+                  <svg
+                    class="h-5 w-5 text-blue-500 mr-2 mt-0.5"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                  <span>1 Jahr kostenlose Online-Datenspeicherung</span>
+                </li>
+                <li class="flex items-start">
+                  <svg
+                    class="h-5 w-5 text-blue-500 mr-2 mt-0.5"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                  <span>0 Risiko-90 Tage Geld zurueck Garantie</span>
+                </li>
+              </ul>
+              <div class="text-gray-500 mb-6 text-center text-sm">
+                ab Juni 2025 lieferbar
+              </div>
+              <p class="text-sm text-gray-600 mb-6">
+                Dieses Angebot ist einzigartig und begrenzt – perfekt für den,
+                der sofort handelt und die maximale Unterstützung sucht. Nur
+                eine Reservierung pro Person möglich, um Exklusivität und
+                Fairness zu gewährleisten.
+              </p>
+              <div class="flex flex-col space-y-3">
+                <a
+                  href="klarna-payment-info.html"
+                  class="text-blue-500 text-sm text-center hover:underline"
                 >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M5 13l4 4L19 7"
-                  ></path>
-                </svg>
-                <span
-                  >1 Jahr Subsription fuer Leistungsfaehigkeit Bewertung durch
-                  APP</span
+                  Mehr zu Klarna Zahlungsoptionen →
+                </a>
+                <button
+                  class="checkout-button button w-full"
+                  data-tracking-url="https://blog.bper.online/click"
                 >
-              </li>
-              <li class="flex items-start">
-                <svg
-                  class="w-5 h-5 text-green-500 mr-2 flex-shrink-0"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M5 13l4 4L19 7"
-                  ></path>
-                </svg>
-                <span>1 Jahr kostenlose Online-Datenspeicherung</span>
-              </li>
-              <li class="flex items-start">
-                <svg
-                  class="w-5 h-5 text-green-500 mr-2 flex-shrink-0"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M5 13l4 4L19 7"
-                  ></path>
-                </svg>
-                <span>0 Risiko-90 Tage Geld zurueck Garantie</span>
-              </li>
-            </ul>
-            <div class="mb-4 text-sm text-gray-500 font-semibold">
-              ab Juni 2025 lieferbar
+                  Jetzt Angebot sichern
+                </button>
+              </div>
             </div>
-            <p class="text-sm text-gray-600 mb-4">
-              Dieses Angebot ist einzigartig und begrenzt – perfekt für den, der
-              sofort handelt und die maximale Unterstützung sucht. Nur eine
-              Reservierung pro Person möglich, um Exklusivität und Fairness zu
-              gewährleisten.
-            </p>
-            <a
-              class="text-blue-600 hover:underline text-sm block mb-4"
-              href="/klarna-payment-info"
-            >
-              Mehr zu Klarna Zahlungsoptionen →
-            </a>
-            <a
-              href="javascript:void(0)"
-              class="mt-auto w-full py-2 bg-green-500 hover:bg-green-600 text-white rounded-xl transition duration-300 block text-center checkout-button"
-            >
-              Jetzt Angebot sichern
-            </a>
           </div>
 
           <!-- Angebot 2 -->
@@ -1260,6 +1255,31 @@
         'pk_live_51QyFM2A9aibyk7ocyoijP7A9gPKC0oDS0HlySiSEuCOaS4sndnS1HZn9fyKPkf48ERT7FPaoxOWwvesYKKSy7N5J003rxyTc2b'
       );
 
+      // Function to get URL parameters
+      function getUrlParameter(name) {
+        name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+        var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+        var results = regex.exec(location.search);
+        return results === null
+          ? ''
+          : decodeURIComponent(results[1].replace(/\+/g, ' '));
+      }
+
+      // Get click ID from URL
+      const clickId = getUrlParameter('cid');
+      console.log('Click ID from URL:', clickId);
+
+      // When the page loads, add the click ID to all checkout buttons as a data attribute
+      document.addEventListener('DOMContentLoaded', function () {
+        if (clickId) {
+          const checkoutButtons = document.querySelectorAll('.checkout-button');
+          checkoutButtons.forEach((button) => {
+            button.setAttribute('data-click-id', clickId);
+            console.log('Added click ID to button:', clickId);
+          });
+        }
+      });
+
       // Function to handle checkout process
       async function handleCheckout(event) {
         try {
@@ -1268,19 +1288,19 @@
             event.preventDefault();
           }
 
-          // Extract click ID from URL if present
-          function getUrlParameter(name) {
-            name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
-            var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
-            var results = regex.exec(location.search);
-            return results === null
-              ? ''
-              : decodeURIComponent(results[1].replace(/\+/g, ' '));
+          // Get click ID from the button data attribute or from URL
+          let trackingClickId = '';
+          if (
+            event &&
+            event.currentTarget &&
+            event.currentTarget.dataset.clickId
+          ) {
+            trackingClickId = event.currentTarget.dataset.clickId;
+          } else {
+            trackingClickId = clickId;
           }
 
-          // Get click ID from URL
-          const clickId = getUrlParameter('cid');
-          console.log('Click ID from URL:', clickId);
+          console.log('Using click ID for checkout:', trackingClickId);
 
           // 获取跟踪URL（如果有）
           let trackingUrl = null;
@@ -1300,7 +1320,12 @@
               console.log('Sending tracking request to:', trackingUrl);
               // 创建一个图像对象来发送跟踪请求（常见的跟踪方法）
               const trackingImg = new Image();
-              trackingImg.src = trackingUrl + '?t=' + new Date().getTime();
+              trackingImg.src =
+                trackingUrl +
+                '?cid=' +
+                trackingClickId +
+                '&t=' +
+                new Date().getTime();
               // 等待一小段时间以确保跟踪请求有时间发送
               await new Promise((resolve) => setTimeout(resolve, 100));
             } catch (trackingError) {
@@ -1334,7 +1359,7 @@
             },
             body: JSON.stringify({
               priceId: 'price_1RI4RCA9aibyk7oc22okGK2W', // Updated Price ID
-              clickId: clickId, // Pass the click ID to the checkout endpoint
+              clickId: trackingClickId, // Pass the click ID to the checkout endpoint
             }),
           });
 

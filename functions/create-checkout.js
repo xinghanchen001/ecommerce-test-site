@@ -17,6 +17,7 @@ exports.handler = async function (event, context) {
     const data = JSON.parse(event.body);
     // Extract click ID if present
     const clickId = data.clickId || '';
+    console.log('Click ID received:', clickId);
 
     // --- Generate Order ID Server-Side (Berlin Time) ---
     const now = new Date();

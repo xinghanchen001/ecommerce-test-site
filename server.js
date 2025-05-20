@@ -79,8 +79,19 @@ app.get('/wissen/studien', (req, res) => {
 
 app.post('/create-checkout-session', async (req, res) => {
   try {
+    // Extract priceId and check if it exists
+    const { priceId: requestedPriceId } = req.body;
+
+    if (!requestedPriceId) {
+      res
+        .status(400)
+        .json({ error: { message: 'Missing required parameter: priceId' } });
+      return;
+    }
+
     // Extract click ID if present
     const clickId = req.body.clickId || '';
+    console.log('Click ID received:', clickId);
 
     // --- Generate Order ID Server-Side (Berlin Time) ---
     const now = new Date();
@@ -114,23 +125,23 @@ app.post('/create-checkout-session', async (req, res) => {
     const generatedOrderId = `LPBP${year}${month}${day}${hours}${minutes}${seconds}`;
     // --- End Order ID Generation ---
 
-    // Option 1: If you have a productId but no priceId, create a price on the fly
-    let priceId = req.body.priceId;
+    // Determine which price ID to use
+    let finalPriceId = requestedPriceId;
 
-    if (req.body.productId && !priceId) {
+    if (req.body.productId && !finalPriceId) {
       // Create a new price for the product
       const price = await stripe.prices.create({
         product: req.body.productId,
         unit_amount: 4999, // $49.99 in cents
         currency: 'usd',
       });
-      priceId = price.id;
-      console.log(`Created new price: ${priceId}`);
+      finalPriceId = price.id;
+      console.log(`Created new price: ${finalPriceId}`);
     }
 
     // If no price ID is provided, use the default product key from live mode
-    if (!priceId) {
-      priceId = 'price_1QyfHoA9aibyk7ocoy9gcOsX'; // Live mode product key
+    if (!finalPriceId) {
+      finalPriceId = 'price_1QyfHoA9aibyk7ocoy9gcOsX'; // Live mode product key
     }
 
     // Construct success URL with clickId if it exists
@@ -143,7 +154,7 @@ app.post('/create-checkout-session', async (req, res) => {
       payment_method_types: ['card', 'klarna'],
       line_items: [
         {
-          price: priceId,
+          price: finalPriceId,
           quantity: 1,
         },
       ],

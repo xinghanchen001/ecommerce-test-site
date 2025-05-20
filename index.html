@@ -2953,6 +2953,16 @@
     </script>
 
     <script>
+      // Function to get URL parameters
+      function getUrlParameter(name) {
+        name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+        var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+        var results = regex.exec(location.search);
+        return results === null
+          ? ''
+          : decodeURIComponent(results[1].replace(/\+/g, ' '));
+      }
+
       // Word animation
       const words = document.querySelectorAll('.animated-word');
       let currentWordIndex = 0;
@@ -2987,6 +2997,21 @@
             button.addEventListener('click', handleCheckout);
           }
         });
+
+        // Update all links to blutdruck-test-merged.html to preserve the clickId parameter
+        const clickId = getUrlParameter('cid');
+        if (clickId) {
+          console.log('Found click ID in URL, updating links:', clickId);
+          const links = document.querySelectorAll(
+            'a[href*="blutdruck-test-merged.html"]'
+          );
+          links.forEach((link) => {
+            const url = new URL(link.href, window.location.origin);
+            url.searchParams.set('cid', clickId);
+            link.href = url.href;
+            console.log('Updated link:', link.href);
+          });
+        }
 
         // Bento Grid interactions
         const bentoCards = document.querySelectorAll('.bento-card');
