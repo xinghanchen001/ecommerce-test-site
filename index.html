@@ -3002,14 +3002,45 @@
         const clickId = getUrlParameter('cid');
         if (clickId) {
           console.log('Found click ID in URL, updating links:', clickId);
-          const links = document.querySelectorAll(
-            'a[href*="blutdruck-test-merged.html"]'
-          );
+
+          // Target both relative and absolute links to the test page
+          const linkSelectors = [
+            'a[href*="blutdruck-test-merged.html"]',
+            'a[href*="blutdruck-test-merged"]',
+            'a[href*="/blutdruck-test"]',
+            'a[href*="blutdruck-test"]',
+            'a[href*="/blutdruck-analyse"]',
+            'a[href*="blutdruck-analyse"]',
+          ];
+
+          // Combine all selectors and find links
+          const links = document.querySelectorAll(linkSelectors.join(','));
+          console.log('Found links to update:', links.length);
+
           links.forEach((link) => {
-            const url = new URL(link.href, window.location.origin);
-            url.searchParams.set('cid', clickId);
-            link.href = url.href;
-            console.log('Updated link:', link.href);
+            try {
+              // Parse the current URL
+              const url = new URL(link.href, window.location.origin);
+              // Add or update the cid parameter
+              url.searchParams.set('cid', clickId);
+              // Update the link's href
+              link.href = url.href;
+              console.log('Updated link:', link.href);
+
+              // Also add a click event listener as a backup
+              link.addEventListener('click', function (e) {
+                if (!this.href.includes('cid=')) {
+                  e.preventDefault();
+                  window.location.href =
+                    this.href +
+                    (this.href.includes('?') ? '&' : '?') +
+                    'cid=' +
+                    clickId;
+                }
+              });
+            } catch (error) {
+              console.error('Error updating link:', error, link);
+            }
           });
         }
 

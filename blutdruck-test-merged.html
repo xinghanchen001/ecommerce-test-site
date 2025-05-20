@@ -872,7 +872,35 @@
     <!-- JavaScript for form handling and step transitions -->
     <script>
       document.addEventListener('DOMContentLoaded', function () {
-        // DOM-Elemente für Formular
+        // First, get any click ID from URL
+        function getUrlParameter(name) {
+          name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+          var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+          var results = regex.exec(location.search);
+          return results === null
+            ? ''
+            : decodeURIComponent(results[1].replace(/\+/g, ' '));
+        }
+
+        // Get click ID from URL
+        const clickId = getUrlParameter('cid');
+        console.log(
+          'Click ID detected in blutdruck-test-merged page:',
+          clickId
+        );
+
+        // Store click ID in localStorage for persistence across pages
+        if (clickId) {
+          localStorage.setItem('bper_click_id', clickId);
+
+          // Update all checkout buttons with the click ID
+          const checkoutButtons = document.querySelectorAll('.checkout-button');
+          checkoutButtons.forEach((button) => {
+            button.setAttribute('data-click-id', clickId);
+          });
+        }
+
+        // Get the form and necessary inputs
         const form = document.getElementById('bloodPressureForm');
         const ageInput = document.getElementById('age');
         const systolicInput = document.getElementById('systolic');

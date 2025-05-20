@@ -11,20 +11,24 @@
 [[redirects]]
   from = "/blutdruck-test"
   to = "/blutdruck-test-merged.html"
-  status = 200
+  status = 301
+  force = true
 
 [[redirects]]
   from = "/blutdruck-test/"
   to = "/blutdruck-test-merged.html"
-  status = 200 
+  status = 301
+  force = true
 
 # Alte Blutdruck-Analyse-Seite umleiten
 [[redirects]]
   from = "/blutdruck-analyse"
   to = "/blutdruck-test-merged.html"
-  status = 200
+  status = 301
+  force = true
 
 [[redirects]]
   from = "/blutdruck-analyse/"
   to = "/blutdruck-test-merged.html"
-  status = 200 
+  status = 301
+  force = true 
