@@ -1549,6 +1549,177 @@
         animation: fadeInUp 2s ease-in-out 0.3s forwards;
       }
 
+      /* Pricing card consistent styling */
+      .pricing-card {
+        transition: all 0.3s ease;
+        height: 630px !important; /* Consistent height for all cards */
+        display: flex !important;
+        flex-direction: column !important;
+      }
+
+      /* Ensure content area takes same space */
+      .pricing-card ul {
+        flex: 1 0 auto !important;
+        margin-bottom: 15px !important;
+      }
+
+      /* Make checkout buttons align at bottom */
+      .pricing-card .checkout-button {
+        margin-top: auto !important;
+      }
+
+      /* Swipeable pricing cards for mobile */
+      @media (max-width: 768px) {
+        /* Ensure all pricing cards have consistent padding */
+        .pricing-card {
+          padding: 20px !important;
+          box-sizing: border-box !important;
+        }
+
+        .pricing-cards-container {
+          display: flex !important; /* Force flex display */
+          flex-direction: row !important; /* Force horizontal layout */
+          flex-wrap: nowrap !important; /* Prevent wrapping */
+          overflow-x: auto !important; /* Enable horizontal scrolling */
+          scroll-snap-type: x mandatory;
+          -webkit-overflow-scrolling: touch;
+          scrollbar-width: none; /* Firefox */
+          -ms-overflow-style: none; /* IE and Edge */
+          gap: 16px;
+          padding: 10px 0;
+          margin: 0 -16px;
+          padding-left: 16px;
+          width: 100vw; /* Full viewport width */
+          position: relative;
+          left: 50%;
+          right: 50%;
+          margin-left: -50vw;
+          margin-right: -50vw;
+        }
+
+        .pricing-cards-container::-webkit-scrollbar {
+          display: none; /* Chrome, Safari, Opera */
+        }
+
+        .pricing-cards-container > div {
+          flex: 0 0 85% !important; /* Force card width */
+          min-width: 85% !important; /* Ensure minimum width */
+          scroll-snap-align: center;
+          scroll-snap-stop: always;
+          box-sizing: border-box;
+          float: none !important; /* Override any float */
+          margin-right: 16px;
+          width: 85% !important; /* Force width */
+          display: block !important; /* Force display */
+          min-height: 620px !important; /* Force consistent height */
+          height: auto !important; /* Allow expansion if needed */
+        }
+
+        /* Pricing cards indicators */
+        .pricing-indicators {
+          display: flex;
+          justify-content: center;
+          gap: 10px;
+          margin-top: 20px;
+          margin-bottom: 5px;
+          padding: 0;
+          width: 100%;
+          position: relative;
+          z-index: 10;
+          text-align: center;
+          left: 0;
+          right: 0;
+        }
+
+        .pricing-indicator {
+          width: 12px;
+          height: 12px;
+          border-radius: 50%;
+          background-color: #e2e8f0;
+          transition: all 0.3s ease;
+          cursor: pointer;
+          border: none;
+          padding: 0;
+          margin: 0 8px; /* Added horizontal spacing */
+          display: inline-block;
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+          position: relative; /* For better touch target */
+        }
+
+        /* Add a larger hit area for mobile taps */
+        .pricing-indicator::after {
+          content: '';
+          position: absolute;
+          top: -10px;
+          left: -10px;
+          right: -10px;
+          bottom: -10px;
+          z-index: 1;
+        }
+
+        .pricing-indicator.active {
+          background-color: #004691 !important; /* Force override */
+          width: 14px;
+          height: 14px;
+          transform: scale(1.1);
+        }
+      }
+
+      /* Swipe indicator for pricing cards on mobile */
+      .swipe-indicator {
+        position: absolute;
+        top: 50%;
+        left: calc(85% - 20px);
+        transform: translateY(-50%);
+        background-color: rgba(255, 255, 255, 0.8);
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        z-index: 10;
+        pointer-events: none;
+        animation: swipeAnimation 1.5s infinite;
+        opacity: 0;
+        display: none;
+        transition: opacity 0.3s ease;
+      }
+
+      @media (max-width: 768px) {
+        .swipe-indicator {
+          opacity: 1;
+          display: flex;
+        }
+
+        .swipe-indicator svg {
+          width: 24px;
+          height: 24px;
+          color: #004691;
+        }
+
+        @keyframes swipeAnimation {
+          0% {
+            transform: translateY(-50%) translateX(0);
+            opacity: 1;
+          }
+          50% {
+            transform: translateY(-50%) translateX(-10px);
+            opacity: 0.7;
+          }
+          100% {
+            transform: translateY(-50%) translateX(0);
+            opacity: 1;
+          }
+        }
+
+        /* Ensure pricing cards are well aligned in all views */
+        .pricing-cards-container {
+          align-items: stretch !important;
+        }
+      }
+
       /* Button sichtbar machen */
       .btn.btn-primary.checkout-button {
         opacity: 1;
@@ -1638,284 +1809,314 @@
           </p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <!-- Angebot 1 -->
+        <!-- Pricing cards wrapper for better mobile layout -->
+        <div
+          class="pricing-cards-wrapper overflow-hidden md:overflow-visible w-full relative"
+        >
+          <!-- Swipe indicator for mobile - only appears on the first card -->
+          <div class="swipe-indicator md:hidden">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M9 18l6-6-6-6"></path>
+            </svg>
+          </div>
+
+          <!-- Pricing grid - on desktop uses grid, on mobile becomes swipeable -->
           <div
-            class="opacity-100 bg-white rounded-xl p-6 border-4 border-green-500 flex flex-col h-full relative overflow-hidden shadow-lg"
+            class="pricing-cards-container grid grid-cols-1 md:grid-cols-3 gap-8"
           >
+            <!-- Angebot 1 -->
             <div
-              class="absolute top-0 right-0 bg-green-500 text-white py-1 px-4 rounded-bl-lg text-sm font-medium"
+              class="pricing-card opacity-100 bg-white rounded-xl p-6 border-4 border-green-500 flex flex-col h-full relative overflow-hidden shadow-lg"
             >
-              Aktuell
+              <div
+                class="absolute top-0 right-0 bg-green-500 text-white py-1 px-4 rounded-bl-lg text-sm font-medium"
+              >
+                Aktuell
+              </div>
+              <h3 class="text-xl font-bold mb-2">
+                Earlybird Preis für die ersten 200 Stk.
+              </h3>
+              <div class="text-3xl font-bold mb-4">199 €</div>
+              <ul class="mb-6 flex-1 space-y-2 text-sm">
+                <li class="flex items-start">
+                  <svg
+                    class="w-5 h-5 text-green-500 mr-2 flex-shrink-0"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M5 13l4 4L19 7"
+                    ></path>
+                  </svg>
+                  <span
+                    >1 Jahr Subsription fuer Leistungsfaehigkeit Bewertung durch
+                    APP</span
+                  >
+                </li>
+                <li class="flex items-start">
+                  <svg
+                    class="w-5 h-5 text-green-500 mr-2 flex-shrink-0"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M5 13l4 4L19 7"
+                    ></path>
+                  </svg>
+                  <span>1 Jahr kostenlose Online-Datenspeicherung</span>
+                </li>
+                <li class="flex items-start">
+                  <svg
+                    class="w-5 h-5 text-green-500 mr-2 flex-shrink-0"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M5 13l4 4L19 7"
+                    ></path>
+                  </svg>
+                  <span>0 Risiko-90 Tage Geld zurueck Garantie</span>
+                </li>
+              </ul>
+              <div class="mb-4 text-sm text-gray-500 font-semibold">
+                ab Juni 2025 lieferbar
+              </div>
+              <p class="text-sm text-gray-600 mb-4">
+                Dieses Angebot ist einzigartig und begrenzt – perfekt für den,
+                der sofort handelt und die maximale Unterstützung sucht. Nur
+                eine Reservierung pro Person möglich, um Exklusivität und
+                Fairness zu gewährleisten.
+              </p>
+              <a
+                class="text-blue-600 hover:underline text-sm block mb-4"
+                href="/klarna-payment-info"
+              >
+                Mehr zu Klarna Zahlungsoptionen →
+              </a>
+              <a
+                href="javascript:void(0)"
+                class="mt-auto w-full py-2 bg-green-500 hover:bg-green-600 text-white rounded-xl transition duration-300 block text-center checkout-button"
+              >
+                Jetzt Angebot sichern
+              </a>
             </div>
-            <h3 class="text-xl font-bold mb-2">
-              Earlybird Preis für die ersten 200 Stk.
-            </h3>
-            <div class="text-3xl font-bold mb-4">199 €</div>
-            <ul class="mb-6 flex-1 space-y-2 text-sm">
-              <li class="flex items-start">
-                <svg
-                  class="w-5 h-5 text-green-500 mr-2 flex-shrink-0"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M5 13l4 4L19 7"
-                  ></path>
-                </svg>
-                <span
-                  >1 Jahr Subsription fuer Leistungsfaehigkeit Bewertung durch
-                  APP</span
-                >
-              </li>
-              <li class="flex items-start">
-                <svg
-                  class="w-5 h-5 text-green-500 mr-2 flex-shrink-0"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M5 13l4 4L19 7"
-                  ></path>
-                </svg>
-                <span>1 Jahr kostenlose Online-Datenspeicherung</span>
-              </li>
-              <li class="flex items-start">
-                <svg
-                  class="w-5 h-5 text-green-500 mr-2 flex-shrink-0"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M5 13l4 4L19 7"
-                  ></path>
-                </svg>
-                <span>0 Risiko-90 Tage Geld zurueck Garantie</span>
-              </li>
-            </ul>
-            <div class="mb-4 text-sm text-gray-500 font-semibold">
-              ab Juni 2025 lieferbar
-            </div>
-            <p class="text-sm text-gray-600 mb-4">
-              Dieses Angebot ist einzigartig und begrenzt – perfekt für den, der
-              sofort handelt und die maximale Unterstützung sucht. Nur eine
-              Reservierung pro Person möglich, um Exklusivität und Fairness zu
-              gewährleisten.
-            </p>
-            <a
-              class="text-blue-600 hover:underline text-sm block mb-4"
-              href="/klarna-payment-info"
-            >
-              Mehr zu Klarna Zahlungsoptionen →
-            </a>
-            <a
-              href="javascript:void(0)"
-              class="mt-auto w-full py-2 bg-green-500 hover:bg-green-600 text-white rounded-xl transition duration-300 block text-center checkout-button"
-            >
-              Jetzt Angebot sichern
-            </a>
-          </div>
 
-          <!-- Angebot 2 -->
-          <div
-            class="opacity-60 bg-white rounded-xl p-6 flex flex-col h-full relative overflow-hidden shadow-lg"
-          >
-            <!-- Removed Aktuell badge -->
-            <h3 class="text-xl font-bold mb-2">Einführungs-Angebot</h3>
-            <!-- Title updated -->
-            <div class="text-3xl font-bold mb-4">259 €</div>
-            <!-- Price updated -->
-            <!-- Removed quantity limit -->
-            <ul class="mb-6 flex-1 space-y-2 text-sm">
-              <li class="flex items-start">
-                <svg
-                  class="w-5 h-5 text-green-500 mr-2 flex-shrink-0"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M5 13l4 4L19 7"
-                  ></path>
-                </svg>
-                <!-- Feature text updated -->
-                <span
-                  >1 Jahr Subskription fuer Leistungsfaehigkeit Bewertung durch
-                  APP</span
-                >
-              </li>
-              <li class="flex items-start">
-                <svg
-                  class="w-5 h-5 text-green-500 mr-2 flex-shrink-0"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M5 13l4 4L19 7"
-                  ></path>
-                </svg>
-                <!-- Feature text updated -->
-                <span>1 Jahr kostenlose Online-Datenspeicherung</span>
-              </li>
-              <li class="flex items-start">
-                <svg
-                  class="w-5 h-5 text-green-500 mr-2 flex-shrink-0"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M5 13l4 4L19 7"
-                  ></path>
-                </svg>
-                <!-- Feature text updated -->
-                <span>0 Risiko-90 Tage Geld zurueck Garantie</span>
-              </li>
-              <!-- Removed other list items -->
-            </ul>
-            <!-- Added availability -->
-            <div class="mb-4 text-sm text-gray-500 font-semibold">
-              erhaeltlich online ab August 2025
+            <!-- Angebot 2 -->
+            <div
+              class="pricing-card opacity-60 bg-white rounded-xl p-6 border-4 border-gray-300 flex flex-col h-full relative overflow-hidden shadow-lg"
+            >
+              <!-- Removed Aktuell badge -->
+              <h3 class="text-xl font-bold mb-2">Einführungs-Angebot</h3>
+              <!-- Title updated -->
+              <div class="text-3xl font-bold mb-4">259 €</div>
+              <!-- Price updated -->
+              <!-- Removed quantity limit -->
+              <ul class="mb-6 flex-1 space-y-2 text-sm">
+                <li class="flex items-start">
+                  <svg
+                    class="w-5 h-5 text-green-500 mr-2 flex-shrink-0"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M5 13l4 4L19 7"
+                    ></path>
+                  </svg>
+                  <!-- Feature text updated -->
+                  <span
+                    >1 Jahr Subskription fuer Leistungsfaehigkeit Bewertung
+                    durch APP</span
+                  >
+                </li>
+                <li class="flex items-start">
+                  <svg
+                    class="w-5 h-5 text-green-500 mr-2 flex-shrink-0"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M5 13l4 4L19 7"
+                    ></path>
+                  </svg>
+                  <!-- Feature text updated -->
+                  <span>1 Jahr kostenlose Online-Datenspeicherung</span>
+                </li>
+                <li class="flex items-start">
+                  <svg
+                    class="w-5 h-5 text-green-500 mr-2 flex-shrink-0"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M5 13l4 4L19 7"
+                    ></path>
+                  </svg>
+                  <!-- Feature text updated -->
+                  <span>0 Risiko-90 Tage Geld zurueck Garantie</span>
+                </li>
+                <!-- Removed other list items -->
+              </ul>
+              <!-- Added availability -->
+              <div class="mb-4 text-sm text-gray-500 font-semibold">
+                erhaeltlich online ab August 2025
+              </div>
+              <p class="text-sm text-gray-600 mb-4">
+                <!-- Description updated -->
+                Dieses Angebot ist für alle die den EarlyBird Rabatt verpasst
+                haben oder sich nicht qualifiziert haben.
+              </p>
+              <a
+                class="text-blue-600 hover:underline text-sm block mb-4"
+                href="/klarna-payment-info"
+              >
+                Mehr zu Klarna Zahlungsoptionen →
+              </a>
+              <a
+                href="javascript:void(0)"
+                class="mt-auto w-full py-2 bg-gray-600 hover:bg-gray-700 text-white rounded-xl transition duration-300 block text-center checkout-button"
+              >
+                <!-- Button text kept as Jetzt reservieren -->
+                Jetzt reservieren
+              </a>
             </div>
-            <p class="text-sm text-gray-600 mb-4">
+
+            <!-- Angebot 3 -->
+            <div
+              class="pricing-card bg-gray-50 rounded-xl p-6 border-4 border-gray-200 flex flex-col h-full opacity-60 shadow-lg"
+            >
+              <h3 class="text-xl font-bold mb-2">Offizieller Preis</h3>
+              <!-- Title updated -->
+              <div class="text-3xl font-bold mb-4">359 €</div>
+              <!-- Price updated -->
+              <!-- Removed Regulaere UVP-Preis text -->
+              <ul class="mb-6 flex-1 space-y-2 text-sm">
+                <li class="flex items-start">
+                  <svg
+                    class="w-5 h-5 text-green-500 mr-2 flex-shrink-0"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M5 13l4 4L19 7"
+                    ></path>
+                  </svg>
+                  <!-- Feature text updated -->
+                  <span
+                    >1 Jahr Subskription fuer Leistungsfaehigkeit Bewertung
+                    durch APP</span
+                  >
+                </li>
+                <li class="flex items-start">
+                  <svg
+                    class="w-5 h-5 text-green-500 mr-2 flex-shrink-0"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M5 13l4 4L19 7"
+                    ></path>
+                  </svg>
+                  <!-- Feature text updated -->
+                  <span>1 Jahr kostenlose Online-Datenspeicherung</span>
+                </li>
+                <li class="flex items-start">
+                  <svg
+                    class="w-5 h-5 text-green-500 mr-2 flex-shrink-0"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M5 13l4 4L19 7"
+                    ></path>
+                  </svg>
+                  <!-- Feature text updated -->
+                  <span>0 Risiko-90 Tage Geld zurueck Garantie</span>
+                </li>
+                <!-- Removed other list items -->
+              </ul>
+              <!-- Added availability -->
+              <div class="mb-4 text-sm text-gray-500 font-semibold">
+                erhaeltlich online und in Apotheke ab Januar 2026
+              </div>
               <!-- Description updated -->
-              Dieses Angebot ist für alle die den EarlyBird Rabatt verpasst
-              haben oder sich nicht qualifiziert haben.
-            </p>
-            <a
-              class="text-blue-600 hover:underline text-sm block mb-4"
-              href="/klarna-payment-info"
-            >
-              Mehr zu Klarna Zahlungsoptionen →
-            </a>
-            <a
-              href="javascript:void(0)"
-              class="mt-auto w-full py-2 bg-gray-600 hover:bg-gray-700 text-white rounded-xl transition duration-300 block text-center checkout-button"
-            >
-              <!-- Button text kept as Jetzt reservieren -->
-              Jetzt reservieren
-            </a>
+              <p class="text-sm text-gray-600 mb-4">
+                Der offizielle Preis bei Serienproduktion.
+              </p>
+
+              <a
+                class="text-blue-600 hover:underline text-sm block mb-4"
+                href="/klarna-payment-info"
+              >
+                Mehr zu Klarna Zahlungsoptionen →
+              </a>
+              <a
+                href="javascript:void(0)"
+                class="mt-auto w-full py-2 bg-gray-600 hover:bg-gray-700 text-white rounded-xl transition duration-300 block text-center checkout-button"
+              >
+                <!-- Button text kept as Jetzt vorbestellen -->
+                Jetzt vorbestellen
+              </a>
+            </div>
           </div>
 
-          <!-- Angebot 3 -->
-          <div
-            class="bg-gray-50 rounded-xl p-6 border border-gray-200 flex flex-col h-full opacity-60"
-          >
-            <h3 class="text-xl font-bold mb-2">Offizieller Preis</h3>
-            <!-- Title updated -->
-            <div class="text-3xl font-bold mb-4">359 €</div>
-            <!-- Price updated -->
-            <!-- Removed Regulaere UVP-Preis text -->
-            <ul class="mb-6 flex-1 space-y-2 text-sm">
-              <li class="flex items-start">
-                <svg
-                  class="w-5 h-5 text-green-500 mr-2 flex-shrink-0"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M5 13l4 4L19 7"
-                  ></path>
-                </svg>
-                <!-- Feature text updated -->
-                <span
-                  >1 Jahr Subskription fuer Leistungsfaehigkeit Bewertung durch
-                  APP</span
-                >
-              </li>
-              <li class="flex items-start">
-                <svg
-                  class="w-5 h-5 text-green-500 mr-2 flex-shrink-0"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M5 13l4 4L19 7"
-                  ></path>
-                </svg>
-                <!-- Feature text updated -->
-                <span>1 Jahr kostenlose Online-Datenspeicherung</span>
-              </li>
-              <li class="flex items-start">
-                <svg
-                  class="w-5 h-5 text-green-500 mr-2 flex-shrink-0"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M5 13l4 4L19 7"
-                  ></path>
-                </svg>
-                <!-- Feature text updated -->
-                <span>0 Risiko-90 Tage Geld zurueck Garantie</span>
-              </li>
-              <!-- Removed other list items -->
-            </ul>
-            <!-- Added availability -->
-            <div class="mb-4 text-sm text-gray-500 font-semibold">
-              erhaeltlich online und in Apotheke ab Januar 2026
-            </div>
-            <!-- Description updated -->
-            <p class="text-sm text-gray-600 mb-4">
-              Der offizielle Preis bei Serienproduktion.
-            </p>
-
-            <a
-              class="text-blue-600 hover:underline text-sm block mb-4"
-              href="/klarna-payment-info"
-            >
-              Mehr zu Klarna Zahlungsoptionen →
-            </a>
-            <a
-              href="javascript:void(0)"
-              class="mt-auto w-full py-2 bg-gray-600 hover:bg-gray-700 text-white rounded-xl transition duration-300 block text-center checkout-button"
-            >
-              <!-- Button text kept as Jetzt vorbestellen -->
-              Jetzt vorbestellen
-            </a>
+          <!-- Pricing indicators for mobile swipe - positioned outside of cards container -->
+          <div class="pricing-indicators md:hidden mt-6 mb-2">
+            <div class="pricing-indicator active" data-index="0"></div>
+            <div class="pricing-indicator" data-index="1"></div>
+            <div class="pricing-indicator" data-index="2"></div>
           </div>
         </div>
 
@@ -3057,6 +3258,44 @@
           : decodeURIComponent(results[1].replace(/\+/g, ' '));
       }
 
+      // Hide swipe indicator after first interaction with pricing cards
+      document.addEventListener('DOMContentLoaded', function () {
+        const pricingCardsContainer = document.querySelector(
+          '.pricing-cards-container'
+        );
+        const swipeIndicator = document.querySelector('.swipe-indicator');
+
+        if (pricingCardsContainer && swipeIndicator) {
+          // Hide indicator after user scrolls
+          pricingCardsContainer.addEventListener(
+            'scroll',
+            function () {
+              if (swipeIndicator) {
+                swipeIndicator.style.opacity = '0';
+                setTimeout(() => {
+                  swipeIndicator.style.display = 'none';
+                }, 300);
+              }
+            },
+            { passive: true, once: true }
+          );
+
+          // Also hide after touch events
+          pricingCardsContainer.addEventListener(
+            'touchmove',
+            function () {
+              if (swipeIndicator) {
+                swipeIndicator.style.opacity = '0';
+                setTimeout(() => {
+                  swipeIndicator.style.display = 'none';
+                }, 300);
+              }
+            },
+            { passive: true, once: true }
+          );
+        }
+      });
+
       // Word animation
       const words = document.querySelectorAll('.animated-word');
       let currentWordIndex = 0;
@@ -3082,6 +3321,380 @@
 
       // Add event listeners for Stripe checkout buttons
       document.addEventListener('DOMContentLoaded', function () {
+        // Add a separate initialization for the pricing indicators that runs after page load
+        window.addEventListener('load', function () {
+          setupPricingIndicators();
+        });
+
+        // Function to setup pricing indicators separately from other functionality
+        function setupPricingIndicators() {
+          // Get DOM elements
+          const container = document.querySelector('.pricing-cards-container');
+          const indicators = document.querySelectorAll('.pricing-indicator');
+
+          if (container && indicators.length > 0 && window.innerWidth <= 768) {
+            console.log('Setting up pricing indicators:', indicators.length);
+
+            // Direct DOM manipulation for scrolling behavior
+            container.style.scrollSnapType = 'x mandatory';
+            container.style.overflow = 'auto';
+            container.style.display = 'flex';
+            container.style.scrollBehavior = 'smooth';
+
+            // Function to update indicators based on visible card
+            function updateActiveIndicator() {
+              const scrollPosition = container.scrollLeft;
+              const containerWidth = container.clientWidth;
+
+              // Get the first visible card
+              const cards = container.querySelectorAll(':scope > div');
+              let activeIndex = 0;
+
+              if (cards.length > 0) {
+                // Simple calculation - whichever card is most in view
+                const cardWidth = cards[0].offsetWidth;
+                activeIndex = Math.round(scrollPosition / cardWidth);
+
+                // Clamp to valid range
+                activeIndex = Math.max(
+                  0,
+                  Math.min(activeIndex, indicators.length - 1)
+                );
+
+                console.log(
+                  'Active card:',
+                  activeIndex + 1,
+                  'of',
+                  indicators.length
+                );
+              }
+
+              // Update the indicators
+              indicators.forEach((dot, index) => {
+                if (index === activeIndex) {
+                  dot.classList.add('active');
+                  dot.style.backgroundColor = '#004691';
+                } else {
+                  dot.classList.remove('active');
+                  dot.style.backgroundColor = '#e2e8f0';
+                }
+              });
+            }
+
+            // Attach scroll event listener (most basic version)
+            container.addEventListener(
+              'scroll',
+              function () {
+                updateActiveIndicator();
+              },
+              { passive: true }
+            );
+
+            // Add click handlers to indicators
+            indicators.forEach((dot, index) => {
+              dot.addEventListener('click', function () {
+                const cards = container.querySelectorAll(':scope > div');
+                if (cards.length > index) {
+                  // Calculate position to scroll to
+                  const cardWidth = cards[0].offsetWidth;
+                  container.scrollTo({
+                    left: index * cardWidth,
+                    behavior: 'smooth',
+                  });
+
+                  // Update indicators manually
+                  indicators.forEach((d, i) => {
+                    if (i === index) {
+                      d.classList.add('active');
+                      d.style.backgroundColor = '#004691';
+                    } else {
+                      d.classList.remove('active');
+                      d.style.backgroundColor = '#e2e8f0';
+                    }
+                  });
+                }
+              });
+            });
+
+            // Initialize - make sure the first card is in view and first indicator is active
+            setTimeout(() => {
+              container.scrollTo({ left: 0, behavior: 'smooth' });
+              updateActiveIndicator();
+            }, 100);
+          }
+        }
+
+        // Original pricing cards swiper function
+        function initPricingCardsSwiper() {
+          const pricingCardsContainer = document.querySelector(
+            '.pricing-cards-container'
+          );
+          const pricingIndicators =
+            document.querySelectorAll('.pricing-indicator');
+          const pricingCards = pricingCardsContainer
+            ? pricingCardsContainer.querySelectorAll('> div')
+            : [];
+
+          if (
+            pricingCardsContainer &&
+            window.innerWidth <= 768 &&
+            pricingCards.length > 0
+          ) {
+            // Force grid to flex for mobile - remove any grid classes that might interfere
+            pricingCardsContainer.classList.remove('grid');
+            pricingCardsContainer.classList.remove('grid-cols-1');
+
+            // Apply styles directly to ensure horizontal layout
+            pricingCardsContainer.style.display = 'flex';
+            pricingCardsContainer.style.flexDirection = 'row';
+            pricingCardsContainer.style.flexWrap = 'nowrap';
+            pricingCardsContainer.style.overflowX = 'auto';
+            pricingCardsContainer.style.scrollBehavior = 'smooth';
+            pricingCardsContainer.style.scrollSnapType = 'x mandatory';
+
+            // Apply styles to card elements and add data attributes
+            pricingCards.forEach((card, idx) => {
+              card.style.flex = '0 0 85%';
+              card.style.minWidth = '85%';
+              card.style.marginRight = '16px';
+              card.style.scrollSnapAlign = 'center';
+              card.setAttribute('data-card-index', idx); // Add index for better tracking
+            });
+
+            // Make indicator dots more visible and clickable
+            pricingIndicators.forEach((dot, idx) => {
+              dot.style.cursor = 'pointer';
+              dot.title = `View pricing option ${idx + 1}`; // Add tooltip
+            });
+
+            // Ensure first card is fully visible on load and first indicator is active
+            setTimeout(() => {
+              pricingCardsContainer.scrollLeft = 0;
+
+              // Set first indicator as active
+              pricingIndicators.forEach((ind) =>
+                ind.classList.remove('active')
+              );
+              pricingIndicators[0].classList.add('active');
+            }, 100);
+
+            // Calculate card width including margins
+            const getCardWidth = () => {
+              const card = pricingCards[0];
+              const style = window.getComputedStyle(card);
+              const width = card.offsetWidth;
+              const marginRight = parseInt(style.marginRight || '0', 10);
+              return width + marginRight;
+            };
+
+            // Better method to determine visible card using element position
+            const getCurrentCardIndex = () => {
+              // Get current scroll position and container width
+              const scrollLeft = pricingCardsContainer.scrollLeft;
+              const containerWidth = pricingCardsContainer.clientWidth;
+
+              // Calculate which card is most visible in the viewport
+              // This is more reliable than using rounded division
+              const visibleCenter = scrollLeft + containerWidth / 2;
+              const cardWidth = getCardWidth();
+              const currentIndex = Math.min(
+                Math.floor(visibleCenter / cardWidth),
+                pricingCards.length - 1
+              );
+
+              // For more accuracy, verify with the actual DOM elements
+              return Math.max(0, currentIndex);
+            };
+
+            // Enhanced indicator update with direct style manipulation for better visibility
+            const updateIndicators = () => {
+              const cardIndex = getCurrentCardIndex();
+
+              // Apply visual changes directly to indicators
+              pricingIndicators.forEach((indicator, index) => {
+                if (index === cardIndex) {
+                  // Active indicator: blue and larger
+                  indicator.classList.add('active');
+                  indicator.style.backgroundColor = '#004691';
+                  indicator.style.width = '14px';
+                  indicator.style.height = '14px';
+                } else {
+                  // Inactive indicators: gray and smaller
+                  indicator.classList.remove('active');
+                  indicator.style.backgroundColor = '#e2e8f0';
+                  indicator.style.width = '12px';
+                  indicator.style.height = '12px';
+                }
+              });
+
+              // Log indicator changes for debugging
+              console.log(
+                'Indicator updated: showing card',
+                cardIndex + 1,
+                'of',
+                pricingCards.length
+              );
+            };
+
+            // Remove any existing event listeners to prevent duplicates
+            const oldContainer = document.querySelector(
+              '.pricing-cards-container'
+            );
+            if (oldContainer) {
+              const newContainer = oldContainer.cloneNode(true);
+              if (oldContainer.parentNode) {
+                oldContainer.parentNode.replaceChild(
+                  newContainer,
+                  oldContainer
+                );
+              }
+            }
+
+            // Create a more reliable scroll handler that forces indicator updates
+            const handleScroll = function () {
+              // Update the indicators immediately during scrolling
+              requestAnimationFrame(updateIndicators);
+            };
+
+            // Create a handler for when scrolling stops to snap to nearest card
+            const handleScrollEnd = function () {
+              const cardIndex = getCurrentCardIndex();
+              const cardWidth = getCardWidth();
+              const targetPosition = cardIndex * cardWidth;
+
+              // Snap to nearest card if not already aligned
+              if (
+                Math.abs(pricingCardsContainer.scrollLeft - targetPosition) > 5
+              ) {
+                pricingCardsContainer.scrollTo({
+                  left: targetPosition,
+                  behavior: 'smooth',
+                });
+              }
+
+              // Force indicator update
+              pricingIndicators.forEach((indicator, index) => {
+                if (index === cardIndex) {
+                  indicator.classList.add('active');
+                  indicator.style.backgroundColor = '#004691';
+                  indicator.style.width = '14px';
+                  indicator.style.height = '14px';
+                } else {
+                  indicator.classList.remove('active');
+                  indicator.style.backgroundColor = '#e2e8f0';
+                  indicator.style.width = '12px';
+                  indicator.style.height = '12px';
+                }
+              });
+
+              console.log('Snap to card:', cardIndex + 1);
+            };
+
+            // Attach scroll event with debounce for scroll end detection
+            let scrollTimer;
+            pricingCardsContainer.addEventListener(
+              'scroll',
+              function () {
+                // Update indicators during scroll
+                handleScroll();
+
+                // Detect when scrolling stops
+                clearTimeout(scrollTimer);
+                scrollTimer = setTimeout(handleScrollEnd, 100);
+              },
+              { passive: true }
+            );
+
+            // Add touch events for mobile users
+            pricingCardsContainer.addEventListener('touchmove', handleScroll, {
+              passive: true,
+            });
+            pricingCardsContainer.addEventListener(
+              'touchend',
+              function () {
+                setTimeout(handleScrollEnd, 50);
+              },
+              { passive: true }
+            );
+
+            // Enhanced click handlers for indicators with immediate feedback
+            pricingIndicators.forEach((indicator, index) => {
+              // Make indicators more visible
+              indicator.style.cursor = 'pointer';
+
+              // Add click event with immediate visual feedback and forced scrolling
+              indicator.addEventListener('click', function () {
+                // Clear any existing timers
+                clearTimeout(scrollTimer);
+
+                // Update all indicators immediately
+                pricingIndicators.forEach((ind, i) => {
+                  if (i === index) {
+                    // Active indicator
+                    ind.classList.add('active');
+                    ind.style.backgroundColor = '#004691';
+                    ind.style.width = '14px';
+                    ind.style.height = '14px';
+                    // Add pulse animation
+                    ind.style.transform = 'scale(1.3)';
+                    ind.style.boxShadow = '0 0 0 2px rgba(0, 70, 145, 0.3)';
+                  } else {
+                    // Inactive indicators
+                    ind.classList.remove('active');
+                    ind.style.backgroundColor = '#e2e8f0';
+                    ind.style.width = '12px';
+                    ind.style.height = '12px';
+                    ind.style.transform = '';
+                    ind.style.boxShadow = '';
+                  }
+                });
+
+                // Calculate target position and force scroll
+                const cardWidth = getCardWidth();
+                pricingCardsContainer.scrollTo({
+                  left: index * cardWidth,
+                  behavior: 'smooth',
+                });
+
+                // Reset animation after delay
+                setTimeout(() => {
+                  indicator.style.transform = 'scale(1)';
+                  indicator.style.boxShadow = '';
+                }, 400);
+
+                console.log('Clicked indicator for card:', index + 1);
+              });
+            });
+
+            // Initial update
+            updateIndicators();
+
+            // Debug info
+            console.log('Pricing cards swiper initialized:', {
+              cards: pricingCards.length,
+              cardWidth: getCardWidth(),
+              containerWidth: pricingCardsContainer.offsetWidth,
+            });
+          }
+        }
+
+        // Initialize the original swiper function (but let our new indicator function handle the indicators)
+        // This prevents any conflict between the two implementations
+        initPricingCardsSwiper();
+
+        // Handle resizing and orientation changes
+        ['resize', 'orientationchange'].forEach((eventType) => {
+          window.addEventListener(eventType, function () {
+            // Use timeout to debounce
+            clearTimeout(window.resizeTimer);
+            window.resizeTimer = setTimeout(function () {
+              // Reinitialize both systems
+              initPricingCardsSwiper();
+              setupPricingIndicators();
+            }, 250);
+          });
+        });
+
         // Get all buy buttons
         const buyButtons = document.querySelectorAll('.checkout-button');
 
