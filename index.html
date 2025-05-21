@@ -1919,6 +1919,8 @@
               <a
                 href="javascript:void(0)"
                 class="mt-auto w-full py-2 bg-green-500 hover:bg-green-600 text-white rounded-xl transition duration-300 block text-center checkout-button"
+                onclick="window.handleCheckout(event); return false;"
+                data-price-id="price_1RI4RCA9aibyk7oc22okGK2W"
               >
                 Jetzt Angebot sichern
               </a>
@@ -3173,7 +3175,18 @@
       });
 
       // Function to handle checkout process
-      async function handleCheckout() {
+      // Make handleCheckout a window property for global access
+      window.handleCheckout = async function (event) {
+        console.log(
+          'Checkout triggered',
+          event ? event.currentTarget : 'no event'
+        );
+
+        // Prevent default action if this is a link
+        if (event && event.preventDefault) {
+          event.preventDefault();
+        }
+
         try {
           // Extract click ID from URL if present
           function getUrlParameter(name) {
@@ -3206,6 +3219,17 @@
           const endpointUrl = '/api/create-checkout';
           console.log('Using endpoint:', endpointUrl);
 
+          // Get price ID from the button if available
+          let priceId = 'price_1RI4RCA9aibyk7oc22okGK2W'; // Default price ID
+          if (
+            event &&
+            event.currentTarget &&
+            event.currentTarget.dataset.priceId
+          ) {
+            priceId = event.currentTarget.dataset.priceId;
+          }
+          console.log('Using price ID for checkout:', priceId);
+
           // Call your backend to create a Checkout Session
           const response = await fetch(endpointUrl, {
             method: 'POST',
@@ -3213,7 +3237,7 @@
               'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-              priceId: 'price_1RI4RCA9aibyk7oc22okGK2W', // Updated Price ID
+              priceId: priceId,
               clickId: clickId, // Pass the click ID to the checkout endpoint
             }),
           });
@@ -3244,7 +3268,7 @@
             'Es gab ein Problem mit der Weiterleitung zum Checkout. Bitte versuchen Sie es später noch einmal.'
           );
         }
-      }
+      };
     </script>
 
     <script>
@@ -3697,11 +3721,29 @@
 
         // Get all buy buttons
         const buyButtons = document.querySelectorAll('.checkout-button');
+        console.log('Found checkout buttons:', buyButtons.length);
 
         // Add checkout handler to all buy buttons
         buyButtons.forEach((button) => {
           if (button) {
-            button.addEventListener('click', handleCheckout);
+            // Remove existing event listeners
+            button.replaceWith(button.cloneNode(true));
+
+            // Get the fresh button reference
+            const freshButton = document.querySelector(
+              `a[href="${button.getAttribute('href')}"]`
+            );
+
+            // Add fresh event listener to the global handleCheckout function
+            freshButton.addEventListener('click', window.handleCheckout);
+
+            // Add an onclick attribute as a fallback method
+            freshButton.setAttribute(
+              'onclick',
+              'window.handleCheckout(event); return false;'
+            );
+
+            console.log('Added checkout handler to button:', freshButton);
           }
         });
 
