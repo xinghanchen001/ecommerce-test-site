@@ -43,7 +43,7 @@
         padding: 80px 20px;
         text-align: center;
         overflow: hidden;
-        min-height: 80vh;
+        min-height: 90vh; /* Increased from 80vh to 90vh */
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -138,29 +138,34 @@
         margin: 0 auto;
         position: relative;
         z-index: 1;
+        width: 100%; /* Ensure full width */
       }
       .hero-flex {
         display: flex;
-        gap: 2rem;
-        padding: 2rem 0 0 0;
+        gap: 3rem; /* Increased from 2rem */
+        padding: 2rem 0;
         align-items: center;
         justify-content: center;
         flex-direction: column;
         position: relative;
         z-index: 1;
+        width: 100%; /* Added to ensure full width */
+        max-width: 1200px; /* Match hero-container width */
+        height: 100%; /* Added to fill vertical space */
       }
       .hero-subtitle-container {
         display: flex;
         gap: 1rem;
         flex-direction: column;
+        width: 100%; /* Added to ensure full width */
       }
       .hero-title {
-        font-size: 3.8rem;
-        max-width: 40rem;
+        font-size: 4.2rem; /* Increased from 3.8rem */
+        max-width: 44rem; /* Increased from 40rem */
         letter-spacing: -0.05em;
         text-align: center;
         font-weight: 400;
-        margin: 0;
+        margin: 0 auto; /* Centered */
       }
       .hero-title-highlight {
         color: #000000;
@@ -171,10 +176,11 @@
         display: flex;
         width: 100%;
         justify-content: center;
-        overflow: visible; /* Änderung von hidden zu visible */
+        overflow: visible;
         text-align: center;
-        padding: 0.25rem 0 1rem 0;
-        min-height: 6rem; /* Erhöhung von 5rem auf 6rem */
+        padding: 0.5rem 0 1.5rem 0; /* Increased padding */
+        min-height: 7rem; /* Increased from 6rem */
+        margin: 0.5rem 0; /* Added margin */
       }
       .animated-word {
         position: absolute;
@@ -183,6 +189,8 @@
         transform: translateY(3rem);
         transition: all 0.5s ease;
         color: #004691;
+        font-size: 110%; /* Make animated words slightly larger than surrounding text */
+        text-shadow: 0 1px 2px rgba(0, 70, 145, 0.1); /* Add subtle text shadow */
       }
       .animated-word.active {
         opacity: 1;
@@ -374,19 +382,21 @@
       }
       @media (max-width: 768px) {
         .hero {
-          padding: 60px 20px;
+          padding: 20px 0; /* Reduced padding significantly */
+          min-height: auto; /* Auto height instead of fixed vh */
         }
         .hero-container {
-          padding: 15px;
+          padding: 0; /* Remove container padding */
+          width: 100%; /* Ensure full width */
+          max-width: 100%;
         }
         .hero-title {
-          font-size: 2.5rem;
+          font-size: 2.2rem; /* Slightly reduced */
+          max-width: 100%;
+          padding: 0 10px; /* Add small horizontal padding */
         }
         .aurora-bg {
-          opacity: 0.7;
-        }
-        .hero-title {
-          font-size: 2.5rem;
+          opacity: 0.5;
         }
         .story-section {
           flex-direction: column;
@@ -397,7 +407,40 @@
         .hero-buttons {
           flex-direction: column;
         }
+        .animated-word-container {
+          min-height: 3.2rem; /* Reduced height */
+          padding: 0 0 0.4rem 0; /* Reduced padding */
+          margin: 0.2rem 0; /* Reduced margin */
+        }
+        .hero-flex {
+          gap: 1rem; /* Reduced gap */
+          padding: 0; /* Remove all padding */
+          height: auto;
+          width: 100%; /* Ensure full width */
+        }
+        .hero-subtitle-container {
+          width: 100%; /* Full width */
+          padding: 0; /* No padding */
+          margin: 0 0 0.5rem 0; /* Small bottom margin only */
+        }
+        .hero-image-container {
+          margin-top: 0.5rem; /* Reduced top margin */
+          width: 100%; /* Full width */
+          padding: 0; /* No padding */
+        }
+        .hero-device-image {
+          border-radius: 0; /* Remove border radius */
+          width: 100%; /* Full width */
+        }
       }
+
+      /* Hide hero buttons on screens smaller than 1440px */
+      @media (max-width: 1440px) {
+        .hero-buttons {
+          display: none;
+        }
+      }
+
       .gallery-section {
         width: 100%;
         padding: 60px 0;
@@ -533,7 +576,7 @@
       }
       .bento-section {
         width: 100%;
-        padding: 60px 0 150px 0;
+        padding: 60px 0 50px 0;
         background-color: #fff;
       }
       .bento-header {
@@ -698,7 +741,8 @@
 
         .bento-card .bento-card-inner.with-image .bento-image {
           min-height: 100px;
-          max-height: 150px;
+          max-height: none; /* Remove height restriction */
+          width: 100%; /* Ensure full width */
         }
       }
 
@@ -881,8 +925,9 @@
         }
       }
       .hero-image-container {
-        margin-top: 0.5rem;
+        margin-top: 2rem; /* Increased from 0.5rem */
         max-width: 100%;
+        width: 90%; /* Added to make image larger */
         display: flex;
         justify-content: center;
       }
@@ -890,6 +935,24 @@
         max-width: 100%;
         height: auto;
         border-radius: 12px;
+        box-shadow: 0 0 0 transparent; /* Removed shadow as requested */
+        transform: perspective(1000px) rotateX(2deg); /* Subtle 3D effect */
+        transition: transform 0.5s ease;
+      }
+
+      .hero-device-image:hover {
+        transform: perspective(1000px) rotateX(0deg) translateY(-5px);
+        box-shadow: 0 0 0 transparent; /* No shadow on hover either */
+      }
+
+      @media (max-width: 768px) {
+        .hero-device-image {
+          transform: none; /* Remove perspective transform on mobile */
+          transition: none;
+        }
+        .hero-device-image:hover {
+          transform: none;
+        }
       }
 
       /* Marquee Animation Styles */
@@ -1332,6 +1395,7 @@
       /* Anpassung für normale Karten mit Bild */
       .bento-card .bento-card-inner.with-image .bento-image {
         max-width: 100%;
+        width: 100%; /* Ensure full width */
         margin-top: 15px;
         min-height: 120px;
         overflow: hidden;
@@ -1391,11 +1455,27 @@
         .bento-image {
           max-width: 100%;
           width: 100%;
+          height: auto;
+          min-height: 200px; /* Increased min-height for better visibility */
+          border-radius: 0; /* Remove border radius on mobile */
+          margin: 0; /* Remove margin */
+          padding: 0; /* Remove padding */
         }
 
         .bento-image img {
           width: 100%;
+          height: 100%;
           object-fit: cover;
+          border-radius: 0; /* Remove border radius on mobile */
+        }
+
+        /* Ensure cards with images display properly */
+        .bento-card-inner.with-image {
+          padding: 0; /* Remove padding */
+        }
+
+        .bento-card-inner.with-image .bento-content {
+          padding: 15px; /* Add padding to content instead */
         }
       }
 
@@ -1419,6 +1499,22 @@
         display: -webkit-box;
         -webkit-line-clamp: 2;
         -webkit-box-orient: vertical;
+      }
+
+      /* Special class for the specific images mentioned */
+      .full-width-img {
+        width: 100% !important;
+        height: auto !important;
+        object-fit: cover !important;
+        display: block !important;
+      }
+
+      @media (max-width: 768px) {
+        .full-width-img {
+          border-radius: 0 !important;
+          max-height: none !important;
+          min-height: auto !important;
+        }
       }
 
       /* Verbesserte Textbegrenzung für mobile Ansicht */
@@ -1528,6 +1624,318 @@
       </div>
     </div>
 
+    <!-- Pricing Section -->
+    <section class="py-16 md:py-24 bg-white">
+      <div class="container mx-auto px-4 md:px-6">
+        <div class="flex flex-col items-center text-center mb-12">
+          <div class="badge mb-2">Limitiertes Angebot</div>
+          <h2 class="text-3xl md:text-4xl font-bold tracking-tight mb-4">
+            Unsere exklusive Vorabvermarktung – nur für die Schnellsten!
+          </h2>
+          <p class="text-lg text-gray-600 max-w-2xl mb-8">
+            Sichern Sie sich jetzt Ihr BPER System zu einem der begrenzt
+            verfügbaren Sonderangebote.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <!-- Angebot 1 -->
+          <div
+            class="opacity-100 bg-white rounded-xl p-6 border-4 border-green-500 flex flex-col h-full relative overflow-hidden shadow-lg"
+          >
+            <div
+              class="absolute top-0 right-0 bg-green-500 text-white py-1 px-4 rounded-bl-lg text-sm font-medium"
+            >
+              Aktuell
+            </div>
+            <h3 class="text-xl font-bold mb-2">
+              Earlybird Preis für die ersten 200 Stk.
+            </h3>
+            <div class="text-3xl font-bold mb-4">199 €</div>
+            <ul class="mb-6 flex-1 space-y-2 text-sm">
+              <li class="flex items-start">
+                <svg
+                  class="w-5 h-5 text-green-500 mr-2 flex-shrink-0"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  ></path>
+                </svg>
+                <span
+                  >1 Jahr Subsription fuer Leistungsfaehigkeit Bewertung durch
+                  APP</span
+                >
+              </li>
+              <li class="flex items-start">
+                <svg
+                  class="w-5 h-5 text-green-500 mr-2 flex-shrink-0"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  ></path>
+                </svg>
+                <span>1 Jahr kostenlose Online-Datenspeicherung</span>
+              </li>
+              <li class="flex items-start">
+                <svg
+                  class="w-5 h-5 text-green-500 mr-2 flex-shrink-0"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  ></path>
+                </svg>
+                <span>0 Risiko-90 Tage Geld zurueck Garantie</span>
+              </li>
+            </ul>
+            <div class="mb-4 text-sm text-gray-500 font-semibold">
+              ab Juni 2025 lieferbar
+            </div>
+            <p class="text-sm text-gray-600 mb-4">
+              Dieses Angebot ist einzigartig und begrenzt – perfekt für den, der
+              sofort handelt und die maximale Unterstützung sucht. Nur eine
+              Reservierung pro Person möglich, um Exklusivität und Fairness zu
+              gewährleisten.
+            </p>
+            <a
+              class="text-blue-600 hover:underline text-sm block mb-4"
+              href="/klarna-payment-info"
+            >
+              Mehr zu Klarna Zahlungsoptionen →
+            </a>
+            <a
+              href="javascript:void(0)"
+              class="mt-auto w-full py-2 bg-green-500 hover:bg-green-600 text-white rounded-xl transition duration-300 block text-center checkout-button"
+            >
+              Jetzt Angebot sichern
+            </a>
+          </div>
+
+          <!-- Angebot 2 -->
+          <div
+            class="opacity-60 bg-white rounded-xl p-6 flex flex-col h-full relative overflow-hidden shadow-lg"
+          >
+            <!-- Removed Aktuell badge -->
+            <h3 class="text-xl font-bold mb-2">Einführungs-Angebot</h3>
+            <!-- Title updated -->
+            <div class="text-3xl font-bold mb-4">259 €</div>
+            <!-- Price updated -->
+            <!-- Removed quantity limit -->
+            <ul class="mb-6 flex-1 space-y-2 text-sm">
+              <li class="flex items-start">
+                <svg
+                  class="w-5 h-5 text-green-500 mr-2 flex-shrink-0"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  ></path>
+                </svg>
+                <!-- Feature text updated -->
+                <span
+                  >1 Jahr Subskription fuer Leistungsfaehigkeit Bewertung durch
+                  APP</span
+                >
+              </li>
+              <li class="flex items-start">
+                <svg
+                  class="w-5 h-5 text-green-500 mr-2 flex-shrink-0"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  ></path>
+                </svg>
+                <!-- Feature text updated -->
+                <span>1 Jahr kostenlose Online-Datenspeicherung</span>
+              </li>
+              <li class="flex items-start">
+                <svg
+                  class="w-5 h-5 text-green-500 mr-2 flex-shrink-0"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  ></path>
+                </svg>
+                <!-- Feature text updated -->
+                <span>0 Risiko-90 Tage Geld zurueck Garantie</span>
+              </li>
+              <!-- Removed other list items -->
+            </ul>
+            <!-- Added availability -->
+            <div class="mb-4 text-sm text-gray-500 font-semibold">
+              erhaeltlich online ab August 2025
+            </div>
+            <p class="text-sm text-gray-600 mb-4">
+              <!-- Description updated -->
+              Dieses Angebot ist für alle die den EarlyBird Rabatt verpasst
+              haben oder sich nicht qualifiziert haben.
+            </p>
+            <a
+              class="text-blue-600 hover:underline text-sm block mb-4"
+              href="/klarna-payment-info"
+            >
+              Mehr zu Klarna Zahlungsoptionen →
+            </a>
+            <a
+              href="javascript:void(0)"
+              class="mt-auto w-full py-2 bg-gray-600 hover:bg-gray-700 text-white rounded-xl transition duration-300 block text-center checkout-button"
+            >
+              <!-- Button text kept as Jetzt reservieren -->
+              Jetzt reservieren
+            </a>
+          </div>
+
+          <!-- Angebot 3 -->
+          <div
+            class="bg-gray-50 rounded-xl p-6 border border-gray-200 flex flex-col h-full opacity-60"
+          >
+            <h3 class="text-xl font-bold mb-2">Offizieller Preis</h3>
+            <!-- Title updated -->
+            <div class="text-3xl font-bold mb-4">359 €</div>
+            <!-- Price updated -->
+            <!-- Removed Regulaere UVP-Preis text -->
+            <ul class="mb-6 flex-1 space-y-2 text-sm">
+              <li class="flex items-start">
+                <svg
+                  class="w-5 h-5 text-green-500 mr-2 flex-shrink-0"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  ></path>
+                </svg>
+                <!-- Feature text updated -->
+                <span
+                  >1 Jahr Subskription fuer Leistungsfaehigkeit Bewertung durch
+                  APP</span
+                >
+              </li>
+              <li class="flex items-start">
+                <svg
+                  class="w-5 h-5 text-green-500 mr-2 flex-shrink-0"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  ></path>
+                </svg>
+                <!-- Feature text updated -->
+                <span>1 Jahr kostenlose Online-Datenspeicherung</span>
+              </li>
+              <li class="flex items-start">
+                <svg
+                  class="w-5 h-5 text-green-500 mr-2 flex-shrink-0"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  ></path>
+                </svg>
+                <!-- Feature text updated -->
+                <span>0 Risiko-90 Tage Geld zurueck Garantie</span>
+              </li>
+              <!-- Removed other list items -->
+            </ul>
+            <!-- Added availability -->
+            <div class="mb-4 text-sm text-gray-500 font-semibold">
+              erhaeltlich online und in Apotheke ab Januar 2026
+            </div>
+            <!-- Description updated -->
+            <p class="text-sm text-gray-600 mb-4">
+              Der offizielle Preis bei Serienproduktion.
+            </p>
+
+            <a
+              class="text-blue-600 hover:underline text-sm block mb-4"
+              href="/klarna-payment-info"
+            >
+              Mehr zu Klarna Zahlungsoptionen →
+            </a>
+            <a
+              href="javascript:void(0)"
+              class="mt-auto w-full py-2 bg-gray-600 hover:bg-gray-700 text-white rounded-xl transition duration-300 block text-center checkout-button"
+            >
+              <!-- Button text kept as Jetzt vorbestellen -->
+              Jetzt vorbestellen
+            </a>
+          </div>
+        </div>
+
+        <!-- Hinweisblock mit voller Breite -->
+        <div
+          class="mt-10 p-5 bg-yellow-50 border border-yellow-200 rounded-lg w-full"
+        >
+          <p
+            class="text-sm md:text-base font-medium text-yellow-800 text-center"
+          >
+            <span class="font-bold">Achtung:</span> Handeln Sie schnell! Unsere
+            Produktion ist noch im Aufbau, und die ersten 200 Geräte sind
+            begrenzt. Wenn Ihr Blutdruck noch nicht täglich überwacht werden
+            muss, empfehlen wir Ihnen, vorerst zu warten – wir wollen die
+            Ressourcen für die dringendsten Fälle nutzen.
+          </p>
+        </div>
+      </div>
+    </section>
+
     <!-- Bento Grid Section -->
     <section class="bento-section bg-gray-100">
       <div class="container">
@@ -1609,10 +2017,9 @@
           <div class="bento-card" style="transform: translateY(0px)">
             <div class="bento-card-inner with-image">
               <div class="bento-image">
-                <img
-                  src="images/Bildschirmfoto 2025-03-06 um 23.49.48.png"
-                  alt="Warnungen des BPER Systems"
-                />
+                <img src="images/Bildschirmfoto 2025-03-06 um 23.49.48.png"
+                alt="Warnungen des BPER Systems" class="full-width-img" /* Added
+                class for specific targeting */ />
               </div>
             </div>
           </div>
@@ -1621,10 +2028,9 @@
           <div class="bento-card" style="transform: translateY(0px)">
             <div class="bento-card-inner with-image">
               <div class="bento-image">
-                <img
-                  src="images/Bildschirmfoto 2025-03-06 um 23.50.12.png"
-                  alt="KI-Analyse des BPER Systems"
-                />
+                <img src="images/Bildschirmfoto 2025-03-06 um 23.50.12.png"
+                alt="KI-Analyse des BPER Systems" class="full-width-img" /*
+                Added class for specific targeting */ />
               </div>
             </div>
           </div>
@@ -2078,318 +2484,6 @@
           <div
             class="pointer-events-none absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-gray-900 to-transparent"
           ></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Pricing Section -->
-    <section class="py-16 md:py-24 bg-white">
-      <div class="container mx-auto px-4 md:px-6">
-        <div class="flex flex-col items-center text-center mb-12">
-          <div class="badge mb-2">Limitiertes Angebot</div>
-          <h2 class="text-3xl md:text-4xl font-bold tracking-tight mb-4">
-            Unsere exklusive Vorabvermarktung – nur für die Schnellsten!
-          </h2>
-          <p class="text-lg text-gray-600 max-w-2xl mb-8">
-            Sichern Sie sich jetzt Ihr BPER System zu einem der begrenzt
-            verfügbaren Sonderangebote.
-          </p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <!-- Angebot 1 -->
-          <div
-            class="opacity-100 bg-white rounded-xl p-6 border-4 border-green-500 flex flex-col h-full relative overflow-hidden shadow-lg"
-          >
-            <div
-              class="absolute top-0 right-0 bg-green-500 text-white py-1 px-4 rounded-bl-lg text-sm font-medium"
-            >
-              Aktuell
-            </div>
-            <h3 class="text-xl font-bold mb-2">
-              Earlybird Preis für die ersten 200 Stk.
-            </h3>
-            <div class="text-3xl font-bold mb-4">199 €</div>
-            <ul class="mb-6 flex-1 space-y-2 text-sm">
-              <li class="flex items-start">
-                <svg
-                  class="w-5 h-5 text-green-500 mr-2 flex-shrink-0"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M5 13l4 4L19 7"
-                  ></path>
-                </svg>
-                <span
-                  >1 Jahr Subsription fuer Leistungsfaehigkeit Bewertung durch
-                  APP</span
-                >
-              </li>
-              <li class="flex items-start">
-                <svg
-                  class="w-5 h-5 text-green-500 mr-2 flex-shrink-0"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M5 13l4 4L19 7"
-                  ></path>
-                </svg>
-                <span>1 Jahr kostenlose Online-Datenspeicherung</span>
-              </li>
-              <li class="flex items-start">
-                <svg
-                  class="w-5 h-5 text-green-500 mr-2 flex-shrink-0"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M5 13l4 4L19 7"
-                  ></path>
-                </svg>
-                <span>0 Risiko-90 Tage Geld zurueck Garantie</span>
-              </li>
-            </ul>
-            <div class="mb-4 text-sm text-gray-500 font-semibold">
-              ab Juni 2025 lieferbar
-            </div>
-            <p class="text-sm text-gray-600 mb-4">
-              Dieses Angebot ist einzigartig und begrenzt – perfekt für den, der
-              sofort handelt und die maximale Unterstützung sucht. Nur eine
-              Reservierung pro Person möglich, um Exklusivität und Fairness zu
-              gewährleisten.
-            </p>
-            <a
-              class="text-blue-600 hover:underline text-sm block mb-4"
-              href="/klarna-payment-info"
-            >
-              Mehr zu Klarna Zahlungsoptionen →
-            </a>
-            <a
-              href="javascript:void(0)"
-              class="mt-auto w-full py-2 bg-green-500 hover:bg-green-600 text-white rounded-xl transition duration-300 block text-center checkout-button"
-            >
-              Jetzt Angebot sichern
-            </a>
-          </div>
-
-          <!-- Angebot 2 -->
-          <div
-            class="opacity-60 bg-white rounded-xl p-6 flex flex-col h-full relative overflow-hidden shadow-lg"
-          >
-            <!-- Removed Aktuell badge -->
-            <h3 class="text-xl font-bold mb-2">Einführungs-Angebot</h3>
-            <!-- Title updated -->
-            <div class="text-3xl font-bold mb-4">259 €</div>
-            <!-- Price updated -->
-            <!-- Removed quantity limit -->
-            <ul class="mb-6 flex-1 space-y-2 text-sm">
-              <li class="flex items-start">
-                <svg
-                  class="w-5 h-5 text-green-500 mr-2 flex-shrink-0"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M5 13l4 4L19 7"
-                  ></path>
-                </svg>
-                <!-- Feature text updated -->
-                <span
-                  >1 Jahr Subskription fuer Leistungsfaehigkeit Bewertung durch
-                  APP</span
-                >
-              </li>
-              <li class="flex items-start">
-                <svg
-                  class="w-5 h-5 text-green-500 mr-2 flex-shrink-0"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M5 13l4 4L19 7"
-                  ></path>
-                </svg>
-                <!-- Feature text updated -->
-                <span>1 Jahr kostenlose Online-Datenspeicherung</span>
-              </li>
-              <li class="flex items-start">
-                <svg
-                  class="w-5 h-5 text-green-500 mr-2 flex-shrink-0"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M5 13l4 4L19 7"
-                  ></path>
-                </svg>
-                <!-- Feature text updated -->
-                <span>0 Risiko-90 Tage Geld zurueck Garantie</span>
-              </li>
-              <!-- Removed other list items -->
-            </ul>
-            <!-- Added availability -->
-            <div class="mb-4 text-sm text-gray-500 font-semibold">
-              erhaeltlich online ab August 2025
-            </div>
-            <p class="text-sm text-gray-600 mb-4">
-              <!-- Description updated -->
-              Dieses Angebot ist für alle die den EarlyBird Rabatt verpasst
-              haben oder sich nicht qualifiziert haben.
-            </p>
-            <a
-              class="text-blue-600 hover:underline text-sm block mb-4"
-              href="/klarna-payment-info"
-            >
-              Mehr zu Klarna Zahlungsoptionen →
-            </a>
-            <a
-              href="javascript:void(0)"
-              class="mt-auto w-full py-2 bg-gray-600 hover:bg-gray-700 text-white rounded-xl transition duration-300 block text-center checkout-button"
-            >
-              <!-- Button text kept as Jetzt reservieren -->
-              Jetzt reservieren
-            </a>
-          </div>
-
-          <!-- Angebot 3 -->
-          <div
-            class="bg-gray-50 rounded-xl p-6 border border-gray-200 flex flex-col h-full opacity-60"
-          >
-            <h3 class="text-xl font-bold mb-2">Offizieller Preis</h3>
-            <!-- Title updated -->
-            <div class="text-3xl font-bold mb-4">359 €</div>
-            <!-- Price updated -->
-            <!-- Removed Regulaere UVP-Preis text -->
-            <ul class="mb-6 flex-1 space-y-2 text-sm">
-              <li class="flex items-start">
-                <svg
-                  class="w-5 h-5 text-green-500 mr-2 flex-shrink-0"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M5 13l4 4L19 7"
-                  ></path>
-                </svg>
-                <!-- Feature text updated -->
-                <span
-                  >1 Jahr Subskription fuer Leistungsfaehigkeit Bewertung durch
-                  APP</span
-                >
-              </li>
-              <li class="flex items-start">
-                <svg
-                  class="w-5 h-5 text-green-500 mr-2 flex-shrink-0"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M5 13l4 4L19 7"
-                  ></path>
-                </svg>
-                <!-- Feature text updated -->
-                <span>1 Jahr kostenlose Online-Datenspeicherung</span>
-              </li>
-              <li class="flex items-start">
-                <svg
-                  class="w-5 h-5 text-green-500 mr-2 flex-shrink-0"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M5 13l4 4L19 7"
-                  ></path>
-                </svg>
-                <!-- Feature text updated -->
-                <span>0 Risiko-90 Tage Geld zurueck Garantie</span>
-              </li>
-              <!-- Removed other list items -->
-            </ul>
-            <!-- Added availability -->
-            <div class="mb-4 text-sm text-gray-500 font-semibold">
-              erhaeltlich online und in Apotheke ab Januar 2026
-            </div>
-            <!-- Description updated -->
-            <p class="text-sm text-gray-600 mb-4">
-              Der offizielle Preis bei Serienproduktion.
-            </p>
-
-            <a
-              class="text-blue-600 hover:underline text-sm block mb-4"
-              href="/klarna-payment-info"
-            >
-              Mehr zu Klarna Zahlungsoptionen →
-            </a>
-            <a
-              href="javascript:void(0)"
-              class="mt-auto w-full py-2 bg-gray-600 hover:bg-gray-700 text-white rounded-xl transition duration-300 block text-center checkout-button"
-            >
-              <!-- Button text kept as Jetzt vorbestellen -->
-              Jetzt vorbestellen
-            </a>
-          </div>
-        </div>
-
-        <!-- Hinweisblock mit voller Breite -->
-        <div
-          class="mt-10 p-5 bg-yellow-50 border border-yellow-200 rounded-lg w-full"
-        >
-          <p
-            class="text-sm md:text-base font-medium text-yellow-800 text-center"
-          >
-            <span class="font-bold">Achtung:</span> Handeln Sie schnell! Unsere
-            Produktion ist noch im Aufbau, und die ersten 200 Geräte sind
-            begrenzt. Wenn Ihr Blutdruck noch nicht täglich überwacht werden
-            muss, empfehlen wir Ihnen, vorerst zu warten – wir wollen die
-            Ressourcen für die dringendsten Fälle nutzen.
-          </p>
         </div>
       </div>
     </section>
