@@ -1552,15 +1552,33 @@
       /* Pricing card consistent styling */
       .pricing-card {
         transition: all 0.3s ease;
-        height: 630px !important; /* Consistent height for all cards */
+        height: auto !important; /* Auto height based on content */
+        min-height: 520px !important; /* Reduced height for desktop */
         display: flex !important;
         flex-direction: column !important;
       }
 
+      /* Mobile-specific height */
+      @media (max-width: 768px) {
+        .pricing-card {
+          height: 630px !important; /* Taller for mobile */
+        }
+      }
+
       /* Ensure content area takes same space */
       .pricing-card ul {
-        flex: 1 0 auto !important;
+        flex: 0 0 auto !important;
         margin-bottom: 15px !important;
+      }
+
+      /* Optimize spacing in pricing cards */
+      .pricing-card p {
+        margin-bottom: 10px !important;
+      }
+
+      /* Reduce space between pricing sections */
+      .pricing-card > div:not(:last-child) {
+        margin-bottom: 10px !important;
       }
 
       /* Make checkout buttons align at bottom */
@@ -1844,8 +1862,8 @@
               <h3 class="text-xl font-bold mb-2">
                 Earlybird Preis für die ersten 200 Stk.
               </h3>
-              <div class="text-3xl font-bold mb-4">199 €</div>
-              <ul class="mb-6 flex-1 space-y-2 text-sm">
+              <div class="text-3xl font-bold mb-3">199 €</div>
+              <ul class="mb-4 space-y-1 text-sm">
                 <li class="flex items-start">
                   <svg
                     class="w-5 h-5 text-green-500 mr-2 flex-shrink-0"
