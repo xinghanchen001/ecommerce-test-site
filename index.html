@@ -1605,14 +1605,14 @@
           -ms-overflow-style: none; /* IE and Edge */
           gap: 16px;
           padding: 10px 0;
-          margin: 0 -16px;
-          padding-left: 16px;
+          padding-left: calc(50% - 150px); /* Center first card */
           width: 100vw; /* Full viewport width */
           position: relative;
           left: 50%;
           right: 50%;
           margin-left: -50vw;
           margin-right: -50vw;
+          justify-content: flex-start; /* Start from the left, but with offset padding */
         }
 
         .pricing-cards-container::-webkit-scrollbar {
@@ -1687,7 +1687,7 @@
       .swipe-indicator {
         position: absolute;
         top: 50%;
-        left: calc(85% - 20px);
+        left: calc(50% + 120px);
         transform: translateY(-50%);
         background-color: rgba(255, 255, 255, 0.8);
         border-radius: 50%;
@@ -1848,7 +1848,7 @@
 
           <!-- Pricing grid - on desktop uses grid, on mobile becomes swipeable -->
           <div
-            class="pricing-cards-container grid grid-cols-1 md:grid-cols-3 gap-8"
+            class="pricing-cards-container grid grid-cols-1 md:grid-cols-3 gap-8 md:mx-auto"
           >
             <!-- Angebot 1 -->
             <div
@@ -3496,8 +3496,9 @@
 
             // Apply styles to card elements and add data attributes
             pricingCards.forEach((card, idx) => {
-              card.style.flex = '0 0 85%';
-              card.style.minWidth = '85%';
+              card.style.flex = '0 0 300px';
+              card.style.minWidth = '300px';
+              card.style.width = '300px';
               card.style.marginRight = '16px';
               card.style.scrollSnapAlign = 'center';
               card.setAttribute('data-card-index', idx); // Add index for better tracking
