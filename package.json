@@ -1,18 +1,30 @@
 {
-  "name": "stripe-checkout-example",
+  "name": "bper-system-website",
   "version": "1.0.0",
-  "description": "Stripe Checkout Example",
+  "description": "BPER System Ecommerce & Blutdruck-Test Website",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "dev": "node server.js"
   },
   "dependencies": {
+    "express": "^4.21.2",
+    "stripe": "^12.18.0",
+    "dotenv": "^16.0.0",
     "@tsparticles/react": "^3.0.0",
     "@tsparticles/slim": "^3.8.1",
     "clsx": "^2.1.1",
-    "dotenv": "^16.0.0",
-    "express": "^4.21.2",
-    "stripe": "^12.18.0",
     "tailwind-merge": "^3.0.2"
-  }
+  },
+  "engines": {
+    "node": ">=12.16.0"
+  },
+  "keywords": [
+    "ecommerce",
+    "medical",
+    "blutdruck",
+    "stripe"
+  ],
+  "author": "",
+  "license": "ISC"
 }

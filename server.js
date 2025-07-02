@@ -60,6 +60,14 @@ app.get('/datenschutz', (req, res) => {
   res.sendFile(__dirname + '/datenschutz.html');
 });
 
+app.get('/widerrufsrecht', (req, res) => {
+  res.sendFile(__dirname + '/widerrufsrecht.html');
+});
+
+app.get('/agb', (req, res) => {
+  res.sendFile(__dirname + '/agb.html');
+});
+
 // Routes for wissen pages
 app.get('/wissen/blutdruck', (req, res) => {
   res.sendFile(__dirname + '/wissen/blutdruck.html');
