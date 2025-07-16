@@ -1762,11 +1762,26 @@
 
       /* Fixed Banner Styles */
       .banner-content {
-        padding: 0 2rem;
         font-weight: 500;
         font-size: 1rem;
         letter-spacing: 0.025em;
-        text-align: center;
+        white-space: nowrap;
+        animation: bottom-banner-scroll 30s linear infinite;
+        display: flex;
+      }
+
+      .banner-text {
+        padding-right: 5rem;
+        flex-shrink: 0;
+      }
+
+      @keyframes bottom-banner-scroll {
+        0% {
+          transform: translateX(0%);
+        }
+        100% {
+          transform: translateX(-50%);
+        }
       }
     </style>
     <script
@@ -2692,6 +2707,158 @@
           <div
             class="pointer-events-none absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-gray-900 to-transparent"
           ></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Google App Section -->
+    <section class="bg-gray-100 py-20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col lg:flex-row items-center gap-12">
+          <!-- Text Content -->
+          <div class="lg:w-1/2 space-y-6">
+            <h2 class="text-4xl font-bold text-gray-900 leading-tight">
+              Die BPER App - Jetzt auch für
+              <span class="text-blue-600">Android</span> und
+              <span class="text-blue-600">iOS</span>
+            </h2>
+
+            <p class="text-xl text-gray-600 leading-relaxed">
+              Nutzen Sie die volle Funktionalität unserer professionellen
+              Blutdruckmessung jetzt auch unterwegs. Verfügbar im Google Play
+              Store.
+            </p>
+
+            <div class="space-y-4">
+              <div class="flex items-start gap-3">
+                <div
+                  class="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1"
+                >
+                  <svg
+                    class="w-3 h-3 text-blue-600"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                      clip-rule="evenodd"
+                    ></path>
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="font-semibold text-gray-900">
+                    Präzise Messungen jederzeit
+                  </h3>
+                  <p class="text-gray-600">
+                    Führen Sie Blutdruckmessungen durch und erhalten Sie
+                    sofortige professionelle Auswertung
+                  </p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-3">
+                <div
+                  class="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1"
+                >
+                  <svg
+                    class="w-3 h-3 text-blue-600"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                      clip-rule="evenodd"
+                    ></path>
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="font-semibold text-gray-900">
+                    Personalisierte Gesundheitsinsights
+                  </h3>
+                  <p class="text-gray-600">
+                    Erhalten Sie maßgeschneiderte Empfehlungen basierend auf
+                    Ihren Messwerten
+                  </p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-3">
+                <div
+                  class="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1"
+                >
+                  <svg
+                    class="w-3 h-3 text-blue-600"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                      clip-rule="evenodd"
+                    ></path>
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="font-semibold text-gray-900">
+                    Sichere Datenspeicherung
+                  </h3>
+                  <p class="text-gray-600">
+                    Alle Ihre Gesundheitsdaten werden verschlüsselt und sicher
+                    gespeichert
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="flex flex-col sm:flex-row gap-4 pt-4">
+              <a
+                href="https://play.google.com/store/apps/details?id=de.redtel.rm1app&pcampaignid=web_share"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center justify-center px-8 py-3 bg-black text-white rounded-lg hover:bg-gray-800 transition-colors duration-200 shadow-lg"
+              >
+                <img
+                  src="images/Google_Play_2022_logo.svg.png"
+                  alt="Google Play Store"
+                  class="w-6 h-6 mr-3"
+                />
+                Google Play Store
+              </a>
+
+              <a
+                href="https://apps.apple.com/de/app/bper-me/id6745517418"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center justify-center px-8 py-3 bg-black text-white rounded-lg hover:bg-gray-800 transition-colors duration-200 shadow-lg"
+              >
+                <svg
+                  class="w-6 h-6 mr-3 fill-white"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"
+                  />
+                </svg>
+                Apple Store
+              </a>
+            </div>
+          </div>
+
+          <!-- Image Content -->
+          <div class="lg:w-1/2 h-full">
+            <div class="relative h-full">
+              <div class="bg-white p-8 shadow-2xl h-full flex items-center">
+                <img
+                  src="images/WechatIMG4693.jpg"
+                  alt="BPER App auf Android Smartphone"
+                  class="w-full h-full object-cover shadow-lg"
+                />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -3891,157 +4058,6 @@
     <!-- Flowbite JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js"></script>
 
-    <!-- Google App Section -->
-    <section class="bg-gray-100 py-20">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex flex-col lg:flex-row items-center gap-12">
-          <!-- Text Content -->
-          <div class="lg:w-1/2 space-y-6">
-            <h2 class="text-4xl font-bold text-gray-900 leading-tight">
-              Die BPER App - Jetzt auch für
-              <span class="text-blue-600">Android</span>
-            </h2>
-
-            <p class="text-xl text-gray-600 leading-relaxed">
-              Nutzen Sie die volle Funktionalität unserer professionellen
-              Blutdruckmessung jetzt auch unterwegs. Verfügbar im Google Play
-              Store.
-            </p>
-
-            <div class="space-y-4">
-              <div class="flex items-start gap-3">
-                <div
-                  class="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1"
-                >
-                  <svg
-                    class="w-3 h-3 text-blue-600"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                      clip-rule="evenodd"
-                    ></path>
-                  </svg>
-                </div>
-                <div>
-                  <h3 class="font-semibold text-gray-900">
-                    Präzise Messungen jederzeit
-                  </h3>
-                  <p class="text-gray-600">
-                    Führen Sie Blutdruckmessungen durch und erhalten Sie
-                    sofortige professionelle Auswertung
-                  </p>
-                </div>
-              </div>
-
-              <div class="flex items-start gap-3">
-                <div
-                  class="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1"
-                >
-                  <svg
-                    class="w-3 h-3 text-blue-600"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                      clip-rule="evenodd"
-                    ></path>
-                  </svg>
-                </div>
-                <div>
-                  <h3 class="font-semibold text-gray-900">
-                    Personalisierte Gesundheitsinsights
-                  </h3>
-                  <p class="text-gray-600">
-                    Erhalten Sie maßgeschneiderte Empfehlungen basierend auf
-                    Ihren Messwerten
-                  </p>
-                </div>
-              </div>
-
-              <div class="flex items-start gap-3">
-                <div
-                  class="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1"
-                >
-                  <svg
-                    class="w-3 h-3 text-blue-600"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                      clip-rule="evenodd"
-                    ></path>
-                  </svg>
-                </div>
-                <div>
-                  <h3 class="font-semibold text-gray-900">
-                    Sichere Datenspeicherung
-                  </h3>
-                  <p class="text-gray-600">
-                    Alle Ihre Gesundheitsdaten werden verschlüsselt und sicher
-                    gespeichert
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div class="flex flex-col sm:flex-row gap-4 pt-4">
-              <a
-                href="https://play.google.com/store/apps/details?id=de.redtel.rm1app&pcampaignid=web_share"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="inline-flex items-center justify-center px-8 py-3 bg-black text-white rounded-lg hover:bg-gray-800 transition-colors duration-200 shadow-lg"
-              >
-                <img
-                  src="images/Google_Play_2022_logo.svg.png"
-                  alt="Google Play Store"
-                  class="w-6 h-6 mr-3"
-                />
-                Google Play Store
-              </a>
-
-              <a
-                href="https://apps.apple.com/de/app/bper-me/id6745517418"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="inline-flex items-center justify-center px-8 py-3 bg-black text-white rounded-lg hover:bg-gray-800 transition-colors duration-200 shadow-lg"
-              >
-                <svg
-                  class="w-6 h-6 mr-3 fill-white"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"
-                  />
-                </svg>
-                Apple Store
-              </a>
-            </div>
-          </div>
-
-          <!-- Image Content -->
-          <div class="lg:w-1/2 h-full">
-            <div class="relative h-full">
-              <div class="bg-white p-8 shadow-2xl h-full flex items-center">
-                <img
-                  src="images/WechatIMG4693.jpg"
-                  alt="BPER App auf Android Smartphone"
-                  class="w-full h-full object-cover shadow-lg"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <!-- Footer Section -->
     <footer class="bg-white border-t border-gray-200 shadow-sm">
       <div class="max-w-7xl mx-auto px-4 py-12 sm:px-6 lg:px-8">
@@ -4265,12 +4281,19 @@
 
     <!-- Fixed Bottom Banner -->
     <div
-      class="fixed bottom-0 left-0 right-0 bg-yellow-50 text-black py-3 z-50"
+      class="fixed bottom-0 left-0 right-0 bg-yellow-50 text-black py-3 z-50 overflow-hidden"
     >
       <div class="banner-content">
-        Bitte laden Sie nach dem Kauf die App bper.me aus dem Google Play Store
-        oder dem Apple App Store herunter, um vollständige Messergebnisse zu
-        erhalten.
+        <span class="banner-text"
+          >Bitte laden Sie nach dem Kauf die App bper.me aus dem Google Play
+          Store oder dem Apple App Store herunter, um vollständige
+          Messergebnisse zu erhalten.</span
+        >
+        <span class="banner-text"
+          >Bitte laden Sie nach dem Kauf die App bper.me aus dem Google Play
+          Store oder dem Apple App Store herunter, um vollständige
+          Messergebnisse zu erhalten.</span
+        >
       </div>
     </div>
 
