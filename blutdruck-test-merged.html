@@ -584,7 +584,7 @@
       </div>
     </main>
 
-    <!-- Products section - replaced content -->
+    <!-- Products section - Updated to match index.html pricing -->
     <section id="products-section" class="py-16 md:py-24 bg-white hidden">
       <div class="container mx-auto px-4 md:px-6">
         <div class="flex flex-col items-center text-center mb-12">
@@ -598,33 +598,142 @@
           </p>
         </div>
 
-        <div class="offer-cards grid md:grid-cols-3 gap-6 mb-8">
-          <!-- Earlybird Offer -->
+        <!-- Pricing cards wrapper for better mobile layout -->
+        <div
+          class="pricing-cards-wrapper overflow-hidden md:overflow-visible w-full relative"
+        >
+          <!-- Swipe indicator for mobile - only appears on the first card -->
+          <div class="swipe-indicator md:hidden">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M9 18l6-6-6-6"></path>
+            </svg>
+          </div>
+          <!-- Pricing grid - on desktop uses grid, on mobile becomes swipeable -->
           <div
-            class="offer-card border rounded-lg shadow-lg overflow-hidden relative"
+            class="pricing-cards-container grid grid-cols-1 md:grid-cols-3 gap-8 md:mx-auto"
           >
-            <div class="bg-blue-500 text-white py-3 px-4 text-center">
-              <span class="text-sm font-bold">Aktuell</span>
-            </div>
-            <div class="p-6 bg-white">
-              <h3 class="text-xl font-bold mb-4">
+            <!-- Angebot 1 - SOLD OUT -->
+            <div
+              class="pricing-card opacity-50 bg-white rounded-xl p-6 border-4 border-red-300 flex flex-col h-full relative overflow-hidden shadow-lg"
+            >
+              <div
+                class="absolute top-0 right-0 bg-red-500 text-white py-1 px-4 rounded-bl-lg text-sm font-medium"
+              >
+                Ausverkauft
+              </div>
+              <h3 class="text-xl font-bold mb-2 text-gray-500">
                 Earlybird Preis für die ersten 200 Stk.
               </h3>
-              <div class="mb-6 text-center">
-                <span class="text-4xl font-bold text-blue-600">199 €</span>
-              </div>
-              <ul class="mb-6 space-y-2 text-gray-700">
+              <div class="text-3xl font-bold mb-3 text-gray-500">199 €</div>
+              <ul class="mb-4 space-y-1 text-sm">
                 <li class="flex items-start">
                   <svg
-                    class="h-5 w-5 text-blue-500 mr-2 mt-0.5"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
+                    class="w-5 h-5 text-gray-400 mr-2 flex-shrink-0"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
                   >
                     <path
-                      fill-rule="evenodd"
-                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                      clip-rule="evenodd"
-                    />
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M5 13l4 4L19 7"
+                    ></path>
+                  </svg>
+                  <span class="text-gray-500"
+                    >1 Jahr Subscription für Leistungsfähigkeit Bewertung durch
+                    APP</span
+                  >
+                </li>
+                <li class="flex items-start">
+                  <svg
+                    class="w-5 h-5 text-gray-400 mr-2 flex-shrink-0"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M5 13l4 4L19 7"
+                    ></path>
+                  </svg>
+                  <span class="text-gray-500"
+                    >1 Jahr kostenlose Online-Datenspeicherung</span
+                  >
+                </li>
+                <li class="flex items-start">
+                  <svg
+                    class="w-5 h-5 text-gray-400 mr-2 flex-shrink-0"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M5 13l4 4L19 7"
+                    ></path>
+                  </svg>
+                  <span class="text-gray-500"
+                    >0 Risiko-90 Tage Geld zurück Garantie</span
+                  >
+                </li>
+              </ul>
+              <p class="text-sm text-gray-500 mb-4">
+                Dieses Angebot war einzigartig und begrenzt – leider bereits
+                ausverkauft. Alle 200 Stück sind vergriffen.
+              </p>
+              <a class="text-gray-400 text-sm block mb-4 cursor-default">
+                Mehr zu Klarna Zahlungsoptionen →
+              </a>
+              <button
+                class="mt-auto w-full py-2 bg-gray-400 text-white rounded-xl transition duration-300 block text-center cursor-not-allowed"
+                disabled=""
+              >
+                Ausverkauft
+              </button>
+            </div>
+
+            <!-- Angebot 2 - NOW ACTIVE -->
+            <div
+              class="pricing-card opacity-100 bg-white rounded-xl p-6 border-4 border-green-500 flex flex-col h-full relative overflow-hidden shadow-lg"
+            >
+              <div
+                class="absolute top-0 right-0 bg-green-500 text-white py-1 px-4 rounded-bl-lg text-sm font-medium"
+              >
+                Aktuell
+              </div>
+              <h3 class="text-xl font-bold mb-2">Einführungs-Angebot</h3>
+              <div class="text-3xl font-bold mb-4">259 €</div>
+              <ul class="mb-6 flex-1 space-y-2 text-sm">
+                <li class="flex items-start">
+                  <svg
+                    class="w-5 h-5 text-green-500 mr-2 flex-shrink-0"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M5 13l4 4L19 7"
+                    ></path>
                   </svg>
                   <span
                     >1 Jahr Subscription für Leistungsfähigkeit Bewertung durch
@@ -633,239 +742,158 @@
                 </li>
                 <li class="flex items-start">
                   <svg
-                    class="h-5 w-5 text-blue-500 mr-2 mt-0.5"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
+                    class="w-5 h-5 text-green-500 mr-2 flex-shrink-0"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
                   >
                     <path
-                      fill-rule="evenodd"
-                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                      clip-rule="evenodd"
-                    />
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M5 13l4 4L19 7"
+                    ></path>
                   </svg>
                   <span>1 Jahr kostenlose Online-Datenspeicherung</span>
                 </li>
                 <li class="flex items-start">
                   <svg
-                    class="h-5 w-5 text-blue-500 mr-2 mt-0.5"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
+                    class="w-5 h-5 text-green-500 mr-2 flex-shrink-0"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
                   >
                     <path
-                      fill-rule="evenodd"
-                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                      clip-rule="evenodd"
-                    />
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M5 13l4 4L19 7"
+                    ></path>
                   </svg>
                   <span>0 Risiko-90 Tage Geld zurück Garantie</span>
                 </li>
               </ul>
-              <div class="text-gray-500 mb-6 text-center text-sm">
-                ab Juni 2025 lieferbar
+              <div class="mb-4 text-sm text-green-600 font-semibold">
+                Verfügbar - Jetzt bestellen!
               </div>
-              <p class="text-sm text-gray-600 mb-6">
-                Dieses Angebot ist einzigartig und begrenzt – perfekt für den,
-                der sofort handelt und die maximale Unterstützung sucht. Nur
-                eine Reservierung pro Person möglich, um Exklusivität und
-                Fairness zu gewährleisten.
+              <p class="text-sm text-gray-600 mb-4">
+                Dieses Angebot ist für alle die den EarlyBird Rabatt verpasst
+                haben oder sich nicht qualifiziert haben.
               </p>
-              <div class="flex flex-col space-y-3">
-                <a
-                  href="klarna-payment-info.html"
-                  class="text-blue-500 text-sm text-center hover:underline"
-                >
-                  Mehr zu Klarna Zahlungsoptionen →
-                </a>
-                <button
-                  class="checkout-button button w-full"
-                  data-tracking-url="https://blog.bper.online/click"
-                >
-                  Jetzt Angebot sichern
-                </button>
+              <a
+                class="text-blue-600 hover:underline text-sm block mb-4"
+                href="/klarna-payment-info"
+              >
+                Mehr zu Klarna Zahlungsoptionen →
+              </a>
+              <a
+                href="javascript:void(0)"
+                class="mt-auto w-full py-2 bg-green-500 hover:bg-green-600 text-white rounded-xl transition duration-300 block text-center checkout-button"
+                onclick="window.handleCheckout(event); return false;"
+                data-price-id="price_1RmZQcA9aibyk7oc7HnUPblY"
+              >
+                Jetzt Angebot sichern
+              </a>
+            </div>
+
+            <!-- Angebot 3 -->
+            <div
+              class="pricing-card bg-gray-50 rounded-xl p-6 border-4 border-gray-200 flex flex-col h-full opacity-60 shadow-lg"
+            >
+              <h3 class="text-xl font-bold mb-2">Offizieller Preis</h3>
+              <div class="text-3xl font-bold mb-4">359 €</div>
+              <ul class="mb-6 flex-1 space-y-2 text-sm">
+                <li class="flex items-start">
+                  <svg
+                    class="w-5 h-5 text-green-500 mr-2 flex-shrink-0"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M5 13l4 4L19 7"
+                    ></path>
+                  </svg>
+                  <span
+                    >1 Jahr Subscription für Leistungsfähigkeit Bewertung durch
+                    APP</span
+                  >
+                </li>
+                <li class="flex items-start">
+                  <svg
+                    class="w-5 h-5 text-green-500 mr-2 flex-shrink-0"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M5 13l4 4L19 7"
+                    ></path>
+                  </svg>
+                  <!-- Feature text updated -->
+                  <span>1 Jahr kostenlose Online-Datenspeicherung</span>
+                </li>
+                <li class="flex items-start">
+                  <svg
+                    class="w-5 h-5 text-green-500 mr-2 flex-shrink-0"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M5 13l4 4L19 7"
+                    ></path>
+                  </svg>
+                  <!-- Feature text updated -->
+                  <span>0 Risiko-90 Tage Geld zurueck Garantie</span>
+                </li>
+                <!-- Removed other list items -->
+              </ul>
+              <!-- Added availability -->
+              <div class="mb-4 text-sm text-gray-500 font-semibold">
+                erhaeltlich online und in Apotheke ab Januar 2026
               </div>
+              <!-- Description updated -->
+              <p class="text-sm text-gray-600 mb-4">
+                Der offizielle Preis bei Serienproduktion.
+              </p>
+
+              <a
+                class="text-blue-600 hover:underline text-sm block mb-4"
+                href="/klarna-payment-info"
+              >
+                Mehr zu Klarna Zahlungsoptionen →
+              </a>
+              <a
+                href="javascript:void(0)"
+                class="mt-auto w-full py-2 bg-gray-600 hover:bg-gray-700 text-white rounded-xl transition duration-300 block text-center checkout-button"
+              >
+                <!-- Button text kept as Jetzt vorbestellen -->
+                Jetzt vorbestellen
+              </a>
             </div>
           </div>
 
-          <!-- Angebot 2 -->
-          <div
-            class="opacity-60 bg-white rounded-xl p-6 flex flex-col h-full relative overflow-hidden shadow-lg"
-          >
-            <h3 class="text-xl font-bold mb-2">Einführungs-Angebot</h3>
-            <div class="text-3xl font-bold mb-4">259 €</div>
-            <ul class="mb-6 flex-1 space-y-2 text-sm">
-              <li class="flex items-start">
-                <svg
-                  class="w-5 h-5 text-green-500 mr-2 flex-shrink-0"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M5 13l4 4L19 7"
-                  ></path>
-                </svg>
-                <span
-                  >1 Jahr Subscription für Leistungsfähigkeit Bewertung durch
-                  APP</span
-                >
-              </li>
-              <li class="flex items-start">
-                <svg
-                  class="w-5 h-5 text-green-500 mr-2 flex-shrink-0"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M5 13l4 4L19 7"
-                  ></path>
-                </svg>
-                <span>1 Jahr kostenlose Online-Datenspeicherung</span>
-              </li>
-              <li class="flex items-start">
-                <svg
-                  class="w-5 h-5 text-green-500 mr-2 flex-shrink-0"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M5 13l4 4L19 7"
-                  ></path>
-                </svg>
-                <span>0 Risiko-90 Tage Geld zurück Garantie</span>
-              </li>
-            </ul>
-            <div class="mb-4 text-sm text-gray-500 font-semibold">
-              erhältlich online ab August 2025
-            </div>
-            <p class="text-sm text-gray-600 mb-4">
-              Dieses Angebot ist für alle die den EarlyBird Rabatt verpasst
-              haben oder sich nicht qualifiziert haben.
-            </p>
-            <a
-              class="text-blue-600 hover:underline text-sm block mb-4"
-              href="/klarna-payment-info"
-            >
-              Mehr zu Klarna Zahlungsoptionen →
-            </a>
-            <a
-              href="javascript:void(0)"
-              class="mt-auto w-full py-2 bg-gray-600 hover:bg-gray-700 text-white rounded-xl transition duration-300 block text-center checkout-button"
-            >
-              Jetzt reservieren
-            </a>
+          <!-- Pricing indicators for mobile swipe - positioned outside of cards container -->
+          <div class="pricing-indicators md:hidden mt-6 mb-2">
+            <div class="pricing-indicator active" data-index="0"></div>
+            <div class="pricing-indicator" data-index="1"></div>
+            <div class="pricing-indicator" data-index="2"></div>
           </div>
-
-          <!-- Angebot 3 -->
-          <div
-            class="bg-gray-50 rounded-xl p-6 border border-gray-200 flex flex-col h-full opacity-60"
-          >
-            <h3 class="text-xl font-bold mb-2">Offizieller Preis</h3>
-            <div class="text-3xl font-bold mb-4">359 €</div>
-            <ul class="mb-6 flex-1 space-y-2 text-sm">
-              <li class="flex items-start">
-                <svg
-                  class="w-5 h-5 text-green-500 mr-2 flex-shrink-0"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M5 13l4 4L19 7"
-                  ></path>
-                </svg>
-                <span
-                  >1 Jahr Subskription fuer Leistungsfaehigkeit Bewertung durch
-                  APP</span
-                >
-              </li>
-              <li class="flex items-start">
-                <svg
-                  class="w-5 h-5 text-green-500 mr-2 flex-shrink-0"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M5 13l4 4L19 7"
-                  ></path>
-                </svg>
-                <span>1 Jahr kostenlose Online-Datenspeicherung</span>
-              </li>
-              <li class="flex items-start">
-                <svg
-                  class="w-5 h-5 text-green-500 mr-2 flex-shrink-0"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M5 13l4 4L19 7"
-                  ></path>
-                </svg>
-                <span>0 Risiko-90 Tage Geld zurueck Garantie</span>
-              </li>
-            </ul>
-            <div class="mb-4 text-sm text-gray-500 font-semibold">
-              erhaeltlich online und in Apotheke ab Januar 2026
-            </div>
-            <p class="text-sm text-gray-600 mb-4">
-              Der offizielle Preis bei Serienproduktion.
-            </p>
-
-            <a
-              class="text-blue-600 hover:underline text-sm block mb-4"
-              href="/klarna-payment-info"
-            >
-              Mehr zu Klarna Zahlungsoptionen →
-            </a>
-            <a
-              href="javascript:void(0)"
-              class="mt-auto w-full py-2 bg-gray-600 hover:bg-gray-700 text-white rounded-xl transition duration-300 block text-center checkout-button"
-            >
-              Jetzt vorbestellen
-            </a>
-          </div>
-        </div>
-
-        <!-- Hinweisblock mit voller Breite -->
-        <div
-          class="mt-10 p-5 bg-yellow-50 border border-yellow-200 rounded-lg w-full"
-        >
-          <p
-            class="text-sm md:text-base font-medium text-yellow-800 text-center"
-          >
-            <span class="font-bold">Achtung:</span> Handeln Sie schnell! Unsere
-            Produktion ist noch im Aufbau, und die ersten 200 Geräte sind
-            begrenzt. Wenn Ihr Blutdruck noch nicht täglich überwacht werden
-            muss, empfehlen wir Ihnen, vorerst zu warten – wir wollen die
-            Ressourcen für die dringendsten Fälle nutzen.
-          </p>
         </div>
       </div>
     </section>
