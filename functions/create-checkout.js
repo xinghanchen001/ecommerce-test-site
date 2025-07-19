@@ -67,7 +67,7 @@ exports.handler = async function (event, context) {
 
     // If no price ID is provided, use the default product key from live mode
     if (!priceId) {
-      priceId = 'price_1QyfHoA9aibyk7ocoy9gcOsX'; // Live mode product key
+      priceId = 'price_1RmZQcA9aibyk7oc7HnUPblY'; // Live mode product key - Updated to new 259€ offer
     }
 
     // Construct success URL with clickId if it exists
