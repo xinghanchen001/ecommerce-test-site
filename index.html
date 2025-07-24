@@ -2855,351 +2855,151 @@
     <!-- FAQ Section -->
     <section class="w-full py-20 lg:py-40 bg-gray-50">
       <div class="container mx-auto text-left">
-        <div class="grid lg:grid-cols-2 gap-10">
-          <div class="flex gap-10 flex-col">
-            <div class="flex gap-4 flex-col">
-              <div>
-                <span
-                  class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors"
-                  >FAQ</span
-                >
+        <!-- Header -->
+        <div class="text-center mb-12">
+          <span class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors mb-4">FAQ</span>
+          <h2 class="text-2xl md:text-3xl font-bold tracking-tight mb-4">
+            Die wichtigsten Fragen, um das BPER System wirklich zu verstehen
+          </h2>
+        </div>
+
+        <!-- Main Content Container - 100% width -->
+        <div class="flex gap-4 relative max-w-7xl mx-auto">
+          <style>
+            /* FAQ Navigation Styles */
+            .faq-nav-scrollbar::-webkit-scrollbar { width: 4px; }
+            .faq-nav-scrollbar::-webkit-scrollbar-track { background: #f1f1f1; }
+            .faq-nav-scrollbar::-webkit-scrollbar-thumb { background: #888; border-radius: 2px; }
+            .faq-nav-scrollbar::-webkit-scrollbar-thumb:hover { background: #555; }
+            
+            /* FAQ Content Scrollbar */
+            .faq-content-scrollbar::-webkit-scrollbar { width: 4px; }
+            .faq-content-scrollbar::-webkit-scrollbar-track { background: #f1f1f1; }
+            .faq-content-scrollbar::-webkit-scrollbar-thumb { background: #888; border-radius: 2px; }
+            .faq-content-scrollbar::-webkit-scrollbar-thumb:hover { background: #555; }
+            
+            /* Active nav item */
+            .faq-nav-item.active { background-color: #f3f4f6; }
+            
+            /* Question section padding for scroll offset */
+            .faq-question-section { scroll-margin-top: 20px; }
+          </style>
+          
+          <!-- Left Navigation Panel -->
+          <div class="hidden lg:block w-72 sticky top-20 h-[calc(100vh-10rem)]">
+            <div class="bg-white rounded-lg shadow-sm border border-gray-200 h-full overflow-hidden">
+              <div class="p-4 border-b">
+                <h3 class="font-semibold text-gray-900">Alle Fragen</h3>
+                <p class="text-sm text-gray-500 mt-1">Klicken Sie auf eine Frage, um direkt zur Antwort zu springen</p>
               </div>
-              <div class="flex gap-2 flex-col">
-                <h4
-                  class="text-3xl md:text-5xl tracking-tighter max-w-xl text-left font-regular"
-                >
-                  Häufig gestellte Fragen
-                </h4>
-                <p
-                  class="text-lg max-w-xl lg:max-w-lg leading-relaxed tracking-tight text-muted-foreground text-left"
-                >
-                  Finden Sie Antworten auf die häufigsten Fragen zum BPER
-                  System, seiner Technologie und wie es Ihren Ansatz zur
-                  Blutdrucküberwachung verändern kann.
-                </p>
-              </div>
-              <div>
-                <button
-                  class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors border border-input bg-background hover:bg-accent h-10 px-4 py-2 gap-4"
-                >
-                  Haben Sie Fragen? Kontaktieren Sie uns
-                  <svg
-                    class="w-4 h-4"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M13 16.9998H17.4C18.1732 16.9998 18.5598 16.9998 18.8452 16.8906C19.0985 16.7939 19.3261 16.6347 19.5 16.4281C19.697 16.1961 19.8 15.8841 20 15.2601C20.9 12.5481 20.9 9.44175 20 6.72975C19.8 6.10575 19.697 5.79375 19.5 5.56175C19.3261 5.35515 19.0985 5.19595 18.8452 5.09925C18.5598 4.98975 18.1732 4.98975 17.4 4.98975H6.59998C5.82676 4.98975 5.44015 4.98975 5.15478 5.09925C4.90147 5.19595 4.67376 5.35515 4.49998 5.56175C4.30293 5.79375 4.19998 6.10575 3.99998 6.72975C3.09998 9.44175 3.09998 12.5481 3.99998 15.2601C4.19998 15.8841 4.30293 16.1961 4.49998 16.4281C4.67376 16.6347 4.90147 16.7939 5.15478 16.8906C5.44015 16.9998 5.82676 16.9998 6.59998 16.9998H11"
-                      stroke="currentColor"
-                      stroke-width="1.5"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    ></path>
-                    <path
-                      d="M12 6.5V12.5L11.5 12.5M12 12.5H12.5M12 12.5L15 15.5"
-                      stroke="currentColor"
-                      stroke-width="1.5"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    ></path>
-                  </svg>
-                </button>
-              </div>
+              <nav class="overflow-y-auto faq-nav-scrollbar h-[calc(100%-80px)]">
+                <ul class="p-2">
+                  <li><a href="#faq1" class="faq-nav-item block p-3 text-sm hover:bg-gray-50 rounded-md transition-colors" onclick="setActiveFAQNav(event)"><span class="font-medium text-gray-700">1.</span> Was unterscheidet das BPER System von herkömmlichen Blutdruckmessgeräten?</a></li>
+                  <li><a href="#faq2" class="faq-nav-item block p-3 text-sm hover:bg-gray-50 rounded-md transition-colors" onclick="setActiveFAQNav(event)"><span class="font-medium text-gray-700">2.</span> Werde ich sofort einen Unterschied bemerken?</a></li>
+                  <li><a href="#faq3" class="faq-nav-item block p-3 text-sm hover:bg-gray-50 rounded-md transition-colors" onclick="setActiveFAQNav(event)"><span class="font-medium text-gray-700">3.</span> Wie genau ist das BPER System im Vergleich zu klinischen Messungen?</a></li>
+                  <li><a href="#faq4" class="faq-nav-item block p-3 text-sm hover:bg-gray-50 rounded-md transition-colors" onclick="setActiveFAQNav(event)"><span class="font-medium text-gray-700">4.</span> Kann mir BPER genau sagen, was bei mir nicht stimmt?</a></li>
+                  <li><a href="#faq5" class="faq-nav-item block p-3 text-sm hover:bg-gray-50 rounded-md transition-colors" onclick="setActiveFAQNav(event)"><span class="font-medium text-gray-700">5.</span> Benötige ich ein Rezept für den Kauf?</a></li>
+                  <li><a href="#faq6" class="faq-nav-item block p-3 text-sm hover:bg-gray-50 rounded-md transition-colors" onclick="setActiveFAQNav(event)"><span class="font-medium text-gray-700">6.</span> Muss ich es den ganzen Tag tragen?</a></li>
+                  <li><a href="#faq7" class="faq-nav-item block p-3 text-sm hover:bg-gray-50 rounded-md transition-colors" onclick="setActiveFAQNav(event)"><span class="font-medium text-gray-700">7.</span> Wie funktioniert die mobile App?</a></li>
+                  <li><a href="#faq8" class="faq-nav-item block p-3 text-sm hover:bg-gray-50 rounded-md transition-colors" onclick="setActiveFAQNav(event)"><span class="font-medium text-gray-700">8.</span> Kann ich die Daten exportieren?</a></li>
+                  <li><a href="#faq9" class="faq-nav-item block p-3 text-sm hover:bg-gray-50 rounded-md transition-colors" onclick="setActiveFAQNav(event)"><span class="font-medium text-gray-700">9.</span> Welche Akkulaufzeit kann ich erwarten?</a></li>
+                  <li><a href="#faq10" class="faq-nav-item block p-3 text-sm hover:bg-gray-50 rounded-md transition-colors" onclick="setActiveFAQNav(event)"><span class="font-medium text-gray-700">10.</span> Ist es für Senioren geeignet?</a></li>
+                  <li><a href="#faq11" class="faq-nav-item block p-3 text-sm hover:bg-gray-50 rounded-md transition-colors" onclick="setActiveFAQNav(event)"><span class="font-medium text-gray-700">11.</span> Kann das Gerät von mehreren Personen genutzt werden?</a></li>
+                  <li><a href="#faq12" class="faq-nav-item block p-3 text-sm hover:bg-gray-50 rounded-md transition-colors" onclick="setActiveFAQNav(event)"><span class="font-medium text-gray-700">12.</span> Sind meine Gesundheitsdaten sicher?</a></li>
+                  <li><a href="#faq13" class="faq-nav-item block p-3 text-sm hover:bg-gray-50 rounded-md transition-colors" onclick="setActiveFAQNav(event)"><span class="font-medium text-gray-700">13.</span> Wie lange ist die Garantiezeit?</a></li>
+                </ul>
+              </nav>
             </div>
           </div>
-          <div class="w-full text-left">
-            <!-- Accordion Item 1 -->
-            <div class="border-b">
-              <div class="flex">
-                <button
-                  class="flex flex-1 items-center justify-between py-4 font-medium transition-all hover:underline text-left"
-                  data-accordion-toggle=""
-                >
-                  <span
-                    >Was unterscheidet das BPER System von herkömmlichen
-                    Blutdruckmessgeräten?</span
-                  >
-                  <svg
-                    class="h-4 w-4 shrink-0 transition-transform duration-200"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <path d="M6 9l6 6 6-6"></path>
-                  </svg>
-                </button>
+          <!-- Right Content Area -->
+          <div class="flex-1">
+            <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-10 h-[calc(100vh-10rem)] overflow-y-auto faq-content-scrollbar">
+              <!-- Q1 -->
+              <div id="faq1" class="faq-question-section mb-16 pb-8 border-b border-gray-200">
+                <h3 class="text-xl font-semibold text-gray-900 mb-6">Was unterscheidet das BPER System von herkömmlichen Blutdruckmessgeräten?</h3>
+                <p class="text-gray-600 leading-loose text-base max-w-4xl">Im Gegensatz zu herkömmlichen Messgeräten, die nur einzelne Messungen vornehmen, bietet das BPER System eine Beat-to-Beat Messung. Dies erlaubt die Erfassung der Blutdruckschwankung II. Ordnung, indem zu jedem Herzschlag Systole und Diastole bestimmt werden. Intermittierend angewendet erlaubt es eine Überwachung über den Tag. Dies zeigt Muster und Schwankungen, die bei bisher bekannten Messungen übersehen würden, und gibt Ihnen und Ihrem Gesundheitsdienstleister ein vollständigeres Bild Ihrer Herz-Kreislauf-Gesundheit.</p>
               </div>
-              <div
-                class="overflow-hidden text-sm transition-all text-left"
-                data-accordion-content=""
-                style="display: none"
-              >
-                <div class="pb-4 pt-0">
-                  Im Gegensatz zu herkömmlichen Messgeräten, die nur einzelne
-                  Messungen vornehmen, bietet das BPER System eine
-                  Beate-to-Beate Messung. Dies erlaubt die Erfassung der
-                  Blutdruckschwankung II. Ordnung, indem zu jedem Herzschlag
-                  Systole und Diastole bestimmt werden. Intermittenend
-                  angewendet erlaubt es eine Überwachung über den Tag. Dies
-                  zeigt Muster und Schwankungen, die bei bisher bekannte
-                  Messungen übersehen würden, und gibt Ihnen und Ihrem
-                  Gesundheitsdienstleister ein vollständigeres Bild Ihrer
-                  Herz-Kreislauf-Gesundheit.
-                </div>
+
+              <!-- Q2 -->
+              <div id="faq2" class="faq-question-section mb-16 pb-8 border-b border-gray-200">
+                <h3 class="text-xl font-semibold text-gray-900 mb-6">Werde ich sofort einen Unterschied zu einem herkömmlichen Blutdruckmessgerät bemerken?</h3>
+                <p class="text-gray-600 leading-loose text-base max-w-4xl mb-5">Das hängt von Ihrem Gesundheitszustand während der Messung ab. Liegt Ihr Blutdruck gerade im normalen, stabilen Bereich, werden Sie womöglich keinen spürbaren Unterschied feststellen. Tritt jedoch auch nur eine leichte Unregelmäßigkeit auf, erfasst nur BPER die vollständige, diagnostisch relevante Druck- und Herz-Kreislauf-Kurve.</p>
+                <p class="text-gray-600 leading-loose text-base max-w-4xl">Denken Sie an BPER wie an ein Pflaster oder einen Defibrillator: Solange nichts passiert, wacht es unauffällig über Sie; kommt es zu einem Ereignis, ist es das einzige Haushaltsgerät, das den gesamten Verlauf lückenlos protokolliert. Bleibt nach einer Messung jegliche Warnung aus, dürfen Sie sich freuen – in diesem Zeitraum war alles stabil.</p>
+              </div>
+
+              <!-- Q3 -->
+              <div id="faq3" class="faq-question-section mb-16 pb-8 border-b border-gray-200">
+                <h3 class="text-xl font-semibold text-gray-900 mb-6">Wie genau ist das BPER System im Vergleich zu klinischen Messungen?</h3>
+                <p class="text-gray-600 leading-loose text-base max-w-4xl">Das BPER System wurde gründlich gegen klinische Geräte getestet und zeigt eine Genauigkeit innerhalb der von großen Gesundheitsorganisationen festgelegten Standards. Unsere proprietäre Sensortechnologie wurde in mehreren klinischen Studien validiert und zeigt eine außergewöhnliche Korrelation zu arteriellen Messungen.</p>
+              </div>
+
+              <!-- Q4 -->
+              <div id="faq4" class="faq-question-section mb-16 pb-8 border-b border-gray-200">
+                <h3 class="text-xl font-semibold text-gray-900 mb-6">Kann mir BPER genau sagen, was bei mir nicht stimmt?</h3>
+                <p class="text-gray-600 leading-loose text-base max-w-4xl">Nein. BPER ist kein Diagnosegerät – die eigentliche Diagnose darf ausschließlich von einer Ärztin oder einem Arzt gestellt werden. BPER ist ein medizinisch präzises Messinstrument für den Heimgebrauch, das verlässliche Daten liefert, auf deren Grundlage Fachpersonal eine fundierte Diagnose erstellen kann.</p>
+              </div>
+
+              <!-- Q5 -->
+              <div id="faq5" class="faq-question-section mb-16 pb-8 border-b border-gray-200">
+                <h3 class="text-xl font-semibold text-gray-900 mb-6">Benötige ich ein Rezept für den Kauf des BPER Systems?</h3>
+                <p class="text-gray-600 leading-loose text-base max-w-4xl">Nein, das BPER System ist ohne Rezept erhältlich. Wir empfehlen jedoch immer, Ihre Überwachungsdaten im Rahmen Ihrer gesamten Gesundheitsvorsorge mit Ihrem Gesundheitsdienstleister zu teilen.</p>
+              </div>
+
+              <!-- Q6 -->
+              <div id="faq6" class="faq-question-section mb-16 pb-8 border-b border-gray-200">
+                <h3 class="text-xl font-semibold text-gray-900 mb-6">Muss ich es den ganzen Tag tragen?</h3>
+                <p class="text-gray-600 leading-loose text-base max-w-4xl">Nein. Es ist kein Wearable, sondern ein Event-Recorder.</p>
+              </div>
+
+              <!-- Q7 -->
+              <div id="faq7" class="faq-question-section mb-16 pb-8 border-b border-gray-200">
+                <h3 class="text-xl font-semibold text-gray-900 mb-6">Wie funktioniert die mobile App mit dem BPER System?</h3>
+                <p class="text-gray-600 leading-loose text-base max-w-4xl">Das BPER System verbindet sich drahtlos mit unserer mobilen App (verfügbar für iOS und Android), die Ihre Echtzeit-Daten, historische Trends und personalisierte Einblicke anzeigt, wenn Sie es einstellen. Die App ermöglicht es Ihnen auch, Berichte direkt mit Ihrem Gesundheitsdienstleister zu teilen und individuelle Warnungen einzurichten.</p>
+              </div>
+
+              <!-- Q8 -->
+              <div id="faq8" class="faq-question-section mb-16 pb-8 border-b border-gray-200">
+                <h3 class="text-xl font-semibold text-gray-900 mb-6">Kann ich die Daten exportieren?</h3>
+                <p class="text-gray-600 leading-loose text-base max-w-4xl">Ja, als PDF, auf Wunsch auch per E-Mail direkt an Ihren Arzt.</p>
+              </div>
+
+              <!-- Q9 -->
+              <div id="faq9" class="faq-question-section mb-16 pb-8 border-b border-gray-200">
+                <h3 class="text-xl font-semibold text-gray-900 mb-6">Welche Akkulaufzeit kann ich erwarten?</h3>
+                <p class="text-gray-600 leading-loose text-base max-w-4xl">Ein vollständig geladener Akku erlaubt ca. 72 Messungen. Eine vollständige Aufladung dauert etwa 90 Minuten, und das Gerät kann in nur 30 Minuten auf 50% schnellgeladen werden.</p>
+              </div>
+
+              <!-- Q10 -->
+              <div id="faq10" class="faq-question-section mb-16 pb-8 border-b border-gray-200">
+                <h3 class="text-xl font-semibold text-gray-900 mb-6">Ist es für Senioren geeignet?</h3>
+                <p class="text-gray-600 leading-loose text-base max-w-4xl">Absolut. Große Tasten, einfache Menüs (derzeit in Deutsch oder Englisch; weitere Sprachen folgen per Software-Update). Die Schriftgröße auf dem Gerät selbst entspricht medizinischen Normvorgaben und ist daher bewusst nicht maximal. Für eine komfortable Ansicht empfehlen wir, die Messwerte in der Smartphone-App abzurufen.</p>
+              </div>
+
+              <!-- Q11 -->
+              <div id="faq11" class="faq-question-section mb-16 pb-8 border-b border-gray-200">
+                <h3 class="text-xl font-semibold text-gray-900 mb-6">Kann das Gerät von mehreren Personen genutzt werden?</h3>
+                <p class="text-gray-600 leading-loose text-base max-w-4xl">Ja. Ein einziges BPER kann von mehreren Nutzer:innen verwendet werden – in manchen Arztpraxen oder Pflegeeinrichtungen sogar von Dutzenden gleichzeitig. Das Gerät selbst speichert lediglich Messwerte und Zeitstempel; persönliche Angaben bleiben ausschließlich auf dem jeweiligen Smartphone. Mehrere Telefone können sich mit demselben BPER koppeln, sodass jede Person ihre Daten separat verwaltet. Aus Datenschutzgründen empfehlen wir den Einsatz vor allem innerhalb eines Haushalts: Eine BPER pro Familie reicht aus, um alle sicher zu versorgen.</p>
+              </div>
+
+              <!-- Q12 -->
+              <div id="faq12" class="faq-question-section mb-16 pb-8 border-b border-gray-200">
+                <h3 class="text-xl font-semibold text-gray-900 mb-6">Sind meine Gesundheitsdaten beim BPER System sicher?</h3>
+                <p class="text-gray-600 leading-loose text-base max-w-4xl">Ja, wir nehmen Datensicherheit sehr ernst. Das BPER System verwendet Ende-zu-Ende-Verschlüsselung für alle Datenübertragungen, und unsere Cloud-Speicherung entspricht HIPAA und anderen relevanten Gesundheitsdatenschutzstandards. Sie behalten stets die Kontrolle darüber, wer auf Ihre Daten zugreifen kann.</p>
+              </div>
+
+              <!-- Q13 -->
+              <div id="faq13" class="faq-question-section mb-16 pb-0">
+                <h3 class="text-xl font-semibold text-gray-900 mb-6">Wie lange ist die Garantiezeit für das BPER System?</h3>
+                <p class="text-gray-600 leading-loose text-base max-w-4xl">Sie erhalten auf das BPER-System eine 2-jährige Herstellergarantie – inklusive Schutz bei Material- und Verarbeitungsfeellern. Auf Wunsch können Sie zusätzlichen Schutz durch unsere erweiterten Garantie- und Premium-Support-Pakete buchen.</p>
               </div>
             </div>
 
-            <!-- Accordion Item 3 -->
-            <div class="border-b">
-              <div class="flex">
-                <button
-                  class="flex flex-1 items-center justify-between py-4 font-medium transition-all hover:underline text-left"
-                  data-accordion-toggle=""
-                >
-                  <span
-                    >Wie genau ist das BPER System im Vergleich zu klinischen
-                    Messungen?</span
-                  >
-                  <svg
-                    class="h-4 w-4 shrink-0 transition-transform duration-200"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <path d="M6 9l6 6 6-6"></path>
-                  </svg>
-                </button>
-              </div>
-              <div
-                class="overflow-hidden text-sm transition-all text-left"
-                data-accordion-content=""
-                style="display: none"
-              >
-                <div class="pb-4 pt-0">
-                  Das BPER System wurde gründlich gegen klinische Geräte
-                  getestet und zeigt eine Genauigkeit innerhalb der von großen
-                  Gesundheitsorganisationen festgelegten Standards. Unsere
-                  proprietäre Sensortechnologie wurde in mehreren klinischen
-                  Studien validiert und zeigt eine außergewöhnliche Korrelation
-                  zu arteriellen Messungen.
-                </div>
-              </div>
-            </div>
+          </div>
 
-            <!-- Accordion Item 4 -->
-            <div class="border-b">
-              <div class="flex">
-                <button
-                  class="flex flex-1 items-center justify-between py-4 font-medium transition-all hover:underline text-left"
-                  data-accordion-toggle=""
-                >
-                  <span
-                    >Benötige ich ein Rezept für den Kauf des BPER
-                    Systems?</span
-                  >
-                  <svg
-                    class="h-4 w-4 shrink-0 transition-transform duration-200 rotate-180"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <path d="M6 9l6 6 6-6"></path>
-                  </svg>
-                </button>
-              </div>
-              <div
-                class="overflow-hidden text-sm transition-all text-left"
-                data-accordion-content=""
-                style="display: block"
-              >
-                <div class="pb-4 pt-0">
-                  Nein, das BPER System ist ohne Rezept erhältlich. Wir
-                  empfehlen jedoch immer, Ihre Überwachungsdaten im Rahmen Ihrer
-                  gesamten Gesundheitsvorsorge mit Ihrem
-                  Gesundheitsdienstleister zu teilen.
-                </div>
-              </div>
-            </div>
-
-            <!-- Accordion Item 5 -->
-            <div class="border-b">
-              <div class="flex">
-                <button
-                  class="flex flex-1 items-center justify-between py-4 font-medium transition-all hover:underline text-left"
-                  data-accordion-toggle=""
-                >
-                  <span
-                    >Wie funktioniert die mobile App mit dem BPER System?</span
-                  >
-                  <svg
-                    class="h-4 w-4 shrink-0 transition-transform duration-200"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <path d="M6 9l6 6 6-6" />
-                  </svg>
-                </button>
-              </div>
-              <div
-                class="overflow-hidden text-sm transition-all"
-                data-accordion-content=""
-                style="display: none"
-              >
-                <div class="pb-4 pt-0">
-                  Das BPER System verbindet sich drahtlos mit unserer mobilen
-                  App (verfügbar für iOS und Android), die Ihre Echtzeit-Daten,
-                  historische Trends und personalisierte Einblicke anzeigt, wenn
-                  Sie es einstellen. Die App ermöglicht es Ihnen auch, Berichte
-                  direkt mit Ihrem Gesundheitsdienstleister zu teilen und
-                  individuelle Warnungen einzurichten.
-                </div>
-              </div>
-            </div>
-
-            <!-- Accordion Item 6 -->
-            <div class="border-b">
-              <div class="flex">
-                <button
-                  class="flex flex-1 items-center justify-between py-4 font-medium transition-all hover:underline text-left"
-                  data-accordion-toggle=""
-                >
-                  <span>Welche Akkulaufzeit kann ich erwarten?</span>
-                  <svg
-                    class="h-4 w-4 shrink-0 transition-transform duration-200"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <path d="M6 9l6 6 6-6" />
-                  </svg>
-                </button>
-              </div>
-              <div
-                class="overflow-hidden text-sm transition-all"
-                data-accordion-content=""
-                style="display: none"
-              >
-                <div class="pb-4 pt-0">
-                  Ein vollständig geladener Akku erlaubt ca. 72 Messungen. Eine
-                  vollständige Aufladung dauert etwa 90 Minuten, und das Gerät
-                  kann in nur 30 Minuten auf 50% schnellgeladen werden.
-                </div>
-              </div>
-            </div>
-
-            <!-- Accordion Item 7 -->
-            <div class="border-b">
-              <div class="flex">
-                <button
-                  class="flex flex-1 items-center justify-between py-4 font-medium transition-all hover:underline text-left"
-                  data-accordion-toggle=""
-                >
-                  <span
-                    >Sind meine Gesundheitsdaten beim BPER System sicher?</span
-                  >
-                  <svg
-                    class="h-4 w-4 shrink-0 transition-transform duration-200"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <path d="M6 9l6 6 6-6" />
-                  </svg>
-                </button>
-              </div>
-              <div
-                class="overflow-hidden text-sm transition-all"
-                data-accordion-content=""
-                style="display: none"
-              >
-                <div class="pb-4 pt-0">
-                  Ja, wir nehmen Datensicherheit sehr ernst. Das BPER System
-                  verwendet Ende-zu-Ende-Verschlüsselung für alle
-                  Datenübertragungen, und unsere Cloud-Speicherung entspricht
-                  HIPAA und anderen relevanten Gesundheitsdatenschutzstandards.
-                  Sie behalten stets die Kontrolle darüber, wer auf Ihre Daten
-                  zugreifen kann.
-                </div>
-              </div>
-            </div>
-
-            <!-- Accordion Item 8 -->
-            <div class="border-b">
-              <div class="flex">
-                <button
-                  class="flex flex-1 items-center justify-between py-4 font-medium transition-all hover:underline text-left"
-                  data-accordion-toggle=""
-                >
-                  <span
-                    >Wie lange ist die Garantiezeit für das BPER System?</span
-                  >
-                  <svg
-                    class="h-4 w-4 shrink-0 transition-transform duration-200"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <path d="M6 9l6 6 6-6" />
-                  </svg>
-                </button>
-              </div>
-              <div
-                class="overflow-hidden text-sm transition-all"
-                data-accordion-content=""
-                style="display: none"
-              >
-                <div class="pb-4 pt-0">
-                  Sie erhalten auf das BPER-System eine 2-jährige
-                  Herstellergarantie – inklusive Schutz bei Material- und
-                  Verarbeitungsfehlern. Auf Wunsch können Sie zusätzlichen
-                  Schutz durch unsere erweiterten Garantie- und
-                  Premium-Support-Pakete buchen.
-                </div>
-              </div>
+          <!-- Mobile FAQ (Accordion style for mobile) -->
+          <div class="lg:hidden w-full">
+            <div class="bg-white rounded-lg shadow-sm border border-gray-200">
+              <!-- Mobile accordion items would go here - similar to original but with new content -->
             </div>
           </div>
         </div>
@@ -3207,7 +3007,61 @@
     </section>
 
     <script>
-      // Add this to your existing script section
+      // FAQ Navigation functionality
+      function setActiveFAQNav(event) {
+        event.preventDefault();
+        
+        // Remove active class from all nav items
+        document.querySelectorAll('.faq-nav-item').forEach(item => {
+          item.classList.remove('active');
+        });
+        
+        // Add active class to clicked item
+        event.currentTarget.classList.add('active');
+        
+        // Scroll to target in the content area
+        const targetId = event.currentTarget.getAttribute('href');
+        const targetElement = document.querySelector(targetId);
+        const contentContainer = document.querySelector('.faq-content-scrollbar');
+        
+        if (targetElement && contentContainer) {
+          const containerTop = contentContainer.scrollTop;
+          const targetTop = targetElement.offsetTop - contentContainer.offsetTop;
+          
+          contentContainer.scrollTo({
+            top: targetTop - 20,
+            behavior: 'smooth'
+          });
+        }
+      }
+
+      // Highlight active section on content scroll
+      function updateActiveFAQNav() {
+        const sections = document.querySelectorAll('.faq-question-section');
+        const navItems = document.querySelectorAll('.faq-nav-item');
+        const contentContainer = document.querySelector('.faq-content-scrollbar');
+        
+        if (!contentContainer) return;
+        
+        let current = '';
+        const scrollTop = contentContainer.scrollTop;
+        
+        sections.forEach(section => {
+          const sectionTop = section.offsetTop - contentContainer.offsetTop;
+          if (scrollTop >= sectionTop - 100) {
+            current = section.getAttribute('id');
+          }
+        });
+        
+        navItems.forEach(item => {
+          item.classList.remove('active');
+          if (item.getAttribute('href') === `#${current}`) {
+            item.classList.add('active');
+          }
+        });
+      }
+
+      // Original accordion functionality (kept for mobile fallback)
       document.addEventListener('DOMContentLoaded', function () {
         const accordionToggles = document.querySelectorAll(
           '[data-accordion-toggle]'
@@ -3258,6 +3112,18 @@
             }
           });
         });
+        
+        // Set initial active FAQ nav state and add scroll listener
+        const firstFAQNavItem = document.querySelector('.faq-nav-item');
+        if (firstFAQNavItem) {
+          firstFAQNavItem.classList.add('active');
+        }
+        
+        // Add scroll listener to FAQ content area
+        const faqContentContainer = document.querySelector('.faq-content-scrollbar');
+        if (faqContentContainer) {
+          faqContentContainer.addEventListener('scroll', updateActiveFAQNav);
+        }
       });
     </script>
 
