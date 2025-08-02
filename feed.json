@@ -1,0 +1,94 @@
+{
+  "version": "https://jsonfeed.org/version/1.1",
+  "title": "BPER Medical - Gesundheitstipps und Updates",
+  "home_page_url": "https://bper.me",
+  "feed_url": "https://bper.me/feed.json",
+  "description": "Aktuelle Artikel, Gesundheitstipps und Neuigkeiten von BPER Medical zur Blutdruckmessung und Herz-Kreislauf-Gesundheit",
+  "language": "de-DE",
+  "icon": "https://bper.me/images/favicon.png",
+  "favicon": "https://bper.me/images/favicon.png",
+  "authors": [
+    {
+      "name": "BPER Medical Team",
+      "url": "https://bper.me",
+      "avatar": "https://bper.me/images/logo_v2_Quer-Format.png"
+    }
+  ],
+  "items": [
+    {
+      "id": "https://bper.me/wissen/blutdruck",
+      "url": "https://bper.me/wissen/blutdruck.html",
+      "title": "Blutdruck verstehen - Alles was Sie wissen müssen",
+      "content_text": "Umfassender Leitfaden zum Verständnis von Blutdruck, seinen Auswirkungen auf die Gesundheit und wie man ihn effektiv überwachen kann.",
+      "summary": "Erfahren Sie alles über Blutdruck, seine Bedeutung für die Gesundheit und wie Sie ihn richtig überwachen.",
+      "date_published": "2024-01-01T10:00:00+01:00",
+      "date_modified": "2025-01-02T10:00:00+01:00",
+      "tags": ["Blutdruck", "Gesundheit", "Hypertonie", "Grundlagen"],
+      "authors": [
+        {
+          "name": "BPER Medical Team"
+        }
+      ]
+    },
+    {
+      "id": "https://bper.me/wissen/messmethoden",
+      "url": "https://bper.me/wissen/messmethoden.html",
+      "title": "Blutdruck richtig messen - Schritt-für-Schritt Anleitung",
+      "content_text": "Lernen Sie die verschiedenen Methoden zur Blutdruckmessung kennen und wie Sie genaue Messergebnisse erhalten.",
+      "summary": "Praktische Anleitung zur korrekten Blutdruckmessung mit Tipps für präzise Ergebnisse.",
+      "date_published": "2024-01-01T10:00:00+01:00",
+      "date_modified": "2025-01-02T10:00:00+01:00",
+      "tags": ["Messung", "Anleitung", "Technik", "Praxis"],
+      "authors": [
+        {
+          "name": "BPER Medical Team"
+        }
+      ]
+    },
+    {
+      "id": "https://bper.me/wissen/gesundheitstipps",
+      "url": "https://bper.me/wissen/gesundheitstipps.html",
+      "title": "Gesundheitstipps für optimalen Blutdruck",
+      "content_text": "Erfahren Sie, wie Sie Ihren Blutdruck durch Ernährung, Bewegung und Lebensstiländerungen natürlich senken und kontrollieren können.",
+      "summary": "Praktische Tipps zur natürlichen Senkung und Kontrolle des Blutdrucks durch Lebensstiländerungen.",
+      "date_published": "2024-01-01T10:00:00+01:00",
+      "date_modified": "2025-01-02T10:00:00+01:00",
+      "tags": ["Ernährung", "Bewegung", "Lifestyle", "Prävention"],
+      "authors": [
+        {
+          "name": "BPER Medical Team"
+        }
+      ]
+    },
+    {
+      "id": "https://bper.me/wissen/studien",
+      "url": "https://bper.me/wissen/studien.html",
+      "title": "Aktuelle Studien zur Blutdruckmessung",
+      "content_text": "Übersicht über aktuelle wissenschaftliche Studien und Forschungsergebnisse zur Blutdruckmessung, einschließlich Beat-to-Beat-Messungen und kontinuierlicher Überwachung.",
+      "summary": "Wissenschaftliche Erkenntnisse und aktuelle Forschung zur modernen Blutdruckmessung.",
+      "date_published": "2024-01-01T10:00:00+01:00",
+      "date_modified": "2025-01-02T10:00:00+01:00",
+      "tags": ["Forschung", "Studien", "Wissenschaft", "Innovation"],
+      "authors": [
+        {
+          "name": "BPER Medical Research Team"
+        }
+      ]
+    },
+    {
+      "id": "https://bper.me/product/bper-system",
+      "url": "https://bper.me/#product",
+      "title": "BPER System - Die neue Generation der Blutdruckmessung",
+      "content_text": "Entdecken Sie das BPER System mit revolutionärer Beat-to-Beat Messung für präzise Blutdrucküberwachung. Jetzt für nur 259€ erhältlich.",
+      "summary": "Revolutionäre Blutdruckmessung mit Beat-to-Beat Technologie für präzise Gesundheitsüberwachung.",
+      "date_published": "2024-12-01T10:00:00+01:00",
+      "date_modified": "2025-01-02T10:00:00+01:00",
+      "tags": ["Produkt", "BPER System", "Innovation", "Technologie"],
+      "authors": [
+        {
+          "name": "BPER Medical Team"
+        }
+      ]
+    }
+  ]
+}

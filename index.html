@@ -4,6 +4,96 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>BPER System - AI-Powered Business Solutions</title>
+    
+    <!-- JSON Feed Discovery -->
+    <link rel="alternate" type="application/feed+json" title="BPER Medical - Gesundheitstipps und Updates" href="/feed.json" />
+    
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://bper.me/#organization",
+          "name": "BPER Medical",
+          "alternateName": "BPER System",
+          "url": "https://bper.me",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://bper.me/images/logo_v2_Quer-Format.png",
+            "width": 800,
+            "height": 200
+          },
+          "description": "BPER Medical bietet innovative Blutdruckmessgeräte und Gesundheitslösungen für präzise Messungen und bessere Gesundheitsüberwachung.",
+          "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "DE"
+          },
+          "sameAs": []
+        },
+        {
+          "@type": "MedicalWebPage",
+          "@id": "https://bper.me/#webpage",
+          "url": "https://bper.me",
+          "name": "BPER System - Präzise Blutdruckmessung für Ihre Gesundheit",
+          "description": "Entdecken Sie das BPER System - die neue Generation der Blutdruckmessung mit fortschrittlicher Technologie für genaue und zuverlässige Ergebnisse.",
+          "inLanguage": "de-DE",
+          "isPartOf": {
+            "@id": "https://bper.me/#website"
+          },
+          "about": {
+            "@type": "MedicalCondition",
+            "name": "Bluthochdruck",
+            "alternateName": ["Hypertonie", "Hypertension"],
+            "description": "Bluthochdruck ist eine häufige Erkrankung, bei der der Blutdruck dauerhaft erhöht ist."
+          },
+          "mainEntity": {
+            "@type": "Product",
+            "@id": "https://bper.me/#bper-device",
+            "name": "BPER Blutdruckmessgerät",
+            "description": "Präzises digitales Blutdruckmessgerät mit fortschrittlicher Messtechnologie",
+            "image": "https://bper.me/images/Group-134.jpg",
+            "offers": {
+              "@type": "Offer",
+              "price": "259.00",
+              "priceCurrency": "EUR",
+              "availability": "https://schema.org/InStock",
+              "priceValidUntil": "2025-12-31",
+              "seller": {
+                "@id": "https://bper.me/#organization"
+              }
+            }
+          },
+          "publisher": {
+            "@id": "https://bper.me/#organization"
+          },
+          "datePublished": "2024-01-01",
+          "dateModified": "2025-01-02"
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://bper.me/#website",
+          "url": "https://bper.me",
+          "name": "BPER Medical",
+          "description": "Offizielle Website von BPER Medical - Ihr Partner für präzise Blutdruckmessung",
+          "publisher": {
+            "@id": "https://bper.me/#organization"
+          },
+          "inLanguage": "de-DE",
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": {
+              "@type": "EntryPoint",
+              "urlTemplate": "https://bper.me/search?q={search_term_string}"
+            },
+            "query-input": "required name=search_term_string"
+          }
+        }
+      ]
+    }
+    </script>
+    
     <!-- Load Stripe.js -->
     <script src="https://js.stripe.com/v3/"></script>
     <link

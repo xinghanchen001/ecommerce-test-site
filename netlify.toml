@@ -2,6 +2,31 @@
   functions = "functions"
   publish = "."
 
+# Headers for better SEO and security
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "SAMEORIGIN"
+    X-XSS-Protection = "1; mode=block"
+
+# Proper content types for SEO files
+[[headers]]
+  for = "/robots.txt"
+  [headers.values]
+    Content-Type = "text/plain; charset=UTF-8"
+
+[[headers]]
+  for = "/sitemap.xml"
+  [headers.values]
+    Content-Type = "application/xml; charset=UTF-8"
+
+[[headers]]
+  for = "/feed.json"
+  [headers.values]
+    Content-Type = "application/feed+json; charset=UTF-8"
+    Access-Control-Allow-Origin = "*"
+
 [[redirects]]
   from = "/api/*"
   to = "/.netlify/functions/:splat"
