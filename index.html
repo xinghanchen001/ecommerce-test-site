@@ -6,6 +6,43 @@
     <meta name="description" content="Das weltweit erste Echtzeit-Blutdruckmessgerät für Zuhause. Beat-to-Beat Messung zu jedem Herzschlag. Klinisch validiert, präzise Überwachung, 259€." />
     <title>BPER System - Das weltweit erste Echtzeit-Blutdruckmessgerät für Zuhause</title>
     
+    <!-- Custom CSS for mobile card ordering -->
+    <style>
+      /* Ensure flexbox order works properly on mobile ONLY */
+      @media (max-width: 767px) {
+        .pricing-cards-container {
+          display: flex !important;
+          flex-direction: column !important;
+        }
+        .pricing-cards-container > div:nth-child(2) {
+          order: 1 !important;
+        }
+        .pricing-cards-container > div:nth-child(1) {
+          order: 2 !important;
+        }
+        .pricing-cards-container > div:nth-child(3) {
+          order: 3 !important;
+        }
+      }
+      
+      /* Ensure grid layout is preserved on desktop */
+      @media (min-width: 768px) {
+        .pricing-cards-container {
+          display: grid !important;
+          grid-template-columns: repeat(3, 1fr) !important;
+        }
+        .pricing-cards-container > div:nth-child(1) {
+          order: unset !important;
+        }
+        .pricing-cards-container > div:nth-child(2) {
+          order: unset !important;
+        }
+        .pricing-cards-container > div:nth-child(3) {
+          order: unset !important;
+        }
+      }
+    </style>
+    
     <!-- JSON Feed Discovery -->
     <link rel="alternate" type="application/feed+json" title="BPER Medical - Gesundheitstipps und Updates" href="/feed.json" />
     
@@ -2074,13 +2111,13 @@
               <path d="M9 18l6-6-6-6"></path>
             </svg>
           </div>
-          <!-- Pricing grid - on desktop uses grid, on mobile becomes swipeable -->
+          <!-- Pricing grid - on desktop uses grid, on mobile uses flex with reordering -->
           <div
-            class="pricing-cards-container grid grid-cols-1 md:grid-cols-3 gap-8 md:mx-auto"
+            class="pricing-cards-container flex flex-col md:grid md:grid-cols-3 gap-8 md:mx-auto"
           >
             <!-- Angebot 1 - SOLD OUT -->
             <div
-              class="pricing-card opacity-50 bg-white rounded-xl p-6 border-4 border-red-300 flex flex-col h-full relative overflow-hidden shadow-lg"
+              class="pricing-card opacity-50 bg-white rounded-xl p-6 border-4 border-red-300 flex flex-col h-full relative overflow-hidden shadow-lg order-2 md:order-1"
             >
               <div
                 class="absolute top-0 right-0 bg-red-500 text-white py-1 px-4 rounded-bl-lg text-sm font-medium"
@@ -2168,7 +2205,7 @@
 
             <!-- Angebot 2 - NOW ACTIVE -->
             <div
-              class="pricing-card opacity-100 bg-white rounded-xl p-6 border-4 border-green-500 flex flex-col h-full relative overflow-hidden shadow-lg"
+              class="pricing-card opacity-100 bg-white rounded-xl p-6 border-4 border-green-500 flex flex-col h-full relative overflow-hidden shadow-lg order-1 md:order-2"
             >
               <div
                 class="absolute top-0 right-0 bg-green-500 text-white py-1 px-4 rounded-bl-lg text-sm font-medium"
@@ -2258,7 +2295,7 @@
 
             <!-- Angebot 3 -->
             <div
-              class="pricing-card bg-gray-50 rounded-xl p-6 border-4 border-gray-200 flex flex-col h-full opacity-60 shadow-lg"
+              class="pricing-card bg-gray-50 rounded-xl p-6 border-4 border-gray-200 flex flex-col h-full opacity-60 shadow-lg order-3 md:order-3"
             >
               <h3 class="text-xl font-bold mb-2">Offizieller Preis</h3>
               <div class="text-3xl font-bold mb-4">359 €</div>
