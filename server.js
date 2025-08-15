@@ -192,7 +192,7 @@ app.post('/create-checkout-session', async (req, res) => {
   }
 });
 
-const port = 3002; // Changed from 3001 to 3002
+const port = process.env.PORT || 3005; // Use PORT from env or default to 3005
 app.listen(port, () =>
   console.log(`Server running at http://localhost:${port}`)
 );
