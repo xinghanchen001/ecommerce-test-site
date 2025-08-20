@@ -1,0 +1,6 @@
+{
+  "name": "bper-system",
+  "compatibility_date": "2025-08-20",
+  "pages_build_output_dir": "./",
+  "functions_directory": "functions-cloudflare"
+}
