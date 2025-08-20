@@ -42,6 +42,11 @@ async function handleStripeCheckout(request, env) {
   }
 
   try {
+    // Check if Stripe key is configured
+    if (!env.STRIPE_SECRET_KEY) {
+      throw new Error('STRIPE_SECRET_KEY is not configured in environment variables');
+    }
+    
     // Parse request
     const data = await request.json();
     const clickId = data.clickId || '';
