@@ -42,12 +42,6 @@ async function handleStripeCheckout(request, env) {
   }
 
   try {
-    // Dynamic import Stripe
-    const Stripe = (await import('stripe')).default;
-    const stripe = new Stripe(env.STRIPE_SECRET_KEY, {
-      apiVersion: '2023-08-16',
-    });
-
     // Parse request
     const data = await request.json();
     const clickId = data.clickId || '';
@@ -83,43 +77,55 @@ async function handleStripeCheckout(request, env) {
     // Get origin
     const origin = request.headers.get('origin') || new URL(request.url).origin;
     
-    // Create checkout session
-    const session = await stripe.checkout.sessions.create({
-      payment_method_types: ['card', 'klarna', 'paypal'],
-      line_items: [{
-        price: priceId,
-        quantity: 1,
-      }],
-      mode: 'payment',
-      success_url: clickId ? `${origin}/success.html?cid=${clickId}` : `${origin}/success.html`,
-      cancel_url: `${origin}/cancel.html`,
-      locale: 'de',
-      shipping_address_collection: {
-        allowed_countries: ['DE', 'AT', 'CH', 'FR', 'IT', 'BE', 'NL', 'LU', 'ES', 'US', 'GB'],
+    // Create checkout session using Stripe API directly
+    const stripeResponse = await fetch('https://api.stripe.com/v1/checkout/sessions', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${env.STRIPE_SECRET_KEY}`,
+        'Content-Type': 'application/x-www-form-urlencoded',
       },
-      billing_address_collection: 'required',
-      custom_fields: [{
-        key: 'delivery_notes',
-        label: {
-          type: 'custom',
-          custom: 'Delivery Instructions (Optional)',
-        },
-        type: 'text',
-        optional: true,
-      }],
-      allow_promotion_codes: true,
-      automatic_tax: { enabled: true },
-      metadata: {
-        order_id: orderId,
-        click_id: clickId,
-      },
-      payment_intent_data: {
-        metadata: {
-          order_id: orderId,
-          click_id: clickId,
-        },
-      },
+      body: new URLSearchParams({
+        'payment_method_types[0]': 'card',
+        'payment_method_types[1]': 'klarna', 
+        'payment_method_types[2]': 'paypal',
+        'line_items[0][price]': priceId,
+        'line_items[0][quantity]': '1',
+        'mode': 'payment',
+        'success_url': clickId ? `${origin}/success.html?cid=${clickId}` : `${origin}/success.html`,
+        'cancel_url': `${origin}/cancel.html`,
+        'locale': 'de',
+        'shipping_address_collection[allowed_countries][0]': 'DE',
+        'shipping_address_collection[allowed_countries][1]': 'AT',
+        'shipping_address_collection[allowed_countries][2]': 'CH',
+        'shipping_address_collection[allowed_countries][3]': 'FR',
+        'shipping_address_collection[allowed_countries][4]': 'IT',
+        'shipping_address_collection[allowed_countries][5]': 'BE',
+        'shipping_address_collection[allowed_countries][6]': 'NL',
+        'shipping_address_collection[allowed_countries][7]': 'LU',
+        'shipping_address_collection[allowed_countries][8]': 'ES',
+        'shipping_address_collection[allowed_countries][9]': 'US',
+        'shipping_address_collection[allowed_countries][10]': 'GB',
+        'billing_address_collection': 'required',
+        'custom_fields[0][key]': 'delivery_notes',
+        'custom_fields[0][label][type]': 'custom',
+        'custom_fields[0][label][custom]': 'Delivery Instructions (Optional)',
+        'custom_fields[0][type]': 'text',
+        'custom_fields[0][optional]': 'true',
+        'allow_promotion_codes': 'true',
+        'automatic_tax[enabled]': 'true',
+        'metadata[order_id]': orderId,
+        'metadata[click_id]': clickId,
+        'payment_intent_data[metadata][order_id]': orderId,
+        'payment_intent_data[metadata][click_id]': clickId,
+      }),
     });
+
+    if (!stripeResponse.ok) {
+      const error = await stripeResponse.json();
+      throw new Error(error.error?.message || 'Stripe API error');
+    }
+
+    const session = await stripeResponse.json();
 
     return new Response(
       JSON.stringify({ id: session.id }),
