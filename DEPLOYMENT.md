@@ -45,8 +45,7 @@ STRIPE_SECRET_KEY=sk_live_YOUR_STRIPE_KEY_HERE
 ```
 
 ### Files Used
-- `/functions-cloudflare/api/create-checkout.js` - Main Stripe handler
-- `/functions-cloudflare/create-checkout-session.js` - Compatibility endpoint
+- `/_worker.js` - Cloudflare Worker handling Stripe checkout and static files
 - `wrangler.json` - Cloudflare configuration
 
 ### API Endpoints
@@ -85,9 +84,9 @@ Access at: http://localhost:3005
 - Built-in form handling
 
 ### Cloudflare
-- Uses `export async function onRequestPost()` syntax
-- Functions in `/functions-cloudflare/` directory
-- Routing via function file structure
+- Uses `_worker.js` with fetch handler
+- Single Worker file handles all routes
+- Routing via URL path matching
 - No built-in form handling (uses custom endpoint)
 
 ## Testing Checkout
