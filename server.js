@@ -3,14 +3,23 @@ const express = require('express');
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY); // Live key
 const app = express();
 
-// Add CORS middleware
+// Add CORS and iframe-friendly headers middleware
 app.use((req, res, next) => {
+  // CORS headers
   res.header('Access-Control-Allow-Origin', '*');
   res.header(
     'Access-Control-Allow-Headers',
     'Origin, X-Requested-With, Content-Type, Accept'
   );
   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  
+  // Remove X-Frame-Options restriction to allow iframe embedding
+  res.removeHeader('X-Frame-Options');
+  
+  // Set Content-Security-Policy to allow iframe embedding from any domain
+  // You can restrict this to specific domains if needed
+  res.header('Content-Security-Policy', "frame-ancestors *");
+  
   if (req.method === 'OPTIONS') {
     return res.sendStatus(200);
   }

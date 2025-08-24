@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iframe Embedding Test - BPER System</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            color: white;
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 2rem;
+        }
+        
+        .info {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .info h2 {
+            color: #333;
+            margin-top: 0;
+            font-size: 1.5rem;
+        }
+        
+        .info p {
+            color: #666;
+            line-height: 1.6;
+            margin: 10px 0;
+        }
+        
+        .info code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            color: #e83e8c;
+        }
+        
+        .iframe-container {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+        
+        .iframe-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 15px 20px;
+            color: white;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .iframe-url {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 5px 12px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-family: monospace;
+        }
+        
+        iframe {
+            width: 100%;
+            height: 800px;
+            border: none;
+            display: block;
+        }
+        
+        .status {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            color: white;
+            font-weight: 600;
+        }
+        
+        .status.success {
+            background: linear-gradient(135deg, #56ab2f 0%, #a8e063 100%);
+        }
+        
+        .status.error {
+            background: linear-gradient(135deg, #f85032 0%, #e73827 100%);
+        }
+        
+        .test-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .test-btn {
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: transform 0.2s;
+        }
+        
+        .test-btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .test-btn:active {
+            transform: translateY(0);
+        }
+        
+        @media (max-width: 768px) {
+            iframe {
+                height: 600px;
+            }
+            
+            h1 {
+                font-size: 1.5rem;
+            }
+            
+            .info h2 {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔧 BPER System - Iframe Embedding Test</h1>
+        
+        <div class="info">
+            <h2>✅ Configuration Complete</h2>
+            <p>Your BPER website is now configured to allow iframe embedding with the following settings:</p>
+            <ul>
+                <li><strong>Local Development (server.js):</strong> Headers configured to allow embedding</li>
+                <li><strong>Production (netlify.toml):</strong> <code>X-Frame-Options</code> removed, <code>frame-ancestors *</code> added</li>
+                <li><strong>Content-Security-Policy:</strong> Set to allow embedding from any domain</li>
+            </ul>
+            <p><strong>Note:</strong> After deploying these changes to production, your site at <code>https://bper.me/</code> will be embeddable in iframes.</p>
+        </div>
+        
+        <div class="iframe-container">
+            <div class="iframe-header">
+                <span>BPER System Embedded</span>
+                <span class="iframe-url" id="iframe-url">http://localhost:3005</span>
+            </div>
+            <iframe 
+                id="bper-iframe"
+                src="http://localhost:3005" 
+                title="BPER System"
+                loading="lazy"
+                sandbox="allow-same-origin allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox"
+            ></iframe>
+        </div>
+        
+        <div id="status" class="status success" style="display: none;">
+            Iframe loaded successfully!
+        </div>
+        
+        <div class="test-buttons">
+            <button class="test-btn" onclick="testLocalhost()">Test Localhost (3005)</button>
+            <button class="test-btn" onclick="testProduction()">Test Production (bper.me)</button>
+            <button class="test-btn" onclick="navigateToTest()">Navigate to Blood Pressure Test</button>
+            <button class="test-btn" onclick="reloadIframe()">Reload Iframe</button>
+        </div>
+    </div>
+    
+    <script>
+        const iframe = document.getElementById('bper-iframe');
+        const status = document.getElementById('status');
+        const urlDisplay = document.getElementById('iframe-url');
+        
+        // Show status when iframe loads
+        iframe.onload = function() {
+            status.textContent = '✅ Iframe loaded successfully!';
+            status.className = 'status success';
+            status.style.display = 'block';
+            
+            // Try to access iframe content (will fail for cross-origin)
+            try {
+                const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+                console.log('Iframe document accessible:', iframeDoc ? 'Yes' : 'No');
+            } catch(e) {
+                console.log('Cross-origin iframe - cannot access content (expected for production)');
+            }
+        };
+        
+        iframe.onerror = function() {
+            status.textContent = '❌ Failed to load iframe. Check if the server is running.';
+            status.className = 'status error';
+            status.style.display = 'block';
+        };
+        
+        function testLocalhost() {
+            iframe.src = 'http://localhost:3005';
+            urlDisplay.textContent = 'http://localhost:3005';
+            status.style.display = 'none';
+        }
+        
+        function testProduction() {
+            iframe.src = 'https://bper.me/';
+            urlDisplay.textContent = 'https://bper.me/';
+            status.style.display = 'none';
+        }
+        
+        function navigateToTest() {
+            const currentSrc = iframe.src;
+            if (currentSrc.includes('localhost')) {
+                iframe.src = 'http://localhost:3005/blutdruck-test-merged.html';
+                urlDisplay.textContent = 'http://localhost:3005/blutdruck-test-merged.html';
+            } else {
+                iframe.src = 'https://bper.me/blutdruck-test';
+                urlDisplay.textContent = 'https://bper.me/blutdruck-test';
+            }
+            status.style.display = 'none';
+        }
+        
+        function reloadIframe() {
+            iframe.src = iframe.src;
+            status.style.display = 'none';
+        }
+        
+        // Check if running locally
+        if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+            console.log('Running locally - iframe should work immediately');
+        } else {
+            console.log('Running in production - make sure headers are configured');
+        }
+    </script>
+</body>
+</html>

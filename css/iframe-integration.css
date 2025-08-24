@@ -1,0 +1,203 @@
+/* BPER System Iframe Integration Styles */
+
+/* Container for the iframe */
+.bper-iframe-wrapper {
+    position: relative;
+    width: 100%;
+    background: #ffffff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+    transition: box-shadow 0.3s ease;
+}
+
+.bper-iframe-wrapper:hover {
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+/* Optional header for the iframe */
+.bper-iframe-header {
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+    padding: 12px 16px;
+    color: white;
+    font-weight: 600;
+    font-size: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.bper-iframe-header .title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.bper-iframe-header .actions {
+    display: flex;
+    gap: 12px;
+}
+
+.bper-iframe-header button {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white;
+    padding: 4px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: background 0.2s;
+}
+
+.bper-iframe-header button:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* The actual iframe */
+.bper-iframe {
+    width: 100%;
+    height: 800px;
+    border: none;
+    display: block;
+    background: #f9fafb;
+}
+
+/* Loading state */
+.bper-iframe-loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #6b7280;
+}
+
+.bper-iframe-loading .spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid #e5e7eb;
+    border-top-color: #ef4444;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 12px;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Error state */
+.bper-iframe-error {
+    padding: 40px;
+    text-align: center;
+    color: #991b1b;
+    background: #fee;
+    border-radius: 8px;
+    margin: 20px;
+}
+
+.bper-iframe-error h3 {
+    margin: 0 0 8px;
+    font-size: 18px;
+}
+
+.bper-iframe-error p {
+    margin: 0;
+    color: #7f1d1d;
+    font-size: 14px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+    .bper-iframe {
+        height: 700px;
+    }
+}
+
+@media (max-width: 768px) {
+    .bper-iframe {
+        height: 600px;
+    }
+    
+    .bper-iframe-header {
+        padding: 10px 12px;
+        font-size: 13px;
+    }
+    
+    .bper-iframe-header button {
+        padding: 3px 8px;
+        font-size: 11px;
+    }
+}
+
+@media (max-width: 480px) {
+    .bper-iframe {
+        height: 500px;
+    }
+    
+    .bper-iframe-wrapper {
+        border-radius: 8px;
+    }
+    
+    .bper-iframe-header .actions {
+        gap: 8px;
+    }
+}
+
+/* Fullscreen mode */
+.bper-iframe-fullscreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9999;
+    border-radius: 0;
+}
+
+.bper-iframe-fullscreen .bper-iframe {
+    height: calc(100vh - 48px);
+}
+
+/* Overlay for fullscreen */
+.bper-iframe-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 9998;
+    display: none;
+}
+
+.bper-iframe-overlay.active {
+    display: block;
+}
+
+/* Minimal mode (no header) */
+.bper-iframe-wrapper.minimal .bper-iframe-header {
+    display: none;
+}
+
+.bper-iframe-wrapper.minimal .bper-iframe {
+    height: 100%;
+}
+
+/* Custom sizing classes */
+.bper-iframe-wrapper.compact .bper-iframe {
+    height: 400px;
+}
+
+.bper-iframe-wrapper.medium .bper-iframe {
+    height: 600px;
+}
+
+.bper-iframe-wrapper.tall .bper-iframe {
+    height: 1000px;
+}
+
+.bper-iframe-wrapper.auto-height .bper-iframe {
+    height: auto;
+    min-height: 400px;
+}

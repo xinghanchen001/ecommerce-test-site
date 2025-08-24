@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community Page - BPER Integration Example</title>
+    
+    <!-- Include the BPER iframe integration styles -->
+    <link rel="stylesheet" href="css/iframe-integration.css">
+    
+    <!-- Community page custom styles -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: #f9fafb;
+            color: #111827;
+        }
+        
+        /* Community header */
+        .community-header {
+            background: linear-gradient(135deg, #1e40af 0%, #3730a3 100%);
+            color: white;
+            padding: 2rem 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .community-nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .community-logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .community-menu {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .community-menu a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.2s;
+        }
+        
+        .community-menu a:hover {
+            opacity: 0.8;
+        }
+        
+        /* Hero section */
+        .hero {
+            background: white;
+            padding: 3rem 0;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #111827;
+        }
+        
+        .hero p {
+            font-size: 1.25rem;
+            color: #6b7280;
+            margin-bottom: 2rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: inline-block;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            color: white;
+        }
+        
+        .btn-secondary {
+            background: white;
+            color: #111827;
+            border: 2px solid #e5e7eb;
+        }
+        
+        /* Main content */
+        .main-content {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 1.5rem;
+        }
+        
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #111827;
+            text-align: center;
+        }
+        
+        .section-subtitle {
+            font-size: 1.125rem;
+            color: #6b7280;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        /* Integration options */
+        .integration-options {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .option-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .option-btn {
+            padding: 0.5rem 1rem;
+            background: #f3f4f6;
+            border: 2px solid transparent;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        
+        .option-btn:hover {
+            background: #e5e7eb;
+        }
+        
+        .option-btn.active {
+            background: #fef2f2;
+            border-color: #ef4444;
+            color: #ef4444;
+        }
+        
+        /* BPER container */
+        #bper-container {
+            margin-top: 2rem;
+        }
+        
+        /* Features grid */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .feature-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #111827;
+        }
+        
+        .feature-description {
+            color: #6b7280;
+            line-height: 1.6;
+        }
+        
+        /* Footer */
+        .community-footer {
+            background: #111827;
+            color: white;
+            padding: 2rem 0;
+            margin-top: 4rem;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            text-align: center;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: #9ca3af;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .community-menu {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Community Header -->
+    <header class="community-header">
+        <nav class="community-nav">
+            <div class="community-logo">
+                <span>🏥</span>
+                <span>Health Community</span>
+            </div>
+            <ul class="community-menu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#tools">Tools</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Advanced Blood Pressure Management</h1>
+            <p>Access professional medical device tools and personalized health analysis directly from our community platform.</p>
+            <div class="hero-buttons">
+                <a href="#bper-tool" class="btn btn-primary">Try BPER Tool</a>
+                <a href="#features" class="btn btn-secondary">Learn More</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- BPER Integration Section -->
+        <section id="bper-tool">
+            <h2 class="section-title">BPER Blood Pressure Analysis System</h2>
+            <p class="section-subtitle">Professional medical device recommendation and analysis tool</p>
+            
+            <!-- Integration Options -->
+            <div class="integration-options">
+                <div class="option-buttons">
+                    <button class="option-btn active" onclick="changeIntegrationMode('default')">
+                        Standard View
+                    </button>
+                    <button class="option-btn" onclick="changeIntegrationMode('minimal')">
+                        Minimal View
+                    </button>
+                    <button class="option-btn" onclick="changeIntegrationMode('compact')">
+                        Compact View
+                    </button>
+                    <button class="option-btn" onclick="changeIntegrationMode('tall')">
+                        Extended View
+                    </button>
+                    <button class="option-btn" onclick="navigateToBPTest()">
+                        Go to BP Test
+                    </button>
+                </div>
+            </div>
+            
+            <!-- BPER Container -->
+            <div id="bper-container"></div>
+        </section>
+        
+        <!-- Features Section -->
+        <section id="features" class="features">
+            <div class="feature-card">
+                <div class="feature-icon">📊</div>
+                <div class="feature-title">Personalized Analysis</div>
+                <div class="feature-description">
+                    Get customized blood pressure analysis based on your age, lifestyle, and health factors.
+                </div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🏆</div>
+                <div class="feature-title">Medical-Grade Devices</div>
+                <div class="feature-description">
+                    Access recommendations for certified medical devices tailored to your specific needs.
+                </div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📚</div>
+                <div class="feature-title">Health Knowledge Base</div>
+                <div class="feature-description">
+                    Learn about blood pressure management with our comprehensive educational resources.
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="community-footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Contact Us</a>
+                <a href="#">Support</a>
+            </div>
+            <p>&copy; 2024 Health Community. Powered by BPER System.</p>
+        </div>
+    </footer>
+    
+    <!-- Include the BPER iframe integration script -->
+    <script src="js/iframe-integration.js"></script>
+    
+    <!-- Initialize BPER Integration -->
+    <script>
+        // Initialize BPER iframe integration
+        let bperIntegration;
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            // Determine if we're running locally or in production
+            const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+            const bperUrl = isLocal ? 'http://localhost:3005/' : 'https://bper.me/';
+            
+            // Initialize with custom options
+            bperIntegration = new BPERIframeIntegration({
+                containerId: 'bper-container',
+                url: bperUrl,
+                height: '800px',
+                showHeader: true,
+                headerTitle: 'BPER Blutdruckmessgerät System',
+                allowFullscreen: true,
+                showNavButtons: true,
+                onLoad: (iframe) => {
+                    console.log('BPER system loaded successfully');
+                    // You can perform additional actions here
+                },
+                onError: (error) => {
+                    console.error('Failed to load BPER system:', error);
+                    // You can show a custom error message to users
+                }
+            });
+        });
+        
+        // Function to change integration mode
+        function changeIntegrationMode(mode) {
+            // Update active button
+            document.querySelectorAll('.option-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Update integration based on mode
+            switch(mode) {
+                case 'minimal':
+                    bperIntegration.updateOptions({
+                        showHeader: false,
+                        height: '700px'
+                    });
+                    break;
+                case 'compact':
+                    bperIntegration.updateOptions({
+                        showHeader: true,
+                        height: '500px'
+                    });
+                    break;
+                case 'tall':
+                    bperIntegration.updateOptions({
+                        showHeader: true,
+                        height: '1000px'
+                    });
+                    break;
+                default:
+                    bperIntegration.updateOptions({
+                        showHeader: true,
+                        height: '800px'
+                    });
+            }
+        }
+        
+        // Navigate to blood pressure test
+        function navigateToBPTest() {
+            if (bperIntegration) {
+                bperIntegration.navigate('test');
+                // Scroll to the iframe
+                document.getElementById('bper-container').scrollIntoView({ 
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        }
+        
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
