@@ -15,43 +15,6 @@
       gtag('config', 'AW-17507756783');
     </script>
     
-    <!-- Custom CSS for mobile card ordering -->
-    <style>
-      /* Ensure flexbox order works properly on mobile ONLY */
-      @media (max-width: 767px) {
-        .pricing-cards-container {
-          display: flex !important;
-          flex-direction: column !important;
-        }
-        .pricing-cards-container > div:nth-child(2) {
-          order: 1 !important;
-        }
-        .pricing-cards-container > div:nth-child(1) {
-          order: 2 !important;
-        }
-        .pricing-cards-container > div:nth-child(3) {
-          order: 3 !important;
-        }
-      }
-      
-      /* Ensure grid layout is preserved on desktop */
-      @media (min-width: 768px) {
-        .pricing-cards-container {
-          display: grid !important;
-          grid-template-columns: repeat(3, 1fr) !important;
-        }
-        .pricing-cards-container > div:nth-child(1) {
-          order: unset !important;
-        }
-        .pricing-cards-container > div:nth-child(2) {
-          order: unset !important;
-        }
-        .pricing-cards-container > div:nth-child(3) {
-          order: unset !important;
-        }
-      }
-    </style>
-    
     <!-- JSON Feed Discovery -->
     <link rel="alternate" type="application/feed+json" title="BPER Medical - Gesundheitstipps und Updates" href="/feed.json" />
     
@@ -292,9 +255,6 @@
     ></script>
   </head>
   <body>
-      
-
-  <body>
     <div class="hero">
       <div class="aurora-bg">
         <div class="aurora-inner"></div>
@@ -333,7 +293,7 @@
 
           <div class="hero-image-container">
             <img
-              src="images/Bildschirmfoto-2024-11-17-um-01.30.04-1.png"
+              src="images/bper-device-app-combo.png"
               alt="BPER System Gerät mit Echtzeit-Blutdruckanzeige"
               class="hero-device-image"
             />
@@ -1357,6 +1317,117 @@
       </div>
     </section>
 
+    <!-- PDF Manual Download Section -->
+    <section class="bg-white py-20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col lg:flex-row items-center gap-12">
+          <!-- PDF Preview - Left Side -->
+          <div class="lg:w-1/2 flex justify-center">
+            <div class="relative max-w-sm w-full">
+              <!-- Book-like shadow effect container -->
+              <div class="relative transform hover:scale-102 transition-transform duration-300">
+                <!-- Multiple shadow layers for book effect -->
+                <div class="absolute inset-0 bg-gray-300 transform translate-x-2 translate-y-2 rounded-r-lg"></div>
+                <div class="absolute inset-0 bg-gray-200 transform translate-x-1 translate-y-1 rounded-r-lg"></div>
+                <!-- Main book container with A4 aspect ratio -->
+                <div class="relative bg-white rounded-lg shadow-2xl border border-gray-200" style="aspect-ratio: 210/297;">
+                  <!-- Book spine effect -->
+                  <div class="absolute left-0 top-0 bottom-0 w-6 bg-gradient-to-r from-gray-300 to-gray-200 shadow-inner rounded-l-lg"></div>
+                  <!-- PDF Preview Image Container -->
+                  <div class="pl-6 h-full flex items-center justify-center">
+                    <img 
+                      src="images/manual-cover.png" 
+                      alt="BPER ARM-30H Handbuch Vorschau" 
+                      class="w-full h-full object-contain rounded-r-lg"
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Content - Right Side -->
+          <div class="lg:w-1/2 space-y-6">
+            <h2 class="text-4xl font-bold text-gray-900 leading-tight">
+              BPER ARM-30H 
+              <span class="text-blue-600">Handbuch</span>
+            </h2>
+
+            <p class="text-xl text-gray-600 leading-relaxed">
+              Umfassende Anleitungen und technische Informationen für Ihr BPER Blutdruckmessgerät. 
+              Verfügbar in Deutsch und Englisch.
+            </p>
+
+            <div class="space-y-4">
+              <div class="bg-gray-50 rounded-lg p-4">
+                <h3 class="font-semibold text-gray-900 mb-3">Enthaltene Informationen:</h3>
+                <ul class="space-y-2">
+                  <li class="flex items-start gap-2">
+                    <svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span class="text-gray-700">Detaillierte Bedienungsanleitung</span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span class="text-gray-700">Technische Spezifikationen</span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span class="text-gray-700">Sicherheitshinweise und Wartung</span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span class="text-gray-700">Fehlerbehebung und Support</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="flex flex-col sm:flex-row gap-4">
+              <!-- German Version Button -->
+              <a 
+                href="images/13032025_ARM30H_IFU_DE.pdf" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                class="inline-flex items-center justify-center px-6 py-3 bg-black text-white font-medium rounded-lg hover:bg-gray-800 transition-all duration-200 shadow-lg hover:shadow-xl group"
+              >
+                <svg class="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V7.414A2 2 0 0015.414 6L12 2.586A2 2 0 0010.586 2H6zm5 6a1 1 0 10-2 0v3.586l-1.293-1.293a1 1 0 10-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 11.586V8z" clip-rule="evenodd"></path>
+                </svg>
+                <span>Deutsche Version</span>
+                <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                </svg>
+              </a>
+
+              <!-- English Version Button -->
+              <a 
+                href="images/13032025_ARM30H_IFU_EN.pdf" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                class="inline-flex items-center justify-center px-6 py-3 bg-black text-white font-medium rounded-lg hover:bg-gray-800 transition-all duration-200 shadow-lg hover:shadow-xl group"
+              >
+                <svg class="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V7.414A2 2 0 0015.414 6L12 2.586A2 2 0 0010.586 2H6zm5 6a1 1 0 10-2 0v3.586l-1.293-1.293a1 1 0 10-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 11.586V8z" clip-rule="evenodd"></path>
+                </svg>
+                <span>English Version</span>
+                <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- FAQ Section -->
     <section class="w-full py-20 lg:py-40 bg-gray-50">
       <div class="container mx-auto text-left">
@@ -1370,25 +1441,6 @@
 
         <!-- Main Content Container - 100% width -->
         <div class="flex gap-4 relative max-w-7xl mx-auto">
-          <style>
-            /* FAQ Navigation Styles */
-            .faq-nav-scrollbar::-webkit-scrollbar { width: 4px; }
-            .faq-nav-scrollbar::-webkit-scrollbar-track { background: #f1f1f1; }
-            .faq-nav-scrollbar::-webkit-scrollbar-thumb { background: #888; border-radius: 2px; }
-            .faq-nav-scrollbar::-webkit-scrollbar-thumb:hover { background: #555; }
-            
-            /* FAQ Content Scrollbar */
-            .faq-content-scrollbar::-webkit-scrollbar { width: 4px; }
-            .faq-content-scrollbar::-webkit-scrollbar-track { background: #f1f1f1; }
-            .faq-content-scrollbar::-webkit-scrollbar-thumb { background: #888; border-radius: 2px; }
-            .faq-content-scrollbar::-webkit-scrollbar-thumb:hover { background: #555; }
-            
-            /* Active nav item */
-            .faq-nav-item.active { background-color: #f3f4f6; }
-            
-            /* Question section padding for scroll offset */
-            .faq-question-section { scroll-margin-top: 20px; }
-          </style>
           
           <!-- Left Navigation Panel -->
           <div class="hidden lg:block w-72 sticky top-20 h-[calc(100vh-10rem)]">
@@ -1708,6 +1760,8 @@
     </section>
 
 
+
+
     <!-- Flowbite JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js"></script>
 
@@ -1950,106 +2004,5 @@
       </div>
     </div>
 
-    <script>
-      // Globale Variable, um den Timer zu speichern
-      let wordAnimationInterval = null;
-
-      // Intersection Observer für die Lampenkomponente
-      document.addEventListener('DOMContentLoaded', function () {
-        const lampInner = document.querySelector('.lamp-inner');
-        const lampGlowOrb = document.querySelector('.lamp-glow-orb');
-        const lampLine = document.querySelector('.lamp-line');
-        const lampHeading = document.querySelector('.lamp-heading');
-        const lampGlowRight = document.querySelector('.lamp-glow-right');
-        const lampGlowLeft = document.querySelector('.lamp-glow-left');
-
-        const observer = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((entry) => {
-              if (entry.isIntersecting) {
-                // Starte die Animationen in einer bestimmten Reihenfolge
-                if (lampGlowRight) lampGlowRight.classList.add('animate');
-                if (lampGlowLeft) lampGlowLeft.classList.add('animate');
-
-                // Verzögere die anderen Animationen
-                setTimeout(() => {
-                  if (lampGlowOrb) lampGlowOrb.classList.add('animate');
-                }, 100);
-
-                setTimeout(() => {
-                  if (lampLine) lampLine.classList.add('animate');
-                }, 300);
-
-                setTimeout(() => {
-                  if (lampHeading) lampHeading.classList.add('animate');
-                }, 600);
-
-                // Beobachtung beenden, nachdem die Animationen gestartet wurden
-                observer.unobserve(entry.target);
-              }
-            });
-          },
-          {
-            root: null, // Viewport als Referenz
-            threshold: 0.25, // Animation startet, wenn 25% des Elements sichtbar sind
-          }
-        );
-
-        // Starte die Beobachtung
-        if (lampInner) {
-          observer.observe(lampInner);
-        }
-
-        // Word-Animation starten, aber nur falls sie noch nicht läuft
-        initWordAnimation();
-      });
-
-      // Initialisiert die Wortanimation, falls sie noch nicht läuft
-      function initWordAnimation() {
-        // Stoppe vorhandene Animation, falls sie bereits läuft
-        if (wordAnimationInterval) {
-          clearInterval(wordAnimationInterval);
-          wordAnimationInterval = null;
-        }
-
-        // Starte die neue Animation
-        startWordAnimation();
-      }
-
-      // Verbesserte Animation für die Wörter
-      function startWordAnimation() {
-        const words = document.querySelectorAll('.animated-word');
-        if (words.length === 0) return; // Falls keine Wörter gefunden wurden
-
-        let activeIndex = 0;
-
-        // Zuerst alle active-Klassen entfernen
-        words.forEach((word) => {
-          word.classList.remove('active');
-        });
-
-        // Dann nur das erste Wort aktivieren
-        words[0].classList.add('active');
-
-        // Timer für die Rotation der Wörter
-        wordAnimationInterval = setInterval(() => {
-          // Aktuelles Wort deaktivieren
-          words[activeIndex].classList.remove('active');
-
-          // Zum nächsten Wort wechseln
-          activeIndex = (activeIndex + 1) % words.length;
-
-          // Neues Wort aktivieren
-          words[activeIndex].classList.add('active');
-
-          // Sicherheitsprüfung: Stelle sicher, dass es keine anderen aktiven Wörter gibt
-          for (let i = 0; i < words.length; i++) {
-            if (i !== activeIndex && words[i].classList.contains('active')) {
-              words[i].classList.remove('active');
-            }
-          }
-        }, 3000);
-      }
-    </script>
   </body>
 </html>
