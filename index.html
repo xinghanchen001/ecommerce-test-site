@@ -225,13 +225,25 @@
         const video2 = document.getElementById('bento-video-2');
         
         if (video1 && video2) {
-          // Set video2 preview to last frame
-          video2.addEventListener('loadedmetadata', function() {
-            video2.currentTime = video2.duration;
+          // Preload both videos
+          video1.load();
+          video2.load();
+          
+          // Set video2 preview to last frame once it can play through
+          video2.addEventListener('canplaythrough', function() {
+            if (video2.duration && !video2.hasAttribute('data-preview-set')) {
+              video2.currentTime = video2.duration;
+              video2.setAttribute('data-preview-set', 'true');
+            }
           });
           
-          // Start playing the first video
-          video1.play();
+          // Start playing the first video once both are ready
+          Promise.all([
+            new Promise(resolve => video1.addEventListener('canplay', resolve, {once: true})),
+            new Promise(resolve => video2.addEventListener('canplay', resolve, {once: true}))
+          ]).then(() => {
+            video1.play().catch(e => console.log('Autoplay prevented:', e));
+          });
           
           // When first video ends, play the second video from beginning
           video1.addEventListener('ended', function() {
@@ -361,6 +373,7 @@
                       alt="BPER System mit medizinischen Berichten"
                       muted
                       playsinline
+                      preload="metadata"
                       style="width: 90%; height: 90%; object-fit: cover;"
                     ></video>
                   </div>
@@ -386,6 +399,7 @@
                       alt="BPER System mit Blutdruckmessung"
                       muted
                       playsinline
+                      preload="metadata"
                       style="width: 90%; height: 90%; object-fit: cover;"
                     ></video>
                   </div>
