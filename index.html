@@ -218,6 +218,35 @@
     }
     </script>
     
+    <!-- Sequential Video Playback Script -->
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const video1 = document.getElementById('bento-video-1');
+        const video2 = document.getElementById('bento-video-2');
+        
+        if (video1 && video2) {
+          // Set video2 preview to last frame
+          video2.addEventListener('loadedmetadata', function() {
+            video2.currentTime = video2.duration;
+          });
+          
+          // Start playing the first video
+          video1.play();
+          
+          // When first video ends, play the second video from beginning
+          video1.addEventListener('ended', function() {
+            video2.currentTime = 0; // Reset to beginning before playing
+            video2.play();
+          });
+          
+          // When second video ends, restart the first video (continuous loop)
+          video2.addEventListener('ended', function() {
+            video1.play();
+          });
+        }
+      });
+    </script>
+
     <!-- Load Stripe.js -->
     <script src="https://js.stripe.com/v3/"></script>
     <link
@@ -311,156 +340,56 @@
           </h2>
         </div>
 
-        <div class="bento-grid">
-          <!-- Große Karte mit span-2 und Bild rechts -->
-          <div class="bento-card bento-span-2">
-            <div class="bento-card-inner">
-              <div class="bento-content">
-                <h3 class="bento-item-title">Ereigniserkennung</h3>
-                <p class="bento-item-description">
-                  Automatische Erkennung kritischer Ereignisse mit sofortigen
-                  Benachrichtigungen an Sie und Ihre Gesundheitsdienstleister.
-                </p>
-                <div class="bento-tags">
-                  <span class="bento-tag">#überwachung</span>
-                  <span class="bento-tag">#echtzeit</span>
+        <div class="bento-grid" style="display: flex; gap: 20px; flex-wrap: wrap;">
+          <!-- Responsive container with two cards -->
+          <div class="flex flex-col lg:flex-row w-full gap-5">
+            <!-- Left Card - Medizinische Berichte -->
+            <div class="bento-card w-full lg:w-1/2 lg:flex-1" style="height: auto; min-height: 400px;">
+              <div class="bento-card-inner flex flex-col lg:flex-row" style="height: 100%; min-height: 400px; align-items: stretch; gap: 0; padding: 0; margin: 0;">
+                <div class="bento-content flex-none lg:flex-initial flex-col p-5 w-full lg:flex-[0_0_35%] lg:justify-center" style="margin: 0; height: auto;">
+                  <h3 class="bento-item-title">Präzise Blutdruckmessung</h3>
+                  <p class="bento-item-description" style="white-space: normal; word-wrap: break-word; overflow-wrap: break-word; height: auto; max-height: none;">
+                    Kontinuierlicher Blutdruck- & Pulsdruckmonitor mit Beat-to-Beat Messung.
+                    Erfasst Systole, Diastole und Herzfrequenz in Echtzeit.
+                  </p>
                 </div>
-              </div>
-              <div class="bento-image">
-                <div class="video-container">
-                  <video
-                    src="images/672f761185cedb86cfdcf42a_674642f269b4561790865f79_video2-transcode.mp4"
-                    alt="BPER System mit Blutdruckmessung"
-                    autoplay
-                    loop
-                    muted
-                    playsinline
-                  ></video>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Einfache Karte ohne Bild -->
-          <div class="bento-card" style="transform: translateY(0px)">
-            <div
-              class="bento-card-inner"
-              style="
-                position: relative;
-                min-height: 280px;
-                padding-bottom: 50px;
-              "
-            >
-              <div
-                class="bento-content"
-                style="
-                  position: absolute;
-                  top: 50%;
-                  transform: translateY(-50%);
-                  padding: 0 20px;
-                "
-              >
-                <h3 class="bento-item-title">Beat-to-Beat-Blutdruckmessung</h3>
-                <p class="bento-item-description">
-                  Im Gegensatz zu herkömmlichen Messgeräten erfasst BPER auch
-                  die Werte zwischen den Herzschlägen. Damit kann die Druckwelle
-                  erfasst und analysiert werden.
-                </p>
-              </div>
-              <div
-                class="bento-tags"
-                style="position: absolute; bottom: 20px; left: 20px"
-              >
-                <span class="bento-tag">#präzision</span>
-                <span class="bento-tag">#kontinuierlich</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Vertikale Karte mit Bild unten (vorher horizontal) -->
-          <div class="bento-card" style="transform: translateY(0px)">
-            <div class="bento-card-inner with-image">
-              <div class="bento-image">
-                <img src="images/Bildschirmfoto 2025-03-06 um 23.49.48.png"
-                alt="Warnungen des BPER Systems" class="full-width-img" /* Added
-                class for specific targeting */ />
-              </div>
-            </div>
-          </div>
-
-          <!-- Karte mit vertikalem Layout und Bild unten -->
-          <div class="bento-card" style="transform: translateY(0px)">
-            <div class="bento-card-inner with-image">
-              <div class="bento-image">
-                <img src="images/Bildschirmfoto 2025-03-06 um 23.50.12.png"
-                alt="KI-Analyse des BPER Systems" class="full-width-img" /*
-                Added class for specific targeting */ />
-              </div>
-            </div>
-          </div>
-
-          <!-- Große Karte mit span-2 und Bild rechts -->
-          <div class="bento-card bento-span-2">
-            <div class="bento-card-inner">
-              <div class="bento-content">
-                <h3 class="bento-item-title">Medizinische Berichte</h3>
-                <p class="bento-item-description">
-                  Erstellen Sie umfassende Berichte für medizinisches
-                  Fachpersonal mit detaillierten Blutdruckprotokollen, Trends
-                  und Ereignisverläufen zur Verbesserung von Diagnose und
-                  Behandlung.
-                </p>
-                <div class="bento-tags">
-                  <span class="bento-tag">#berichte</span>
-                  <span class="bento-tag">#gesundheit</span>
-                  <span class="bento-tag">#analyse</span>
-                </div>
-              </div>
-              <div class="bento-image">
-                <div class="video-container">
-                  <video
-                    src="images/672f761185cedb86cfdcf42a_6746424c6316898233481faa_video3_1-transcode.mp4"
-                    alt="BPER System mit medizinischen Berichten"
-                    autoplay
-                    loop
-                    muted
-                    playsinline
-                  ></video>
+                <div class="bento-image w-full h-64 lg:h-auto lg:flex-[0_0_65%]" style="height: 100%; margin: 0; padding: 0; max-width: none;">
+                  <div class="video-container" style="height: 100%; margin: 0; padding: 0; display: flex; align-items: center; justify-content: center;">
+                    <video
+                      id="bento-video-1"
+                      src="images/672f761185cedb86cfdcf42a_6746424c6316898233481faa_video3_1-transcode.mp4"
+                      alt="BPER System mit medizinischen Berichten"
+                      muted
+                      playsinline
+                      style="width: 90%; height: 90%; object-fit: cover;"
+                    ></video>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
 
-          <div class="bento-card" style="transform: translateY(0px)">
-            <div
-              class="bento-card-inner"
-              style="
-                position: relative;
-                min-height: 280px;
-                padding-bottom: 50px;
-              "
-            >
-              <div
-                class="bento-content"
-                style="
-                  position: absolute;
-                  top: 50%;
-                  transform: translateY(calc(-50% - 20px));
-                  padding: 0 20px;
-                "
-              >
-                <h3 class="bento-item-title">Intelligente Datenanalyse</h3>
-                <p class="bento-item-description">
-                  Nutzung von erprobten Algorithmen zur Interpretation Ihrer
-                  Daten und Bereitstellung personalisierter
-                  Gesundheitseinblicke.
-                </p>
-              </div>
-              <div
-                class="bento-tags"
-                style="position: absolute; bottom: 20px; left: 20px"
-              >
-                <span class="bento-tag">#analyse</span>
+            <!-- Right Card - Ereigniserkennung -->
+            <div class="bento-card w-full lg:w-1/2 lg:flex-1" style="height: auto; min-height: 400px;">
+              <div class="bento-card-inner flex flex-col lg:flex-row" style="height: 100%; min-height: 400px; align-items: stretch; gap: 0; padding: 0; margin: 0;">
+                <div class="bento-content flex-none lg:flex-initial flex-col p-5 w-full lg:flex-[0_0_35%] lg:justify-center" style="margin: 0; height: auto;">
+                  <h3 class="bento-item-title">Smartphone-Synchronisation</h3>
+                  <p class="bento-item-description" style="white-space: normal; word-wrap: break-word; overflow-wrap: break-word; height: auto; max-height: none;">
+                    Automatische Datenübertragung an Ihr Smartphone.
+                    Detaillierte Auswertungen, Trends und Berichte direkt in der App verfügbar.
+                  </p>
+                </div>
+                <div class="bento-image w-full h-64 lg:h-auto lg:flex-[0_0_65%]" style="height: 100%; margin: 0; padding: 0; max-width: none;">
+                  <div class="video-container" style="height: 100%; margin: 0; padding: 0; display: flex; align-items: center; justify-content: center;">
+                    <video
+                      id="bento-video-2"
+                      src="images/137183.mp4"
+                      alt="BPER System mit Blutdruckmessung"
+                      muted
+                      playsinline
+                      style="width: 90%; height: 90%; object-fit: cover;"
+                    ></video>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
