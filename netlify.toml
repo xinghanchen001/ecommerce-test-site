@@ -2,16 +2,18 @@
   functions = "functions"
   publish = "."
 
-# Headers for better SEO and security
+# Enhanced security headers to prevent Google security warnings
 [[headers]]
   for = "/*"
   [headers.values]
     X-Content-Type-Options = "nosniff"
-    # Removed X-Frame-Options to allow iframe embedding
-    # X-Frame-Options = "SAMEORIGIN"
     X-XSS-Protection = "1; mode=block"
-    # Allow iframe embedding from any domain
-    Content-Security-Policy = "frame-ancestors *"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "geolocation=(), microphone=(), camera=()"
+    # Allow iframe embedding from any domain (required for Stripe)
+    Content-Security-Policy = "frame-ancestors *; script-src 'self' 'unsafe-inline' https://js.stripe.com https://cdn.tailwindcss.com https://www.googletagmanager.com https://cdnjs.cloudflare.com; img-src 'self' data: https://blog.heavyrun.de; object-src 'none'; base-uri 'self'"
+    # Add Strict-Transport-Security for HTTPS
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
 
 # Proper content types for SEO files
 [[headers]]
