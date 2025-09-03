@@ -1390,55 +1390,11 @@
             }
           }
 
-          // For local testing
-          if (
-            window.location.hostname === 'localhost' ||
-            window.location.hostname === '127.0.0.1' ||
-            window.location.hostname.includes('192.168')
-          ) {
-            console.log('Local development environment detected');
-            alert(
-              'In der lokalen Entwicklungsumgebung ist die Checkout-Funktion nicht vollständig verfügbar. Bei Bereitstellung auf Netlify wird diese Funktion aktiviert.'
-            );
-            return;
-          }
-
-          // On production, use relative URL to avoid certificate issues
-          const endpointUrl = '/api/create-checkout';
-          console.log('Using endpoint:', endpointUrl);
-
-          // Call your backend to create a Checkout Session
-          const response = await fetch(endpointUrl, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              priceId: 'price_1RmZQcA9aibyk7oc7HnUPblY', // Updated Price ID - New 259€ offer
-              clickId: trackingClickId, // Pass the click ID to the checkout endpoint
-            }),
-          });
-
-          const session = await response.json();
-
-          // Show error if there was a problem
-          if (session.error) {
-            console.error('Session error:', session.error);
-            alert(
-              'Es gab ein Problem mit dem Checkout. Bitte versuchen Sie es später noch einmal.'
-            );
-            return;
-          }
-
-          // Redirect to Stripe Checkout
-          const result = await stripe.redirectToCheckout({
-            sessionId: session.id,
-          });
-
-          if (result.error) {
-            console.error('Redirect error:', result.error);
-            alert(result.error.message);
-          }
+          // Redirect to embedded checkout page
+          const priceId = 'price_1RmZQcA9aibyk7oc7HnUPblY'; // Updated Price ID - New 259€ offer
+          const checkoutUrl = `/checkout.html?price=${priceId}${trackingClickId ? '&cid=' + trackingClickId : ''}`;
+          console.log('Redirecting to embedded checkout:', checkoutUrl);
+          window.location.href = checkoutUrl;
         } catch (error) {
           console.error('Checkout error:', error);
           alert(

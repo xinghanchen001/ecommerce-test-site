@@ -58,7 +58,7 @@ exports.handler = async function (event, context) {
       // Create a new price for the product
       const price = await stripe.prices.create({
         product: data.productId,
-        unit_amount: 29999, // 299.99 € in cents
+        unit_amount: 25900, // 259€ in cents
         currency: 'eur',
       });
       priceId = price.id;
@@ -70,21 +70,15 @@ exports.handler = async function (event, context) {
       priceId = 'price_1RmZQcA9aibyk7oc7HnUPblY'; // Live mode product key - Updated to new 259€ offer
     }
 
-    // Check if this is for embedded mode
-    const isEmbedded = data.mode === 'embedded';
-
-    // Construct success/return URL with clickId if it exists
-    const successUrl = clickId
-      ? `${event.headers.origin}/success.html?cid=${clickId}`
-      : `${event.headers.origin}/success.html`;
-
+    // Construct return URL with clickId if it exists
     const returnUrl = clickId
       ? `${event.headers.origin}/success.html?session_id={CHECKOUT_SESSION_ID}&cid=${clickId}`
       : `${event.headers.origin}/success.html?session_id={CHECKOUT_SESSION_ID}`;
 
-    // Create a checkout session configuration
-    const sessionConfig = {
-      payment_method_types: ['card', 'klarna', 'paypal'],
+    // Create a checkout session for embedded mode with minimal configuration
+    const session = await stripe.checkout.sessions.create({
+      ui_mode: 'embedded',
+      payment_method_types: ['card'],
       line_items: [
         {
           price: priceId,
@@ -92,92 +86,22 @@ exports.handler = async function (event, context) {
         },
       ],
       mode: 'payment',
-      success_url: successUrl,
-      cancel_url: `${event.headers.origin}/cancel.html`,
-      locale: 'de', // Set language to German
-      // Add shipping address collection
+      return_url: returnUrl,
+      locale: 'de',
       shipping_address_collection: {
-        allowed_countries: [
-          'DE',
-          'AT',
-          'CH',
-          'FR',
-          'IT',
-          'BE',
-          'NL',
-          'LU',
-          'ES',
-          'US',
-          'GB',
-        ], // Add countries you want to support
+        allowed_countries: ['DE', 'AT', 'CH', 'FR', 'IT', 'BE', 'NL', 'LU', 'ES', 'US', 'GB'],
       },
-      // Collect billing address
       billing_address_collection: 'required',
-      // Collect additional information
-      custom_fields: [
-        {
-          key: 'delivery_notes',
-          label: {
-            type: 'custom',
-            custom: 'Delivery Instructions (Optional)',
-          },
-          type: 'text',
-          optional: true,
-        },
-      ],
-      // Enable promotion/discount codes
-      allow_promotion_codes: true,
-      automatic_tax: { enabled: true }, // Enable automatic tax calculation
-      // Add generated order ID and click ID to metadata
       metadata: {
         order_id: generatedOrderId,
         click_id: clickId,
       },
-      // Pass metadata to the payment intent
-      payment_intent_data: {
-        metadata: {
-          order_id: generatedOrderId,
-          click_id: clickId,
-        },
-      },
-    };
+    });
 
-    // Add mode-specific configuration
-    if (isEmbedded) {
-      sessionConfig.ui_mode = 'embedded';
-      sessionConfig.return_url = returnUrl;
-    } else {
-      sessionConfig.success_url = successUrl;
-      sessionConfig.cancel_url = `${event.headers.origin}/cancel.html`;
-      // Only add custom fields for non-embedded mode
-      sessionConfig.custom_fields = [
-        {
-          key: 'delivery_notes',
-          label: {
-            type: 'custom',
-            custom: 'Delivery Instructions (Optional)',
-          },
-          type: 'text',
-          optional: true,
-        },
-      ];
-    }
-
-    // Create the Stripe checkout session
-    const session = await stripe.checkout.sessions.create(sessionConfig);
-
-    // Return the appropriate response based on mode
-    if (isEmbedded) {
-      return {
-        statusCode: 200,
-        body: JSON.stringify({ clientSecret: session.client_secret }),
-      };
-    }
-
-    // Return the session ID for redirect mode
+    // Return the client secret
     return {
       statusCode: 200,
-      body: JSON.stringify({ id: session.id }),
+      body: JSON.stringify({ clientSecret: session.client_secret }),
     };
   } catch (error) {
     console.error('Error:', error);

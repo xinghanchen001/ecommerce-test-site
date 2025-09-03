@@ -186,7 +186,7 @@ document.addEventListener('DOMContentLoaded', function () {
   console.log('Stripe mode:', isLiveMode ? 'LIVE' : 'TEST');
 });
 
-// Function to handle checkout process
+// Function to handle checkout process with embedded checkout
 // Make handleCheckout a window property for global access
 window.handleCheckout = async function (event) {
   console.log(
@@ -214,23 +214,6 @@ window.handleCheckout = async function (event) {
     const clickId = getUrlParameter('cid');
     console.log('Click ID from URL:', clickId);
 
-    // For local testing
-    if (
-      window.location.hostname === 'localhost' ||
-      window.location.hostname === '127.0.0.1' ||
-      window.location.hostname.includes('192.168')
-    ) {
-      console.log('Local development environment detected');
-      alert(
-        'In der lokalen Entwicklungsumgebung ist die Checkout-Funktion nicht vollständig verfügbar. Bei Bereitstellung auf Netlify wird diese Funktion aktiviert.'
-      );
-      return;
-    }
-
-    // On production, use relative URL to avoid certificate issues
-    const endpointUrl = '/api/create-checkout';
-    console.log('Using endpoint:', endpointUrl);
-
     // Get price ID from the button if available
     let priceId = 'price_1RmZQcA9aibyk7oc7HnUPblY'; // Default price ID - Updated to new 259€ offer
     if (
@@ -242,38 +225,24 @@ window.handleCheckout = async function (event) {
     }
     console.log('Using price ID for checkout:', priceId);
 
-    // Call your backend to create a Checkout Session
-    const response = await fetch(endpointUrl, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        priceId: priceId,
-        clickId: clickId, // Pass the click ID to the checkout endpoint
-      }),
-    });
-
-    const session = await response.json();
-
-    // Show error if there was a problem
-    if (session.error) {
-      console.error('Session error:', session.error);
-      alert(
-        'Es gab ein Problem mit dem Checkout. Bitte versuchen Sie es später noch einmal.'
-      );
+    // For local testing - redirect to checkout page
+    if (
+      window.location.hostname === 'localhost' ||
+      window.location.hostname === '127.0.0.1' ||
+      window.location.hostname.includes('192.168')
+    ) {
+      console.log('Local development - redirecting to checkout page');
+      // Redirect to the embedded checkout page with parameters
+      const checkoutUrl = `/checkout.html?price=${priceId}${clickId ? '&cid=' + clickId : ''}`;
+      window.location.href = checkoutUrl;
       return;
     }
 
-    // Redirect to Stripe Checkout
-    const result = await stripe.redirectToCheckout({
-      sessionId: session.id,
-    });
+    // On production, also redirect to the embedded checkout page
+    const checkoutUrl = `/checkout.html?price=${priceId}${clickId ? '&cid=' + clickId : ''}`;
+    console.log('Redirecting to embedded checkout:', checkoutUrl);
+    window.location.href = checkoutUrl;
 
-    if (result.error) {
-      console.error('Redirect error:', result.error);
-      alert(result.error.message);
-    }
   } catch (error) {
     console.error('Error:', error);
     alert(

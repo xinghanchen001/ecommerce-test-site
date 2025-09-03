@@ -567,44 +567,11 @@
             }
           }
 
-          // Use Netlify function endpoint or fallback to local server
-          const endpointUrl =
-            window.location.hostname === 'localhost' ||
-            window.location.hostname === '127.0.0.1'
-              ? 'http://localhost:3002/create-checkout-session'
-              : '/api/create-checkout';
-
-          // Call your backend to create a Checkout Session
-          const response = await fetch(endpointUrl, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              priceId: 'price_1QyfHoA9aibyk7ocoy9gcOsX', // Using the live mode price ID
-            }),
-          });
-
-          const session = await response.json();
-
-          // Show error if there was a problem
-          if (session.error) {
-            console.error('Session error:', session.error);
-            alert(
-              'Es gab ein Problem mit dem Checkout. Bitte versuchen Sie es später noch einmal.'
-            );
-            return;
-          }
-
-          // Redirect to Stripe Checkout
-          const result = await stripe.redirectToCheckout({
-            sessionId: session.id,
-          });
-
-          if (result.error) {
-            console.error('Redirect error:', result.error);
-            alert(result.error.message);
-          }
+          // Redirect to embedded checkout page
+          const priceId = 'price_1QyfHoA9aibyk7ocoy9gcOsX'; // Using the live mode price ID
+          const checkoutUrl = `/checkout.html?price=${priceId}`;
+          console.log('Redirecting to embedded checkout:', checkoutUrl);
+          window.location.href = checkoutUrl;
         } catch (error) {
           console.error('Checkout error:', error);
           alert(

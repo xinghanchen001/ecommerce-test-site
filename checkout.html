@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - BPER System</title>
+    <script src="https://js.stripe.com/v3/"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            background: white;
+        }
+        
+        /* Back button */
+        .back-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: white;
+            border: 1px solid #e3e8ee;
+            border-radius: 6px;
+            padding: 12px 16px;
+            font-size: 14px;
+            color: #424770;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: inherit;
+            z-index: 1000;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: all 0.2s ease;
+        }
+        
+        .back-button:hover {
+            background: #f6f9fc;
+            border-color: #c7d2fe;
+        }
+        
+        .back-button svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        /* Loading spinner */
+        .loading-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: white;
+        }
+        
+        .spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #635bff;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Checkout container - centered with max width */
+        #checkout {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 20px;
+            background: white;
+        }
+        
+        /* Center the Stripe checkout content */
+        #checkout > div {
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+        }
+        
+        .error-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: white;
+            padding: 20px;
+        }
+        
+        .error-message {
+            background: white;
+            border-radius: 8px;
+            padding: 40px;
+            max-width: 500px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .error-message h2 {
+            color: #e25950;
+            margin-bottom: 16px;
+        }
+        
+        .error-message p {
+            color: #666;
+            margin-bottom: 24px;
+        }
+        
+        .error-message button {
+            background: #635bff;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        
+        .error-message button:hover {
+            background: #5046e5;
+        }
+        
+        /* Reset any conflicting styles that might cause red button */
+        * {
+            box-sizing: border-box;
+        }
+        
+        /* Ensure iframe renders properly */
+        iframe {
+            border: none !important;
+            width: 100% !important;
+        }
+    </style>
+</head>
+<body>
+    <!-- Back button -->
+    <button class="back-button" onclick="goBack()">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+        </svg>
+        Zurück
+    </button>
+    
+    <!-- Loading state -->
+    <div id="loading" class="loading-container">
+        <div class="spinner"></div>
+    </div>
+    
+    <!-- Checkout container (hidden initially) -->
+    <div id="checkout" style="display: none;">
+        <!-- Stripe Embedded Checkout will be mounted here -->
+    </div>
+    
+    <!-- Error state (hidden initially) -->
+    <div id="error-container" class="error-container" style="display: none;">
+        <div class="error-message">
+            <h2>Ein Fehler ist aufgetreten</h2>
+            <p id="error-text">Die Zahlung konnte nicht initialisiert werden.</p>
+            <button onclick="location.reload()">Erneut versuchen</button>
+        </div>
+    </div>
+
+    <script>
+        // Initialize Stripe with your live key
+        const stripe = Stripe('pk_live_51QyFM2A9aibyk7ocyoijP7A9gPKC0oDS0HlySiSEuCOaS4sndnS1HZn9fyKPkf48ERT7FPaoxOWwvesYKKSy7N5J003rxyTc2b');
+        
+        // Get URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const priceId = urlParams.get('price') || 'price_1RmZQcA9aibyk7oc7HnUPblY'; // Default price
+        const clickId = urlParams.get('cid') || '';
+
+        initialize();
+
+        async function initialize() {
+            try {
+                // Determine the correct API endpoint
+                const isLocal = window.location.hostname === 'localhost' || 
+                               window.location.hostname === '127.0.0.1' || 
+                               window.location.hostname.includes('192.168');
+                
+                const apiUrl = isLocal 
+                    ? '/create-checkout-session-embedded' 
+                    : '/api/create-checkout-embedded';
+
+                // Create checkout session for embedded mode
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        priceId: priceId,
+                        clickId: clickId,
+                        mode: 'embedded'
+                    }),
+                });
+
+                const responseData = await response.json();
+                
+                if (!response.ok) {
+                    console.error('Server error response:', responseData);
+                    throw new Error(responseData.error?.message || `HTTP error! status: ${response.status}`);
+                }
+
+                const { clientSecret } = responseData;
+                
+                if (!clientSecret) {
+                    throw new Error('No client secret received from server');
+                }
+
+                // Create embedded checkout with proper configuration
+                const checkout = await stripe.initEmbeddedCheckout({
+                    clientSecret: clientSecret,
+                });
+
+                // Mount Stripe's checkout to the DOM
+                checkout.mount('#checkout');
+
+                // Hide loading and show checkout
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('checkout').style.display = 'block';
+
+            } catch (error) {
+                console.error('Error:', error);
+                showError(error.message || 'Die Zahlung konnte nicht initialisiert werden. Bitte versuchen Sie es später erneut.');
+            }
+        }
+
+        function showError(message) {
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('checkout').style.display = 'none';
+            document.getElementById('error-container').style.display = 'flex';
+            document.getElementById('error-text').textContent = message;
+        }
+
+        function goBack() {
+            if (window.history.length > 1) {
+                window.history.back();
+            } else {
+                // Fallback to home page if no history
+                window.location.href = '/';
+            }
+        }
+    </script>
+</body>
+</html>
