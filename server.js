@@ -285,7 +285,7 @@ app.post('/create-checkout-session-embedded', async (req, res) => {
       ? `${req.headers.origin}/success.html?session_id={CHECKOUT_SESSION_ID}&cid=${clickId}`
       : `${req.headers.origin}/success.html?session_id={CHECKOUT_SESSION_ID}`;
 
-    // Create a checkout session for embedded mode with minimal configuration
+    // Create a checkout session for embedded mode with coupon support
     const session = await stripe.checkout.sessions.create({
       ui_mode: 'embedded',
       payment_method_types: ['card'],
@@ -302,6 +302,7 @@ app.post('/create-checkout-session-embedded', async (req, res) => {
         allowed_countries: ['DE', 'AT', 'CH', 'FR', 'IT', 'BE', 'NL', 'LU', 'ES', 'US', 'GB'],
       },
       billing_address_collection: 'required',
+      allow_promotion_codes: true, // Enable coupon/discount codes
       metadata: {
         order_id: generatedOrderId,
         click_id: clickId,
