@@ -294,6 +294,113 @@
       type="text/javascript"
       src="https://blog.bper.online/track.js"
     ></script>
+
+    <!-- Video Popup Styles -->
+    <style>
+      /* Aspect Ratio Support */
+      .aspect-w-16 {
+        position: relative;
+        padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+      }
+      
+      .aspect-w-16 > * {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+      }
+
+      /* Video Modal Animation */
+      #videoModal {
+        transition: opacity 0.3s ease-in-out;
+      }
+      
+      #videoModal.show {
+        opacity: 1;
+      }
+      
+      #videoModal:not(.show) {
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      /* Ensure modal is always on top */
+      #videoModal {
+        z-index: 9999;
+      }
+    </style>
+
+    <!-- Video Popup JavaScript -->
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const videoThumbnails = document.querySelectorAll('.video-thumbnail-wrapper');
+        const videoModal = document.getElementById('videoModal');
+        const youtubePlayer = document.getElementById('youtubePlayer');
+        const closeModal = document.getElementById('closeModal');
+        const modalBackdrop = document.getElementById('modalBackdrop');
+
+        // Fetch YouTube video titles using noembed service (no API key required)
+        async function fetchVideoTitle(videoId, titleElementId) {
+          try {
+            const response = await fetch(`https://noembed.com/embed?url=https://www.youtube.com/watch?v=${videoId}`);
+            const data = await response.json();
+            if (data.title) {
+              document.getElementById(titleElementId).textContent = data.title;
+            } else {
+              document.getElementById(titleElementId).textContent = 'Video ansehen';
+            }
+          } catch (error) {
+            console.log('Could not fetch video title:', error);
+            document.getElementById(titleElementId).textContent = 'Video ansehen';
+          }
+        }
+
+        // Fetch titles for both videos
+        fetchVideoTitle('e8jLlMyOCFY', 'video-title-1');
+        fetchVideoTitle('IqzwDwaPiY0', 'video-title-2');
+
+        // Open video popup
+        videoThumbnails.forEach(thumbnail => {
+          thumbnail.addEventListener('click', function() {
+            const videoId = this.dataset.videoId;
+            const videoUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`;
+            
+            youtubePlayer.src = videoUrl;
+            videoModal.classList.remove('hidden');
+            setTimeout(() => {
+              videoModal.classList.add('show');
+            }, 10);
+            
+            // Prevent body scroll when modal is open
+            document.body.style.overflow = 'hidden';
+          });
+        });
+
+        // Close video popup
+        function closeVideoModal() {
+          videoModal.classList.remove('show');
+          setTimeout(() => {
+            videoModal.classList.add('hidden');
+            youtubePlayer.src = '';
+            // Re-enable body scroll
+            document.body.style.overflow = '';
+          }, 300);
+        }
+
+        closeModal.addEventListener('click', closeVideoModal);
+        modalBackdrop.addEventListener('click', closeVideoModal);
+
+        // Close on Escape key
+        document.addEventListener('keydown', function(e) {
+          if (e.key === 'Escape' && !videoModal.classList.contains('hidden')) {
+            closeVideoModal();
+          }
+        });
+      });
+    </script>
   </head>
   <body>
     <div class="hero">
@@ -434,6 +541,87 @@
           Präzise Blutdruckmessung <br />
           für Ihre Gesundheit
         </h1>
+      </div>
+    </div>
+
+    <!-- Expert Testimonials Section with Video -->
+    <section class="py-16 md:py-24" style="background-color: #0f172a;">
+      <div class="container mx-auto px-4 md:px-6">
+        <div class="flex flex-col items-center text-center mb-12 md:mb-16">
+          <h2 class="text-3xl md:text-4xl font-bold tracking-tight mb-4 text-white">
+            Was unsere Experten über BPER sagen
+          </h2>
+          <p class="text-lg text-gray-300 max-w-2xl">
+            Führende Gesundheitsexperten teilen ihre Einschätzung zum BPER System
+          </p>
+        </div>
+
+        <!-- Video Thumbnails Grid -->
+        <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+          <!-- Video 1 -->
+          <div class="video-thumbnail-wrapper relative cursor-pointer group" data-video-id="e8jLlMyOCFY">
+            <div class="aspect-w-16 aspect-h-9 relative overflow-hidden rounded-lg shadow-lg">
+              <img 
+                src="https://img.youtube.com/vi/e8jLlMyOCFY/maxresdefault.jpg" 
+                alt="Experteninterview 1"
+                class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                onerror="this.src='https://img.youtube.com/vi/e8jLlMyOCFY/hqdefault.jpg'"
+              />
+              <!-- Overlay for hover effect -->
+              <div class="absolute inset-0 bg-black bg-opacity-30 group-hover:bg-opacity-40 transition-all duration-300">
+              </div>
+            </div>
+            <h3 class="mt-4 text-lg font-semibold text-white" id="video-title-1">Wird geladen...</h3>
+            <p class="mt-2 text-gray-300">Klicken Sie hier, um das Video anzusehen</p>
+          </div>
+
+          <!-- Video 2 -->
+          <div class="video-thumbnail-wrapper relative cursor-pointer group" data-video-id="IqzwDwaPiY0">
+            <div class="aspect-w-16 aspect-h-9 relative overflow-hidden rounded-lg shadow-lg">
+              <img 
+                src="https://img.youtube.com/vi/IqzwDwaPiY0/maxresdefault.jpg" 
+                alt="Experteninterview 2"
+                class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                onerror="this.src='https://img.youtube.com/vi/IqzwDwaPiY0/hqdefault.jpg'"
+              />
+              <!-- Overlay for hover effect -->
+              <div class="absolute inset-0 bg-black bg-opacity-30 group-hover:bg-opacity-40 transition-all duration-300">
+              </div>
+            </div>
+            <h3 class="mt-4 text-lg font-semibold text-white" id="video-title-2">Wird geladen...</h3>
+            <p class="mt-2 text-gray-300">Klicken Sie hier, um das Video anzusehen</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Video Popup Modal -->
+    <div id="videoModal" class="fixed inset-0 z-50 hidden">
+      <!-- Backdrop -->
+      <div class="absolute inset-0 bg-black bg-opacity-75 transition-opacity" id="modalBackdrop"></div>
+      
+      <!-- Modal Content -->
+      <div class="relative flex items-center justify-center min-h-screen p-4">
+        <div class="relative bg-black rounded-lg w-full max-w-5xl">
+          <!-- Close Button -->
+          <button id="closeModal" class="absolute -top-10 right-0 text-white hover:text-gray-300 transition-colors">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+          </button>
+          
+          <!-- Video Container -->
+          <div class="relative" style="padding-bottom: 56.25%;">
+            <iframe
+              id="youtubePlayer"
+              class="absolute top-0 left-0 w-full h-full rounded-lg"
+              src=""
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
+          </div>
+        </div>
       </div>
     </div>
 
