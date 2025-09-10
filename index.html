@@ -342,23 +342,24 @@
         const closeModal = document.getElementById('closeModal');
         const modalBackdrop = document.getElementById('modalBackdrop');
 
-        // Fetch YouTube video titles using noembed service (no API key required)
+        // Optional: Try to fetch updated YouTube video titles using noembed service
+        // This may fail due to CORS in some browsers, but the hardcoded titles above will be used as fallback
         async function fetchVideoTitle(videoId, titleElementId) {
           try {
             const response = await fetch(`https://noembed.com/embed?url=https://www.youtube.com/watch?v=${videoId}`);
-            const data = await response.json();
-            if (data.title) {
-              document.getElementById(titleElementId).textContent = data.title;
-            } else {
-              document.getElementById(titleElementId).textContent = 'Video ansehen';
+            if (response.ok) {
+              const data = await response.json();
+              if (data.title) {
+                document.getElementById(titleElementId).textContent = data.title;
+              }
             }
           } catch (error) {
-            console.log('Could not fetch video title:', error);
-            document.getElementById(titleElementId).textContent = 'Video ansehen';
+            // Silently fail - the hardcoded title will remain
+            console.log('Using hardcoded title due to:', error.message);
           }
         }
 
-        // Fetch titles for both videos
+        // Try to fetch titles for both videos (optional enhancement)
         fetchVideoTitle('e8jLlMyOCFY', 'video-title-1');
         fetchVideoTitle('IqzwDwaPiY0', 'video-title-2');
 
@@ -571,7 +572,7 @@
               <div class="absolute inset-0 bg-black bg-opacity-30 group-hover:bg-opacity-40 transition-all duration-300">
               </div>
             </div>
-            <h3 class="mt-4 text-lg font-semibold text-white" id="video-title-1">Wird geladen...</h3>
+            <h3 class="mt-4 text-lg font-semibold text-white" id="video-title-1">BPER erklärt: Einfach messen, speichern & senden – für alle verständlich!</h3>
             <p class="mt-2 text-gray-300">Klicken Sie hier, um das Video anzusehen</p>
           </div>
 
@@ -588,7 +589,7 @@
               <div class="absolute inset-0 bg-black bg-opacity-30 group-hover:bg-opacity-40 transition-all duration-300">
               </div>
             </div>
-            <h3 class="mt-4 text-lg font-semibold text-white" id="video-title-2">Wird geladen...</h3>
+            <h3 class="mt-4 text-lg font-semibold text-white" id="video-title-2">BPER: Die neue Dimension der Blutdruckmessung – messen, speichern, senden!</h3>
             <p class="mt-2 text-gray-300">Klicken Sie hier, um das Video anzusehen</p>
           </div>
         </div>
