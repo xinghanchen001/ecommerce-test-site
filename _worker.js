@@ -120,8 +120,10 @@ async function handleStripeCheckout(request, env) {
         'automatic_tax[enabled]': 'true',
         'metadata[order_id]': orderId,
         'metadata[click_id]': clickId,
+        'metadata[dhl_tracking]': '', // Can be updated later in Dashboard
         'payment_intent_data[metadata][order_id]': orderId,
         'payment_intent_data[metadata][click_id]': clickId,
+        'payment_intent_data[metadata][dhl_tracking]': '', // Can be updated later in Dashboard
       }),
     });
 

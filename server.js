@@ -186,12 +186,14 @@ app.post('/create-checkout-session', async (req, res) => {
         // Add generated order ID and click ID to metadata
         order_id: generatedOrderId,
         click_id: clickId,
+        dhl_tracking: '', // Can be updated later in Dashboard
       },
       // Pass metadata to the payment intent
       payment_intent_data: {
         metadata: {
           order_id: generatedOrderId,
           click_id: clickId,
+          dhl_tracking: '', // Can be updated later in Dashboard
         },
       },
     });
@@ -306,6 +308,15 @@ app.post('/create-checkout-session-embedded', async (req, res) => {
       metadata: {
         order_id: generatedOrderId,
         click_id: clickId,
+        dhl_tracking: '', // Can be updated later in Dashboard
+      },
+      // Pass metadata to the payment intent
+      payment_intent_data: {
+        metadata: {
+          order_id: generatedOrderId,
+          click_id: clickId,
+          dhl_tracking: '', // Can be updated later in Dashboard
+        },
       },
     });
 

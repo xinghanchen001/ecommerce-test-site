@@ -96,12 +96,14 @@ exports.handler = async function (event, context) {
       metadata: {
         order_id: generatedOrderId,
         click_id: clickId,
+        dhl_tracking: '', // Can be updated later in Dashboard
       },
       // Pass metadata to the payment intent
       payment_intent_data: {
         metadata: {
           order_id: generatedOrderId,
           click_id: clickId,
+          dhl_tracking: '', // Can be updated later in Dashboard
         },
       },
     });
