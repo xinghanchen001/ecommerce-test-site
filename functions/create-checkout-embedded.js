@@ -97,6 +97,13 @@ exports.handler = async function (event, context) {
         order_id: generatedOrderId,
         click_id: clickId,
       },
+      // Pass metadata to the payment intent
+      payment_intent_data: {
+        metadata: {
+          order_id: generatedOrderId,
+          click_id: clickId,
+        },
+      },
     });
 
     // Return the client secret
