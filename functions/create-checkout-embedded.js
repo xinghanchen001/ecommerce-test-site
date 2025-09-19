@@ -96,14 +96,14 @@ exports.handler = async function (event, context) {
       metadata: {
         order_id: generatedOrderId,
         ...(clickId && { click_id: clickId }), // Only add if clickId has a value
-        // dhl_tracking can be added later in Dashboard
+        dhl_tracking: '-', // Placeholder for easy editing in Dashboard
       },
       // Pass metadata to the payment intent
       payment_intent_data: {
         metadata: {
           order_id: generatedOrderId,
           ...(clickId && { click_id: clickId }), // Only add if clickId has a value
-          // dhl_tracking can be added later in Dashboard
+          dhl_tracking: '-', // Placeholder for easy editing in Dashboard
         },
       },
     });
