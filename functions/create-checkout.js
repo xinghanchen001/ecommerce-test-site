@@ -128,18 +128,18 @@ exports.handler = async function (event, context) {
       // Enable promotion/discount codes
       allow_promotion_codes: true,
       automatic_tax: { enabled: true }, // Enable automatic tax calculation
-      // Add generated order ID and click ID to metadata
+      // Add generated order ID to metadata, only include optional fields if they have values
       metadata: {
         order_id: generatedOrderId,
-        click_id: clickId,
-        dhl_tracking: '', // Can be updated later in Dashboard
+        ...(clickId && { click_id: clickId }), // Only add if clickId has a value
+        // dhl_tracking can be added later in Dashboard
       },
       // Pass metadata to the payment intent
       payment_intent_data: {
         metadata: {
           order_id: generatedOrderId,
-          click_id: clickId,
-          dhl_tracking: '', // Can be updated later in Dashboard
+          ...(clickId && { click_id: clickId }), // Only add if clickId has a value
+          // dhl_tracking can be added later in Dashboard
         },
       },
     };
