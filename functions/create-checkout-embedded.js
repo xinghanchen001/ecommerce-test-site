@@ -78,7 +78,7 @@ exports.handler = async function (event, context) {
     // Create a checkout session for embedded mode with coupon support
     const session = await stripe.checkout.sessions.create({
       ui_mode: 'embedded',
-      payment_method_types: ['card'],
+      payment_method_types: ['card', 'klarna', 'paypal'],
       line_items: [
         {
           price: priceId,
